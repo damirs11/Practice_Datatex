@@ -10,6 +10,10 @@ public class Task extends Document {
     private String  signOfControllability;
     private String  controller;
 
+    public Task(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author) {
+        super(idDoc, name, text, reg_idDoc, regDate, author);
+    }
+
     public Task(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author, Date dateRealize, Date periodOfExecution, String executiveOfficer, String signOfControllability, String controller) {
         super(idDoc, name, text, reg_idDoc, regDate, author);
         this.dateRealize = dateRealize;

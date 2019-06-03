@@ -13,6 +13,9 @@ public abstract class Document implements Comparable<Document>, Storable {
     private Date    regDate;
     private String  author;
 
+    public Document() {
+    }
+
     public Document(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author) {
         this.idDoc = idDoc;
         this.name = name;
@@ -99,12 +102,3 @@ public abstract class Document implements Comparable<Document>, Storable {
 }
 
 
-
-/*
-idDoc
-name
-text
-reg_idDoc
-regDate
-author
-*/

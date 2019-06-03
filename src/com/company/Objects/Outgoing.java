@@ -7,6 +7,13 @@ public class Outgoing extends Document {
     private String addressee;
     private String deliveryType;
 
+    public Outgoing() {
+    }
+
+    public Outgoing(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author) {
+        super(idDoc, name, text, reg_idDoc, regDate, author);
+    }
+
     public Outgoing(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author, String addressee, String deliveryType) {
         super(idDoc, name, text, reg_idDoc, regDate, author);
         this.addressee = addressee;

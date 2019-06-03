@@ -1,0 +1,35 @@
+Document
+id: Math.random() * 1000
+name: Название документа
+text:
+regId: Math.random() * 500
+regData: https://stackoverflow.com/questions/3985392/generate-random-date-of-birth
+author: [
+	Смирнов Иванов
+	Иванов Кузнецов
+	Кузнецов Соколов
+	Соколов Попов
+	Попов Лебедев
+	Лебедев Козлов
+	Козлов Новиков
+	Новиков Морозов
+	Морозов Петров
+	Петров Смирнов
+]
+
+Task
+Дата выдачи: https://stackoverflow.com/questions/3985392/generate-random-date-of-birth
+Срок: Дата_выдачи + [1,2,3 месяца]
+Исполнитель: => document.author
+Признак: [Признак 1,2,3,4,5]
+Контролер: document.author
+
+Incoming
+Отправитель: => document.author
+Адресат: => document.author
+Исход.номер: номер
+Исход.дата.рег: https://stackoverflow.com/questions/3985392/generate-random-date-of-birth
+
+Outgoing:
+Адресат: => document.author
+Способ доставки: [Способ доставки 1, 2, 3]
