@@ -9,6 +9,9 @@ public class Incoming extends Document {
     private String  outgoingNumber;
     private Date    outgoingDate;
 
+    public Incoming(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author) {
+        super(idDoc, name, text, reg_idDoc, regDate, author);
+    }
 
     public Incoming(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author, String sender, String addressee, String outgoingNumber, Date outgoingDate) {
         super(idDoc, name, text, reg_idDoc, regDate, author);
