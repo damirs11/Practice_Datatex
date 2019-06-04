@@ -1,4 +1,4 @@
-package com.company.Objects;
+package com.company.Models;
 
 import com.company.Interfaces.Storable;
 

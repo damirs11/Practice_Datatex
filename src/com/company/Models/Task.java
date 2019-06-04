@@ -1,4 +1,4 @@
-package com.company.Objects;
+package com.company.Models;
 
 import java.util.Date;
 
@@ -6,9 +6,12 @@ public class Task extends Document {
 
     private Date    dateRealize;
     private Date    periodOfExecution;
-    private String  executiveOfficer;
+    private String  responsibleExecutor;
     private String  signOfControllability;
     private String  controller;
+
+    public Task() {
+    }
 
     public Task(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author) {
         super(idDoc, name, text, reg_idDoc, regDate, author);
@@ -18,7 +21,7 @@ public class Task extends Document {
         super(idDoc, name, text, reg_idDoc, regDate, author);
         this.dateRealize = dateRealize;
         this.periodOfExecution = periodOfExecution;
-        this.executiveOfficer = executiveOfficer;
+        this.responsibleExecutor = executiveOfficer;
         this.signOfControllability = signOfControllability;
         this.controller = controller;
     }
@@ -31,8 +34,8 @@ public class Task extends Document {
         return periodOfExecution;
     }
 
-    public String getExecutiveOfficer() {
-        return executiveOfficer;
+    public String getResponsibleExecutor() {
+        return responsibleExecutor;
     }
 
     public String getSignOfControllability() {
@@ -51,8 +54,8 @@ public class Task extends Document {
         this.periodOfExecution = periodOfExecution;
     }
 
-    public void setExecutiveOfficer(String executiveOfficer) {
-        this.executiveOfficer = executiveOfficer;
+    public void setResponsibleExecutor(String executiveOfficer) {
+        this.responsibleExecutor = executiveOfficer;
     }
 
     public void setSignOfControllability(String signOfControllability) {
@@ -68,7 +71,7 @@ public class Task extends Document {
         return "Task{" +
                 "dateRealize=" + dateRealize +
                 ", periodOfExecution=" + periodOfExecution +
-                ", executiveOfficer='" + executiveOfficer + '\'' +
+                ", responsibleExecutor='" + responsibleExecutor + '\'' +
                 ", signOfControllability='" + signOfControllability + '\'' +
                 ", controller='" + controller + '\'' +
                 "} " + super.toString();

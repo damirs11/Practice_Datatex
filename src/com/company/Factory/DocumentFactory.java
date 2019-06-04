@@ -1,42 +1,89 @@
 package com.company.Factory;
 
-import com.company.Objects.Document;
+import com.company.Exception.DocumentExistsException;
+import com.company.Models.*;
+import com.sun.source.tree.Tree;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public abstract class DocumentFactory {
-    public abstract Document create();
-    public Document generateData(Document doc){
+public class DocumentFactory  {
+
+    public DocumentFactory() {
+        setOfDocuments = new ArrayList<>();
+    }
+
+    public Document create(Class<? extends Document> docType) throws DocumentExistsException {
+
+        Document doc = null;
+
+        if(Objects.equals(docType.getName(), Outgoing.class.getName() ))
+            doc = new OutgoingFactory().create();
+
+        if(Objects.equals(docType.getName(), Incoming.class.getName() ))
+            doc = new IncomingFactory().create();
+
+        if(Objects.equals(docType.getName(), Task.class.getName() ))
+            doc = new TaskFactory().create();
+
+        if(doc != null)
+            setOfDocuments.add(doc);
+
+        return doc;
+    }
+    public Document generateData(Document doc) throws DocumentExistsException {
 
         String[] names = {
-                "Смирнов Иванов",
-                "Иванов Кузнецов",
-                "Кузнецов Соколов",
-                "Соколов Попов",
-                "Попов Лебедев",
-                "Лебедев Козлов",
-                "Козлов Новиков",
-                "Новиков Морозов",
-                "Морозов Петров",
-                "Петров Смирнов"
+                "А Иванов Кузнецов",
+                "Б Козлов Новиков",
+                "В Кузнецов Соколов",
+                "Г Лебедев Козлов",
+                "Д Морозов Петров",
+                "Е Новиков Морозов",
+                "Ж Попов Лебедев",
+                "З Смирнов Иванов",
+                "И Соколов Попов"
         };
+
+        GregorianCalendar gc = new GregorianCalendar();
+        int year = 2010 + (int) Math.round(Math.random() * (2020 - 2010));
+        int dayOfYear = 1 + (int) Math.round(Math.random() * (gc.getActualMaximum(Calendar.DAY_OF_YEAR) - 1));
+        gc.set(Calendar.YEAR, year);
+        gc.set(Calendar.DAY_OF_YEAR, dayOfYear);
+
 
         doc.setIdDoc((int) (Math.random() * 1000));
         doc.setName("Название документа");
         doc.setText("Текс документа");
-        doc.setReg_idDoc((int) (Math.random() * 1000));
         doc.setAuthor( names[(int) (Math.random() * (names.length - 1))] );
-
-        GregorianCalendar gc = new GregorianCalendar();
-        int year = 2010 + (int) Math.round(Math.random() * (2020 - 2010));
-        gc.set(Calendar.YEAR, year);
-        int dayOfYear = 1 + (int) Math.round(Math.random() * (gc.getActualMaximum(Calendar.DAY_OF_YEAR) - 1));
-        gc.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
         doc.setRegDate(gc.getTime());
 
+        doc.setReg_idDoc((int) (Math.random() * 1000));
+
+        for(Document elem: setOfDocuments){
+            if(doc.getReg_idDoc() == elem.getReg_idDoc())
+                throw new DocumentExistsException();
+        }
         return doc;
     }
+
+    public void printAll(){
+        Map<String, List<Document> > docGrouped =
+                setOfDocuments.stream().collect(Collectors.groupingBy(Document::getAuthor));
+
+        docGrouped = new TreeMap<>(docGrouped);
+
+        docGrouped.forEach((k,v) ->
+        {
+            System.out.print(k + ": \n");
+                v.forEach((doc) ->
+                        System.out.print(
+                                doc.getClass().getSimpleName() + " №" + doc.getIdDoc() + " от "
+                                + doc.getRegDate() + ". " + doc.getName() + "\n")
+                );
+        });
+
+    }
+
+    private List<Document> setOfDocuments;
 }

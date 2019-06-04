@@ -1,18 +1,26 @@
 package com.company;
 
 
+import com.company.Exception.DocumentExistsException;
 import com.company.Factory.DocumentFactory;
-import com.company.Factory.OutgoingFactory;
-import com.company.Objects.Document;
+import com.company.Models.*;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws DocumentExistsException {
 
-        DocumentFactory facD = new OutgoingFactory();
-        Document doc = facD.create();
+        DocumentFactory factory = new DocumentFactory();
 
-        System.out.print(doc.toString());
+        for(int i = 0; i < 5; i++){
+            factory.create(Outgoing.class);
+            factory.create(Incoming.class);
+            factory.create(Task.class);
+        }
+
+
+        factory.printAll();
+
+
     }
 
 }

@@ -1,13 +1,12 @@
 package com.company.Factory;
 
-import com.company.Objects.Document;
-import com.company.Objects.Outgoing;
-
-import java.util.Date;
+import com.company.Exception.DocumentExistsException;
+import com.company.Models.Document;
+import com.company.Models.Outgoing;
 
 public class OutgoingFactory extends DocumentFactory{
-    @Override
-    public Document create() {
+
+    Document create() throws DocumentExistsException {
         Outgoing doc = new Outgoing();
 
         doc = (Outgoing) generateData(doc);
@@ -16,7 +15,7 @@ public class OutgoingFactory extends DocumentFactory{
     }
 
     @Override
-    public Document generateData(Document doc) {
+    public Document generateData(Document doc) throws DocumentExistsException {
 
         String[] names = {
                 "Смирнов Иванов",

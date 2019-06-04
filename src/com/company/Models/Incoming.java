@@ -1,4 +1,4 @@
-package com.company.Objects;
+package com.company.Models;
 
 import java.util.Date;
 
@@ -8,6 +8,9 @@ public class Incoming extends Document {
     private String  addressee;
     private String  outgoingNumber;
     private Date    outgoingDate;
+
+    public Incoming() {
+    }
 
     public Incoming(int idDoc, String name, String text, int reg_idDoc, Date regDate, String author) {
         super(idDoc, name, text, reg_idDoc, regDate, author);
