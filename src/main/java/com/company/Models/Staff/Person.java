@@ -1,11 +1,18 @@
 package com.company.Models.Staff;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Person extends Staff {
 
     private String secondName;
     private String name;
     private String middleName;
     private String position;
+
+    public Person() {
+    }
 
     public Person(int id) {
         super(id);
@@ -36,18 +43,22 @@ public class Person extends Staff {
         return position;
     }
 
+    @XmlElement
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
 
+    @XmlElement
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
+    @XmlElement
     public void setPosition(String position) {
         this.position = position;
     }

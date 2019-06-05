@@ -8,6 +8,9 @@ public class Staff {
         this.id = id;
     }
 
+    public Staff() {
+    }
+
     public int getId() {
         return id;
     }

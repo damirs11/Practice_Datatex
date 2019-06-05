@@ -1,21 +1,28 @@
 package com.company.Models.Staff;
 
-public class Department extends Staff {
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Organization extends Staff {
 
     private String fullName;
     private String shortName;
-    private String departmentHead;
+    private String organizationHead;
     private String phoneNumber;
 
-    public Department(int id) {
+    public Organization() {
+    }
+
+    public Organization(int id) {
         super(id);
     }
 
-    public Department(int id, String fullName, String shortName, String departmentHead, String phoneNumber) {
+    public Organization(int id, String fullName, String shortName, String organizationHead, String phoneNumber) {
         super(id);
         this.fullName = fullName;
         this.shortName = shortName;
-        this.departmentHead = departmentHead;
+        this.organizationHead = organizationHead;
         this.phoneNumber = phoneNumber;
     }
 
@@ -27,36 +34,40 @@ public class Department extends Staff {
         return shortName;
     }
 
-    public String getDepartmentHead() {
-        return departmentHead;
+    public String getOrganizationHead() {
+        return organizationHead;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    @XmlElement
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
+    @XmlElement
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
 
-    public void setDepartmentHead(String departmentHead) {
-        this.departmentHead = departmentHead;
+    @XmlElement
+    public void setOrganizationHead(String organizationHead) {
+        this.organizationHead = organizationHead;
     }
 
+    @XmlElement
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     @Override
     public String toString() {
-        return "Department{" +
+        return "Organization{" +
                 "fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
-                ", departmentHead='" + departmentHead + '\'' +
+                ", organizationHead='" + organizationHead + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 "} " + super.toString();
     }

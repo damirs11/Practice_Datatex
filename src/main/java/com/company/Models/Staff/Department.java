@@ -1,21 +1,28 @@
 package com.company.Models.Staff;
 
-public class Organization extends Staff {
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Department extends Staff {
 
     private String fullName;
     private String shortName;
-    private String organizationHead;
+    private String departmentHead;
     private String phoneNumber;
 
-    public Organization(int id) {
+    public Department() {
+    }
+
+    public Department(int id) {
         super(id);
     }
 
-    public Organization(int id, String fullName, String shortName, String organizationHead, String phoneNumber) {
+    public Department(int id, String fullName, String shortName, String departmentHead, String phoneNumber) {
         super(id);
         this.fullName = fullName;
         this.shortName = shortName;
-        this.organizationHead = organizationHead;
+        this.departmentHead = departmentHead;
         this.phoneNumber = phoneNumber;
     }
 
@@ -27,36 +34,40 @@ public class Organization extends Staff {
         return shortName;
     }
 
-    public String getOrganizationHead() {
-        return organizationHead;
+    public String getDepartmentHead() {
+        return departmentHead;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    @XmlElement
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
+    @XmlElement
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
 
-    public void setOrganizationHead(String organizationHead) {
-        this.organizationHead = organizationHead;
+    @XmlElement
+    public void setDepartmentHead(String departmentHead) {
+        this.departmentHead = departmentHead;
     }
 
+    @XmlElement
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     @Override
     public String toString() {
-        return "Organization{" +
+        return "Department{" +
                 "fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
-                ", organizationHead='" + organizationHead + '\'' +
+                ", departmentHead='" + departmentHead + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 "} " + super.toString();
     }
