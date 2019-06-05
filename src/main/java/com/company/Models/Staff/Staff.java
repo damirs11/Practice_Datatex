@@ -1,14 +1,14 @@
 package com.company.Models.Staff;
 
 
-public class Staff {
+public abstract class Staff {
     private int id;
 
-    public Staff(int id) {
+    Staff(int id) {
         this.id = id;
     }
 
-    public Staff() {
+    Staff() {
     }
 
     public int getId() {

@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5eafcddf-39e2-43a7-9846-d5adca6c389a" name="Default Changelist" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
+    <list default="true" id="b7de9808-b27f-465e-b82f-e615ccdc9dd1" name="Default Changelist" comment="Add PersonsList_class for multiple Person_model serialization">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/PersonsList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/Parser/InputXML/InputPerson.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Practice_Datatex.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/JaxbParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/JaxbParserTest.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,49 +23,42 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="276">
+              <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/PersonsList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="138">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#359#360#0" expanded="true" />
+                <element signature="e#417#418#0" expanded="true" />
+                <element signature="e#461#462#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/JaxbParserTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Staff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+            <state relative-caret-position="161">
+              <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#112#113#0" expanded="true" />
+                <element signature="e#140#141#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -62,26 +68,24 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/company/Models/Staff/Organization.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Models/Staff/Person.java" />
-        <option value="$PROJECT_DIR$/src/test/java/PersonJAXBTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/Parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/Parser/Impl/JaxbParser.java" />
-        <option value="$PROJECT_DIR$/src/test/java/JaxbParserTes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/Parser/InputXML/InputPerson.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Person.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Organization.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Department.java" />
         <option value="$PROJECT_DIR$/src/test/java/JaxbParserTest.java" />
+        <option value="$PROJECT_DIR$/Person.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/PersonsList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Staff.java" />
       </list>
     </option>
   </component>
@@ -92,27 +96,19 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="Practice_Datatex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
+    <option name="x" value="1015" />
+    <option name="y" value="37" />
     <option name="width" value="1274" />
     <option name="height" value="991" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -120,21 +116,78 @@
               <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
               <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="Staff" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Practice_Datatex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Practice_Datatex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -148,19 +201,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.JaxbParserTest">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+  <component name="RunManager" selected="JUnit.JaxbParserTest.testSaveObject">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
-      <module name="Practice_Datatex" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PersonJAXBTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PersonJAXBTest" />
       <module name="Practice_Datatex" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -175,16 +218,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JaxbParserTest.testGetObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Practice_Datatex" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="JaxbParserTest" />
-      <option name="METHOD_NAME" value="testGetObject" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="JaxbParserTest.testSaveObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Practice_Datatex" />
       <option name="PACKAGE_NAME" value="" />
@@ -195,198 +228,258 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="JUnit.JaxbParserTest" />
+      <item itemvalue="JUnit.JaxbParserTest.testSaveObject" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JaxbParserTest" />
         <item itemvalue="JUnit.JaxbParserTest.testSaveObject" />
-        <item itemvalue="JUnit.JaxbParserTest.testGetObject" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.PersonJAXBTest" />
+        <item itemvalue="JUnit.JaxbParserTest" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5eafcddf-39e2-43a7-9846-d5adca6c389a" name="Default Changelist" comment="" />
-      <created>1559721232701</created>
+      <changelist id="b7de9808-b27f-465e-b82f-e615ccdc9dd1" name="Default Changelist" comment="" />
+      <created>1559748969720</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1559721232701</updated>
-      <workItem from="1559721234398" duration="629000" />
-      <workItem from="1559722393148" duration="5744000" />
-      <workItem from="1559728314078" duration="295000" />
+      <updated>1559748969720</updated>
+      <workItem from="1559748973602" duration="8059000" />
     </task>
+    <task id="LOCAL-00001" summary="Add PersonsList_class for multiple Person_model serialization">
+      <created>1559759905786</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559759905786</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="JaxbParserTest_testGetObject - 2019.06.05 at 14h 31m 35s.xml">
-      <configuration name="JaxbParserTest.testGetObject" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 14h 32m 03s.xml">
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 22h 58m 35s.xml">
       <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JaxbParserTest_testGetObject - 2019.06.05 at 14h 32m 08s.xml">
-      <configuration name="JaxbParserTest.testGetObject" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JaxbParserTest_testGetObject - 2019.06.05 at 14h 37m 47s.xml">
-      <configuration name="JaxbParserTest.testGetObject" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JaxbParserTest - 2019.06.05 at 14h 38m 03s.xml">
-      <configuration name="JaxbParserTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JaxbParserTest - 2019.06.05 at 14h 38m 24s.xml">
-      <configuration name="JaxbParserTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 14h 41m 45s.xml">
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 22h 59m 05s.xml">
       <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 14h 42m 19s.xml">
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 22h 59m 43s.xml">
       <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 14h 43m 01s.xml">
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 00m 59s.xml">
       <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JaxbParserTest - 2019.06.05 at 14h 45m 31s.xml">
-      <configuration name="JaxbParserTest" configurationId="JUnit" />
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 02m 24s.xml">
+      <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 02m 49s.xml">
+      <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 06m 00s.xml">
+      <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 06m 27s.xml">
+      <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 06m 59s.xml">
+      <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JaxbParserTest_testSaveObject - 2019.06.05 at 23h 07m 59s.xml">
+      <configuration name="JaxbParserTest.testSaveObject" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6668000" />
+    <option name="totallyTimeSpent" value="8059000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1274" height="991" extended-state="0" />
+    <frame x="1015" y="37" width="1274" height="991" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30560133" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49814814" visible="true" weight="0.22981878" />
+      <window_info id="Structure" order="1" sideWeight="0.50185186" side_tool="true" weight="0.22981878" />
+      <window_info anchor="bottom" id="Thumbnails" show_stripe_button="false" weight="0.32919255" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info active="true" anchor="bottom" id="Version Control" visible="true" weight="0.32919255" />
+      <window_info anchor="bottom" id="Messages" weight="0.32919255" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32919255" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.50082374" side_tool="true" weight="0.32919255" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32983682" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49917626" weight="0.32919255" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32932693" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32983682" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32983682" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Cargo" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" weight="0.32928804" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add PersonsList_class for multiple Person_model serialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add PersonsList_class for multiple Person_model serialization" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Documents/Document.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/PersonJAXBTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Factory/DocumentFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#384#385#0" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Organization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Department.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="23">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Parser/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="138">
           <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Parser/Impl/JaxbParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+    <entry file="uml://JAVA/com.company.Models.Staff">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>com.company.Models.Staff</OriginalElement>
+          <nodes>
+            <node x="" y="">com.company.Models.Staff.Department</node>
+            <node x="" y="">com.company.Models.Staff.Organization</node>
+            <node x="" y="">com.company.Models.Staff.Staff</node>
+            <node x="" y="">com.company.Models.Staff.Person</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="175.5" y="54.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Person.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Department.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="230">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Main.java">
+    <entry file="file://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.4.0-b180830.0438/jaxb-impl-2.4.0-b180830.0438.pom">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="-4807">
+          <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="731" column="6" selection-start-line="731" selection-start-column="6" selection-end-line="731" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Organization.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Department.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="42" lean-forward="true" selection-start-column="42" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="353">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Parser/InputXML/InputPerson.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.4.0-b180830.0359/jaxb-api-2.4.0-b180830.0359.jar!/javax/xml/bind/annotation/XmlRootElement.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/JaxbParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+        <state relative-caret-position="159">
+          <caret line="45" column="32" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Parser/Impl/JaxbParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Person.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="38" lean-forward="true" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javax/xml/bind/annotation/annotations.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/PersonsList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#359#360#0" expanded="true" />
+            <element signature="e#417#418#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/Models/Staff/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding>
+            <element signature="e#112#113#0" expanded="true" />
+            <element signature="e#140#141#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -394,9 +487,9 @@
   </component>
   <component name="masterDetails">
     <states>
-      <state key="ArtifactsStructureConfigurable.UI">
+      <state key="ProjectJDKs.UI">
         <settings>
-          <artifact-editor />
+          <last-edited>12</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -406,53 +499,7 @@
           </splitter-proportions>
         </settings>
       </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Practice_Datatex</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
+      <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
             <option name="proportions">

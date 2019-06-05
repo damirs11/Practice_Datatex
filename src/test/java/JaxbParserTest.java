@@ -1,6 +1,7 @@
 import com.company.Models.Staff.Department;
 import com.company.Models.Staff.Organization;
 import com.company.Models.Staff.Person;
+import com.company.Models.Staff.PersonsList;
 import com.company.Parser.Impl.JaxbParser;
 import com.company.Parser.Parser;
 import org.junit.Before;
@@ -8,8 +9,6 @@ import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JaxbParserTest {
 
@@ -19,7 +18,7 @@ public class JaxbParserTest {
     private File fileDepartment;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         parser = new JaxbParser();
         filePerson = new File(Person.class.getSimpleName() + ".xml");
         fileOrganization = new File(Organization.class.getSimpleName() + ".xml");
@@ -34,6 +33,16 @@ public class JaxbParserTest {
         person.setMiddleName("Отчество");
         person.setPosition("Должность");
 
+        Person person2 = new Person(2);
+        person2.setName("Имя");
+        person2.setSecondName("Фамилия");
+        person2.setMiddleName("Отчество");
+        person2.setPosition("Должность");
+
+        PersonsList personsList = new PersonsList();
+        personsList.getPersonList().add(person);
+        personsList.getPersonList().add(person2);
+
         Organization organization = new Organization(2);
         organization.setFullName("Полное имя");
         organization.setShortName("Короткое имя");
@@ -47,7 +56,8 @@ public class JaxbParserTest {
         department.setDepartmentHead("Глава");
 
 
-        parser.saveObject(filePerson, person);
+        //parser.saveObject(filePerson, person);
+        parser.saveObject(filePerson, personsList);
         parser.saveObject(fileOrganization, organization);
         parser.saveObject(fileDepartment, department);
     }
@@ -63,6 +73,5 @@ public class JaxbParserTest {
         Department department = (Department) parser.getObject(fileDepartment, Department.class);
         System.out.println(department);
     }
-
 
 }
