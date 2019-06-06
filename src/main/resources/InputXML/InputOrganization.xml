@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Organizations>
+    <Organization>
+        <id>2</id>
+        <fullName>Полное имя</fullName>
+        <organizationHead>Глава организации</organizationHead>
+        <phoneNumber>+7 999 999 99 99</phoneNumber>
+        <shortName>Короткое имя</shortName>
+    </Organization>
+</Organizations>
