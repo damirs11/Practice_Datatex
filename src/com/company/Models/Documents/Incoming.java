@@ -9,12 +9,24 @@ public class Incoming extends Document {
     private String  outgoingNumber;
     private Date    outgoingDate;
 
-    public Incoming(int idDoc, String name, String text, int regId, Date regDate, String author) {
-        super(idDoc, name, text, regId, regDate, author);
+    public Incoming(Document otherDoc) {
+        super(otherDoc);
     }
 
-    public Incoming(int idDoc, String name, String text, int regId, Date regDate, String author, String sender, String addressee, String outgoingNumber, Date outgoingDate) {
-        super(idDoc, name, text, regId, regDate, author);
+    public Incoming(Document otherDoc, String sender, String addressee, String outgoingNumber, Date outgoingDate) {
+        super(otherDoc);
+        this.sender = sender;
+        this.addressee = addressee;
+        this.outgoingNumber = outgoingNumber;
+        this.outgoingDate = outgoingDate;
+    }
+
+    public Incoming(int id, String name, String text, int regId, Date regDate, String author) {
+        super(id, name, text, regId, regDate, author);
+    }
+
+    public Incoming(int id, String name, String text, int regId, Date regDate, String author, String sender, String addressee, String outgoingNumber, Date outgoingDate) {
+        super(id, name, text, regId, regDate, author);
         this.sender = sender;
         this.addressee = addressee;
         this.outgoingNumber = outgoingNumber;
@@ -53,13 +65,10 @@ public class Incoming extends Document {
         this.outgoingDate = outgoingDate;
     }
 
+
+
     @Override
     public String toString() {
-        return "Incoming{" +
-                "sender='" + sender + '\'' +
-                ", addressee='" + addressee + '\'' +
-                ", outgoingNumber='" + outgoingNumber + '\'' +
-                ", outgoingDate=" + outgoingDate +
-                "} " + super.toString();
+        return "Входящий " + super.toString();
     }
 }

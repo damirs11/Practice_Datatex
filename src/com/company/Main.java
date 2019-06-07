@@ -4,22 +4,25 @@ package com.company;
 import com.company.Exception.DocumentExistsException;
 import com.company.Factory.DocumentFactory;
 import com.company.Models.Documents.Document;
-import com.company.Models.Documents.Incoming;
-import com.company.Models.Documents.Outgoing;
-import com.company.Models.Documents.Task;
+import com.company.Utils.DataGeneratorUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
+
+    //TODO подключить логгер
+    //TODO Реализовать группировку по авторам
     public static void main(String[] args) throws DocumentExistsException {
 
-        Document outgoing = DocumentFactory.create(Outgoing.class);
-        Document incoming = DocumentFactory.create(Incoming.class);
-        Document task = DocumentFactory.create(Task.class);
+        List<Document> documents = new ArrayList<>();
 
-        //TODO подключить логгер
-        //TODO переписать toString() методы для моделей
-        //TODO проверить табуляцию
-        System.out.print(outgoing);
+        for(int i = 0; i < 10; i++){
+            Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
+            documents.add(doc);
+        }
+
     }
 
 }

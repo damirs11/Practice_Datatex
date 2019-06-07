@@ -9,22 +9,11 @@ import java.util.Date;
 public class OutgoingFactory extends DocumentFactory{
 
     public Document create() {
-        Outgoing doc = new Outgoing(1, "", "", 1, new Date(), ""); //TODO Спросить, как можно это сделать лучше
+        Outgoing doc = new Outgoing(1, "", "", 1, new Date(), "");
 
-        doc = (Outgoing) generateData(doc);
+        DataGeneratorUtils.generateRandomDataForDocument(doc);
+        DataGeneratorUtils.generateRandomDataForOutgoing(doc);
 
         return doc;
-    }
-
-    @Override
-    public Document generateData(Document doc) {
-
-        DataGeneratorUtils dataGeneratorUtils = new DataGeneratorUtils();
-
-        Outgoing newDoc = (Outgoing) super.generateData(doc);
-
-        newDoc.setAddressee(dataGeneratorUtils.takeRandomPerson());
-        newDoc.setDeliveryType(dataGeneratorUtils.takeRandomDelivetyType());
-        return newDoc;
     }
 }

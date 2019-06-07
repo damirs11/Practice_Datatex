@@ -13,6 +13,15 @@ public abstract class Document implements Comparable<Document>, Storable {
     private Date    regDate;
     private String  author;
 
+    public Document(Document otherDoc){
+        this.id = otherDoc.id;
+        this.name = otherDoc.name;
+        this.text = otherDoc.text;
+        this.regId = otherDoc.regId;
+        this.regDate = otherDoc.regDate;
+        this.author = otherDoc.author;
+    }
+
     public Document(int id, String name, String text, int regId, Date regDate, String author) {
         this.id = id;
         this.name = name;
@@ -46,7 +55,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         return author;
     }
 
-    public void setIdDoc(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -87,14 +96,7 @@ public abstract class Document implements Comparable<Document>, Storable {
 
     @Override
     public String toString() {
-        return "Document{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", text='" + text + '\'' +
-                ", regId=" + regId +
-                ", regDate=" + regDate +
-                ", author='" + author + '\'' +
-                '}';
+        return "№" + id + " от " + regDate + ". " + name;
     }
 }
 

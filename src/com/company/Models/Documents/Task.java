@@ -10,12 +10,25 @@ public class Task extends Document {
     private String  signOfControllability;
     private String  controller;
 
-    public Task(int idDoc, String name, String text, int regId, Date regDate, String author) {
-        super(idDoc, name, text, regId, regDate, author);
+    public Task(Document otherDoc) {
+        super(otherDoc);
     }
 
-    public Task(int idDoc, String name, String text, int regId, Date regDate, String author, Date dateRealize, Date periodOfExecution, String executiveOfficer, String signOfControllability, String controller) {
-        super(idDoc, name, text, regId, regDate, author);
+    public Task(Document otherDoc, Date dateRealize, Date periodOfExecution, String responsibleExecutor, String signOfControllability, String controller) {
+        super(otherDoc);
+        this.dateRealize = dateRealize;
+        this.periodOfExecution = periodOfExecution;
+        this.responsibleExecutor = responsibleExecutor;
+        this.signOfControllability = signOfControllability;
+        this.controller = controller;
+    }
+
+    public Task(int id, String name, String text, int regId, Date regDate, String author) {
+        super(id, name, text, regId, regDate, author);
+    }
+
+    public Task(int id, String name, String text, int regId, Date regDate, String author, Date dateRealize, Date periodOfExecution, String executiveOfficer, String signOfControllability, String controller) {
+        super(id, name, text, regId, regDate, author);
         this.dateRealize = dateRealize;
         this.periodOfExecution = periodOfExecution;
         this.responsibleExecutor = executiveOfficer;
@@ -65,12 +78,6 @@ public class Task extends Document {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "dateRealize=" + dateRealize +
-                ", periodOfExecution=" + periodOfExecution +
-                ", responsibleExecutor='" + responsibleExecutor + '\'' +
-                ", signOfControllability='" + signOfControllability + '\'' +
-                ", controller='" + controller + '\'' +
-                "} " + super.toString();
+        return "Поручение " + super.toString();
     }
 }
