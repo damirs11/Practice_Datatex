@@ -7,7 +7,8 @@ import com.company.Models.Documents.Task;
 
 import java.util.Objects;
 
-public abstract class  DocumentFactory implements Factory {
+
+public abstract class DocumentFactory implements Factory {
 
     public static Document create(Class<? extends Document> docType) {
 
