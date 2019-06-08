@@ -7,10 +7,9 @@ import com.company.Models.Documents.Outgoing;
 import com.company.Models.Documents.Task;
 import org.apache.commons.lang.time.DateUtils;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class DataGeneratorUtils {
 
@@ -90,18 +89,8 @@ public class DataGeneratorUtils {
     public static Class<? extends Document> getRandomDocType() {
         return randomEnum(docTypes.class).getType();
     }
-
-    public static Date takeRandomDate(Integer lowerBound, Integer upperBound){
-
-        GregorianCalendar gc = new GregorianCalendar();
-
-        Integer year = random.nextInt(upperBound - lowerBound) + lowerBound;
-        Integer dayOfYear = random.nextInt(gc.getActualMaximum(Calendar.DAY_OF_YEAR)) + 1;
-
-        gc.set(Calendar.YEAR, year);
-        gc.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
-        return gc.getTime();
+    public static Date takeRandomDate(){
+        return new Date(System.currentTimeMillis() - ThreadLocalRandom.current().nextLong(1000*60*60*24*1000));
     }
 
     public static Document generateRandomDataForDocument(Document doc){
@@ -113,7 +102,7 @@ public class DataGeneratorUtils {
         doc.setName("Название документа");
         doc.setText("Текс документа");
         doc.setAuthor(takeRandomPerson());
-        doc.setRegDate(takeRandomDate(2000, 2020));
+        doc.setRegDate(takeRandomDate());
         doc.setRegId(regId);
 
         return doc;
@@ -136,7 +125,7 @@ public class DataGeneratorUtils {
         doc.setOutgoingNumber("Номер");
         doc.setSender(takeRandomPerson());
         doc.setAddressee(takeRandomPerson());
-        doc.setOutgoingDate(takeRandomDate(2000, 2020));
+        doc.setOutgoingDate(takeRandomDate());
 
         return doc;
     }
@@ -146,7 +135,7 @@ public class DataGeneratorUtils {
         generateRandomDataForDocument( (Document) doc);
 
         doc.setController(takeRandomPerson());
-        doc.setDateRealize(takeRandomDate(2000, 2020));
+        doc.setDateRealize(takeRandomDate());
         doc.setResponsibleExecutor(takeRandomPerson());
         doc.setPeriodOfExecution(DateUtils.addDays(doc.getDateRealize(), 30));
         doc.setSignOfControllability("Признак контрольности");
