@@ -9,18 +9,6 @@ public class Incoming extends Document {
     private String  outgoingNumber;
     private Date    outgoingDate;
 
-    public Incoming(Document otherDoc) {
-        super(otherDoc);
-    }
-
-    public Incoming(Document otherDoc, String sender, String addressee, String outgoingNumber, Date outgoingDate) {
-        super(otherDoc);
-        this.sender = sender;
-        this.addressee = addressee;
-        this.outgoingNumber = outgoingNumber;
-        this.outgoingDate = outgoingDate;
-    }
-
     public Incoming(int id, String name, String text, int regId, Date regDate, String author) {
         super(id, name, text, regId, regDate, author);
     }
@@ -31,6 +19,10 @@ public class Incoming extends Document {
         this.addressee = addressee;
         this.outgoingNumber = outgoingNumber;
         this.outgoingDate = outgoingDate;
+    }
+
+    public Incoming() {
+        super();
     }
 
     public String getSender() {

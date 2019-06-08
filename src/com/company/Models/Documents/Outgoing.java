@@ -7,16 +7,6 @@ public class Outgoing extends Document {
     private String addressee;
     private String deliveryType;
 
-    public Outgoing(Document otherDoc) {
-        super(otherDoc);
-    }
-
-    public Outgoing(Document otherDoc, String addressee, String deliveryType) {
-        super(otherDoc);
-        this.addressee = addressee;
-        this.deliveryType = deliveryType;
-    }
-
     public Outgoing(int id, String name, String text, int regId, Date regDate, String author) {
         super(id, name, text, regId, regDate, author);
     }
@@ -25,6 +15,10 @@ public class Outgoing extends Document {
         super(id, name, text, regId, regDate, author);
         this.addressee = addressee;
         this.deliveryType = deliveryType;
+    }
+
+    public Outgoing() {
+        super();
     }
 
     public String getAddressee() {

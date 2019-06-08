@@ -5,12 +5,11 @@ import com.company.Models.Documents.Document;
 import com.company.Models.Documents.Incoming;
 import com.company.Models.Documents.Outgoing;
 import com.company.Models.Documents.Task;
+import org.apache.commons.lang.time.DateUtils;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Random;
 
 public class DataGeneratorUtils {
@@ -20,50 +19,78 @@ public class DataGeneratorUtils {
     private DataGeneratorUtils() {
     }
 
-    private static List<String> persons = Arrays.asList(
-            "А Иванов Кузнецов",
-            "Б Козлов Новиков",
-            "В Кузнецов Соколов",
-            "Г Лебедев Козлов",
-            "Д Морозов Петров",
-            "Е Новиков Морозов",
-            "Ж Попов Лебедев",
-            "З Смирнов Иванов",
-            "И Соколов Попов"
-    );
+    private enum persons {
+        PERSONS1 ("А Иванов Кузнецов"),
+        PERSONS2 ("А Иванов Кузнецов"),
+        PERSONS3 ("В Кузнецов Соколов"),
+        PERSONS4 ("Г Лебедев Козлов"),
+        PERSONS5 ("Д Морозов Петров"),
+        PERSONS6 ("Е Новиков Морозов"),
+        PERSONS7 ("Ж Попов Лебедев"),
+        PERSONS8 ("З Смирнов Иванов"),
+        PERSONS9 ("И Соколов Попов");
 
-    private static List<String> deliveryType = Arrays.asList(
-            "Способ доставки 1",
-            "Способ доставки 2",
-            "Способ доставки 3",
-            "Способ доставки 4"
-    );
+        private final String person;
 
-    private static List<Class<? extends Document>> docTypes = Arrays.asList(
-            Outgoing.class,
-            Incoming.class,
-            Task.class
-    );
+        persons(String s) {
+            this.person = s;
+        }
 
-    public List getPersons() {
-        return persons;
+        public String getPerson() {
+            return person;
+        }
     }
 
-    public List getDList() {
-        return deliveryType;
+    private enum deliveryType {
+        TYPE1 ("Способ доставки 1"),
+        TYPE2 ("Способ доставки 2"),
+        TYPE3 ("Способ доставки 3"),
+        TYPE4 ("Способ доставки 4");
+
+        private final String type;
+
+        deliveryType(String s) {
+            this.type = s;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
+
+    private enum docTypes {
+        OUTGOING (Outgoing.class),
+        INCOMING (Incoming.class),
+        TASK (Task.class);
+
+        private final Class<? extends Document> type;
+
+        docTypes(Class<? extends Document> aClass) {
+            this.type = aClass;
+        }
+
+        public Class<? extends Document> getType() {
+            return type;
+        }
+    }
+
+    public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
+        int x = random.nextInt(clazz.getEnumConstants().length);
+        return clazz.getEnumConstants()[x];
     }
 
     public static String takeRandomPerson() {
-        return persons.get(random.nextInt(persons.size()));
+        return randomEnum(persons.class).getPerson();
     }
 
     public static String takeRandomDeliveryType() {
-        return deliveryType.get(random.nextInt(deliveryType.size()));
+        return randomEnum(deliveryType.class).getType();
     }
 
     public static Class<? extends Document> getRandomDocType() {
-        return docTypes.get(random.nextInt(docTypes.size()));
+        return randomEnum(docTypes.class).getType();
     }
+
     public static Date takeRandomDate(int lowerBound, int upperBound){
 
         GregorianCalendar gc = new GregorianCalendar();
@@ -75,16 +102,6 @@ public class DataGeneratorUtils {
         gc.set(Calendar.DAY_OF_YEAR, dayOfYear);
 
         return gc.getTime();
-    }
-
-    public static Date addDays(Date date, int days){
-
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.setTime(date);
-        calendar.add(Calendar.DAY_OF_YEAR, days);
-
-        return calendar.getTime();
     }
 
     public static Document generateRandomDataForDocument(Document doc){
@@ -102,7 +119,9 @@ public class DataGeneratorUtils {
         return doc;
     }
 
-    public static Outgoing generateRandomDataForOutgoing(Outgoing doc){
+    public static Outgoing generateRandomDataForDocument(Outgoing doc){
+
+        generateRandomDataForDocument( (Document) doc);
 
         doc.setAddressee(takeRandomPerson());
         doc.setDeliveryType(takeRandomDeliveryType());
@@ -110,7 +129,9 @@ public class DataGeneratorUtils {
         return doc;
     }
 
-    public static Incoming generateRandomDataForIncoming(Incoming doc){
+    public static Incoming generateRandomDataForDocument(Incoming doc){
+
+        generateRandomDataForDocument( (Document) doc);
 
         doc.setOutgoingNumber("Номер");
         doc.setSender(takeRandomPerson());
@@ -120,12 +141,14 @@ public class DataGeneratorUtils {
         return doc;
     }
 
-    public static Task generateRandomDataForTask(Task doc){
+    public static Task generateRandomDataForDocument(Task doc){
+
+        generateRandomDataForDocument( (Document) doc);
 
         doc.setController(takeRandomPerson());
         doc.setDateRealize(takeRandomDate(2000, 2020));
         doc.setResponsibleExecutor(takeRandomPerson());
-        doc.setPeriodOfExecution(addDays(doc.getDateRealize(), 30));
+        doc.setPeriodOfExecution(DateUtils.addDays(doc.getDateRealize(), 30));
         doc.setSignOfControllability("Признак контрольности");
 
         return doc;

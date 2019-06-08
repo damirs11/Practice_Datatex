@@ -5,7 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
+        <maven-compiler-pluginVersion>3.8.0</maven-compiler-pluginVersion>
+        <configuration-sourceVersion>8</configuration-sourceVersion>
+        <configuration-targetVersion>8</configuration-targetVersion>
         <slf4jVersion>1.7.25</slf4jVersion>
+        <commons-langVersion>2.6</commons-langVersion>
     </properties>
 
     <groupId>groupId</groupId>
@@ -16,10 +20,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>${maven-compiler-pluginVersion}</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${configuration-sourceVersion}</source>
+                    <target>${configuration-targetVersion}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -50,6 +54,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-langVersion}</version>
         </dependency>
     </dependencies>
 

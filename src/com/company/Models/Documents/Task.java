@@ -10,19 +10,6 @@ public class Task extends Document {
     private String  signOfControllability;
     private String  controller;
 
-    public Task(Document otherDoc) {
-        super(otherDoc);
-    }
-
-    public Task(Document otherDoc, Date dateRealize, Date periodOfExecution, String responsibleExecutor, String signOfControllability, String controller) {
-        super(otherDoc);
-        this.dateRealize = dateRealize;
-        this.periodOfExecution = periodOfExecution;
-        this.responsibleExecutor = responsibleExecutor;
-        this.signOfControllability = signOfControllability;
-        this.controller = controller;
-    }
-
     public Task(int id, String name, String text, int regId, Date regDate, String author) {
         super(id, name, text, regId, regDate, author);
     }
@@ -34,6 +21,10 @@ public class Task extends Document {
         this.responsibleExecutor = executiveOfficer;
         this.signOfControllability = signOfControllability;
         this.controller = controller;
+    }
+
+    public Task() {
+        super();
     }
 
     public Date getDateRealize() {

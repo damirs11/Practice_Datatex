@@ -23,13 +23,6 @@ public class Main {
 
         for(int i = 0; i < 10; i++){
             Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
-
-            for (Document document : documents) {
-                if (document.getRegId() == doc.getRegId()) {
-                    throw new DocumentExistsException(doc);
-                }
-            }
-
             documents.add(doc);
         }
 
