@@ -10,8 +10,17 @@ import com.company.Utils.DataGeneratorUtils;
 import java.util.Objects;
 
 
+/**
+ * Factory for production Documents
+ */
 public abstract class DocumentFactory implements Factory {
 
+
+    /**
+     * @param docType Document type
+     * @return  Document with generated data
+     * @throws DocumentExistsException if idReg both documents are identical
+     */
     public static Document create(Class<? extends Document> docType) throws DocumentExistsException {
 
         if(Objects.equals(docType.getName(), Outgoing.class.getName() )) {
