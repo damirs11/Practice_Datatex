@@ -21,7 +21,7 @@ public class Main {
 
         List<Document> documents = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++){
+        for(Integer i = 0; i < 10; i++){
             Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
             documents.add(doc);
         }

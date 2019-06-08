@@ -8,10 +8,10 @@ import java.util.List;
 
 public abstract class Document implements Comparable<Document>, Storable {
 
-    private int     id;
+    private Integer     id;
     private String  name;
     private String  text;
-    private int     regId;
+    private Integer     regId;
     private Date    regDate;
     private String  author;
 
@@ -24,7 +24,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         allDocuments.add(this);
     }
 
-    public Document(int id, String name, String text, int regId, Date regDate, String author) {
+    public Document(Integer id, String name, String text, Integer regId, Date regDate, String author) {
         this.id = id;
         this.name = name;
         this.text = text;
@@ -33,7 +33,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         this.author = author;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         return text;
     }
 
-    public int getRegId() {
+    public Integer getRegId() {
         return regId;
     }
 
@@ -57,7 +57,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         return author;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -69,7 +69,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         this.text = text;
     }
 
-    public void setRegId(int regId) {
+    public void setRegId(Integer regId) {
         this.regId = regId;
     }
 
@@ -83,17 +83,11 @@ public abstract class Document implements Comparable<Document>, Storable {
 
 
     public int compareTo(Document obj) {
-        if(this.regId == obj.regId)
-            if(this.regDate.equals(obj.regDate))
-                return 0;
-            else if(this.regDate.after(obj.regDate))
-                return 1;
-            else
-                return -1;
-        else if(this.regId < obj.regId)
-            return 1;
-        else
-            return -1;
+        if(regDate.compareTo(obj.regDate) != 0) {
+            return regDate.compareTo(obj.regDate);
+        } else {
+            return  regId.compareTo(obj.regId);
+        }
     }
 
     @Override

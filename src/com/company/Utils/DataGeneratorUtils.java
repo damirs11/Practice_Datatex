@@ -75,7 +75,7 @@ public class DataGeneratorUtils {
     }
 
     public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
-        int x = random.nextInt(clazz.getEnumConstants().length);
+        Integer x = random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];
     }
 
@@ -91,12 +91,12 @@ public class DataGeneratorUtils {
         return randomEnum(docTypes.class).getType();
     }
 
-    public static Date takeRandomDate(int lowerBound, int upperBound){
+    public static Date takeRandomDate(Integer lowerBound, Integer upperBound){
 
         GregorianCalendar gc = new GregorianCalendar();
 
-        int year = random.nextInt(upperBound - lowerBound) + lowerBound;
-        int dayOfYear = random.nextInt(gc.getActualMaximum(Calendar.DAY_OF_YEAR)) + 1;
+        Integer year = random.nextInt(upperBound - lowerBound) + lowerBound;
+        Integer dayOfYear = random.nextInt(gc.getActualMaximum(Calendar.DAY_OF_YEAR)) + 1;
 
         gc.set(Calendar.YEAR, year);
         gc.set(Calendar.DAY_OF_YEAR, dayOfYear);
@@ -106,8 +106,8 @@ public class DataGeneratorUtils {
 
     public static Document generateRandomDataForDocument(Document doc){
 
-        int docId = random.nextInt(1000);
-        int regId = random.nextInt(1000);
+        Integer docId = random.nextInt(1000);
+        Integer regId = random.nextInt(1000);
 
         doc.setId(docId);
         doc.setName("Название документа");

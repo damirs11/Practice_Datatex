@@ -45,8 +45,9 @@ public abstract class DocumentFactory implements Factory {
     }
 
     private static void checkId(Document doc) throws DocumentExistsException {
+        int count = 0;
         for(Document document: Document.allDocuments) {
-            if(document.getRegId() == doc.getRegId()){
+            if(document.getRegId().equals(doc.getRegId()) && (count == 2)){
                 throw new DocumentExistsException(doc);
             }
         }

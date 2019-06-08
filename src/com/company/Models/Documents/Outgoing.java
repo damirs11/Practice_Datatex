@@ -7,11 +7,11 @@ public class Outgoing extends Document {
     private String addressee;
     private String deliveryType;
 
-    public Outgoing(int id, String name, String text, int regId, Date regDate, String author) {
+    public Outgoing(Integer id, String name, String text, Integer regId, Date regDate, String author) {
         super(id, name, text, regId, regDate, author);
     }
 
-    public Outgoing(int id, String name, String text, int regId, Date regDate, String author, String addressee, String deliveryType) {
+    public Outgoing(Integer id, String name, String text, Integer regId, Date regDate, String author, String addressee, String deliveryType) {
         super(id, name, text, regId, regDate, author);
         this.addressee = addressee;
         this.deliveryType = deliveryType;
