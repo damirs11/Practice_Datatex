@@ -1,6 +1,6 @@
-package com.company.Models.Documents;
+package com.company.models.documents;
 
-import com.company.Interfaces.Storable;
+import com.company.interfaces.Storable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,15 +8,16 @@ import java.util.List;
 
 public abstract class Document implements Comparable<Document>, Storable {
 
-    private Integer     id;
-    private String  name;
-    private String  text;
-    private Integer     regId;
-    private Date    regDate;
-    private String  author;
+    private Integer id;
+    private String name;
+    private String text;
+    private Integer regId;
+    private Date regDate;
+    private String author;
 
     public static final List<Document> allDocuments;
-    static   {
+
+    static {
         allDocuments = new ArrayList<>();
     }
 
@@ -83,10 +84,10 @@ public abstract class Document implements Comparable<Document>, Storable {
 
 
     public int compareTo(Document obj) {
-        if(regDate.compareTo(obj.regDate) != 0) {
+        if (regDate.compareTo(obj.regDate) != 0) {
             return regDate.compareTo(obj.regDate);
         } else {
-            return  regId.compareTo(obj.regId);
+            return regId.compareTo(obj.regId);
         }
     }
 

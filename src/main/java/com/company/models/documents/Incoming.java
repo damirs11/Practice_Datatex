@@ -1,13 +1,13 @@
-package com.company.Models.Documents;
+package com.company.models.documents;
 
 import java.util.Date;
 
 public class Incoming extends Document {
 
-    private String  sender;
-    private String  addressee;
-    private String  outgoingNumber;
-    private Date    outgoingDate;
+    private String sender;
+    private String addressee;
+    private String outgoingNumber;
+    private Date outgoingDate;
 
     public Incoming(Integer id, String name, String text, Integer regId, Date regDate, String author) {
         super(id, name, text, regId, regDate, author);
@@ -56,7 +56,6 @@ public class Incoming extends Document {
     public void setOutgoingDate(Date outgoingDate) {
         this.outgoingDate = outgoingDate;
     }
-
 
 
     @Override

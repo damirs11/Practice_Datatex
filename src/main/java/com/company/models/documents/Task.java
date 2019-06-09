@@ -1,14 +1,14 @@
-package com.company.Models.Documents;
+package com.company.models.documents;
 
 import java.util.Date;
 
 public class Task extends Document {
 
-    private Date    dateRealize;
-    private Date    periodOfExecution;
-    private String  responsibleExecutor;
-    private String  signOfControllability;
-    private String  controller;
+    private Date dateRealize;
+    private Date periodOfExecution;
+    private String responsibleExecutor;
+    private String signOfControllability;
+    private String controller;
 
     public Task(Integer id, String name, String text, Integer regId, Date regDate, String author) {
         super(id, name, text, regId, regDate, author);

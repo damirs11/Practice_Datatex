@@ -1,6 +1,6 @@
-package com.company.Factory;
+package com.company.factory;
 
-import com.company.Models.Documents.Task;
+import com.company.models.documents.Task;
 
 public class TaskFactory extends DocumentFactory {
 

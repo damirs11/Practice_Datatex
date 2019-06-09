@@ -1,10 +1,10 @@
 package com.company;
 
 
-import com.company.Exception.DocumentExistsException;
-import com.company.Factory.DocumentFactory;
-import com.company.Models.Documents.Document;
-import com.company.Utils.DataGeneratorUtils;
+import com.company.exception.DocumentExistsException;
+import com.company.factory.DocumentFactory;
+import com.company.models.documents.Document;
+import com.company.utils.DataGeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ public class Main {
 
         List<Document> documents = new ArrayList<>();
 
-        for(Integer i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
             Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
             documents.add(doc);
         }

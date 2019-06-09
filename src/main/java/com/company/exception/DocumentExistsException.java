@@ -1,6 +1,6 @@
-package com.company.Exception;
+package com.company.exception;
 
-import com.company.Models.Documents.Document;
+import com.company.models.documents.Document;
 
 public class DocumentExistsException extends Exception {
     public DocumentExistsException(Document doc) {

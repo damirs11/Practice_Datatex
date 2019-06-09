@@ -1,6 +1,6 @@
-package com.company.Factory;
+package com.company.factory;
 
-import com.company.Models.Documents.Incoming;
+import com.company.models.documents.Incoming;
 
 public class IncomingFactory extends DocumentFactory {
 
