@@ -2,9 +2,8 @@ package com.company.models.documents;
 
 import com.company.interfaces.Storable;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
 public abstract class Document implements Comparable<Document>, Storable {
 
@@ -15,14 +14,7 @@ public abstract class Document implements Comparable<Document>, Storable {
     private Date regDate;
     private String author;
 
-    public static final List<Document> allDocuments;
-
-    static {
-        allDocuments = new ArrayList<>();
-    }
-
     public Document() {
-        allDocuments.add(this);
     }
 
     public Document(Integer id, String name, String text, Integer regId, Date regDate, String author) {
@@ -96,6 +88,23 @@ public abstract class Document implements Comparable<Document>, Storable {
         return "№" + id + " от " + regDate + ". " + name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Document document = (Document) o;
+        return Objects.equals(id, document.id) &&
+                Objects.equals(name, document.name) &&
+                Objects.equals(text, document.text) &&
+                Objects.equals(regId, document.regId) &&
+                Objects.equals(regDate, document.regDate) &&
+                Objects.equals(author, document.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, text, regId, regDate, author);
+    }
 }
 
 
