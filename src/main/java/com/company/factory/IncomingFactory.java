@@ -2,9 +2,13 @@ package com.company.factory;
 
 import com.company.models.documents.Incoming;
 
-public class IncomingFactory extends DocumentFactory {
+class IncomingFactory {
 
-    public Incoming create() {
+    private IncomingFactory() {
+        throw new IllegalStateException();
+    }
+
+    static Incoming create() {
         return new Incoming();
     }
 }

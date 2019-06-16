@@ -2,9 +2,13 @@ package com.company.factory;
 
 import com.company.models.documents.Outgoing;
 
-public class OutgoingFactory extends DocumentFactory{
+class OutgoingFactory {
 
-    public Outgoing create() {
+    private OutgoingFactory() {
+        throw new IllegalStateException();
+    }
+
+    static Outgoing create() {
         return new Outgoing();
     }
 }

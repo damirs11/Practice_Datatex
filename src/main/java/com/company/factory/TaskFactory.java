@@ -2,9 +2,13 @@ package com.company.factory;
 
 import com.company.models.documents.Task;
 
-public class TaskFactory extends DocumentFactory {
+class TaskFactory {
 
-    public Task create() {
+    private TaskFactory() {
+        throw new IllegalStateException();
+    }
+
+    static Task create() {
         return new Task();
     }
 }
