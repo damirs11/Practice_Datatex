@@ -1,5 +1,6 @@
 package com.company.models.documents;
 
+import com.company.annotation.RandomValue;
 import com.company.interfaces.Storable;
 
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Objects;
 
 public abstract class Document implements Comparable<Document>, Storable {
 
+    @RandomValue
     private Integer id;
     private String name;
     private String text;

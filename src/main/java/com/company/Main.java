@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void main(String[] args) throws DocumentExistsException {
+    public static void main(String[] args) throws DocumentExistsException, IllegalAccessException, InstantiationException {
 
         Logger logger = LoggerFactory.getLogger(Main.class);
 
