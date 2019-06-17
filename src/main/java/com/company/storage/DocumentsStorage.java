@@ -28,18 +28,4 @@ public class DocumentsStorage {
             documentList.add(doc);
         }
     }
-
-
-//    private static void addToFactoryCache(Document doc) throws DocumentExistsException {
-//        checkId(doc);
-//        documentsCache.add(doc);
-//    }
-//
-//    private static void checkId(Document doc) throws  DocumentExistsException {
-//        for(Document document: documentsCache) {
-//            if(document.getRegId().equals(doc.getRegId())){
-//                throw new DocumentExistsException(doc);
-//            }
-//        }
-//    }
 }
