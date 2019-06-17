@@ -1,9 +1,9 @@
 package com.company;
 
-
 import com.company.exception.DocumentExistsException;
 import com.company.factory.DocumentFactory;
 import com.company.models.documents.Document;
+import com.company.storage.DocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

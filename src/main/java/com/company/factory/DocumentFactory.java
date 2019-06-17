@@ -6,6 +6,7 @@ import com.company.models.documents.Document;
 import com.company.models.documents.Incoming;
 import com.company.models.documents.Outgoing;
 import com.company.models.documents.Task;
+import com.company.storage.DocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
 
 import java.util.ArrayList;
@@ -46,22 +47,7 @@ public abstract class DocumentFactory implements Factory {
             DataGeneratorUtils.generateRandomDataForDocument( (Task) doc);
         }
 
-        addToFactoryCache(doc);
+        DocumentsStorage.add(doc);
         return doc;
     }
-
-    private static void addToFactoryCache(Document doc) throws DocumentExistsException {
-        checkId(doc);
-        documentsCache.add(doc);
-    }
-
-    private static void checkId(Document doc) throws  DocumentExistsException {
-        for(Document document: documentsCache) {
-            if(document.getRegId().equals(doc.getRegId())){
-                throw new DocumentExistsException(doc);
-            }
-        }
-    }
-
-    private static final List<Document> documentsCache = new ArrayList<>();
 }
