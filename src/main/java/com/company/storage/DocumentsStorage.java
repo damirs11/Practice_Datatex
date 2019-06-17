@@ -4,28 +4,24 @@ import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class DocumentsStorage {
 
     private DocumentsStorage() {
     }
 
-    private static List<Document> documentList = new ArrayList<>();
+    private static Collection<Integer> documentList = new ArrayList<>();
 
-    public static List<Document> getDocumentList() {
+    public static Collection<Integer> getDocumentList() {
         return documentList;
     }
 
-    public static void setDocumentList(List<Document> documentList) {
-        DocumentsStorage.documentList = documentList;
-    }
-
     public static void add(Document doc) throws DocumentExistsException {
-        if(documentList.contains(doc)) {
+        if(documentList.contains(doc.getId())) {
             throw new DocumentExistsException(doc);
         } else {
-            documentList.add(doc);
+            documentList.add(doc.getId());
         }
     }
 }

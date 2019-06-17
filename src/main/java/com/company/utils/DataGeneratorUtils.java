@@ -58,7 +58,7 @@ public class DataGeneratorUtils {
 
         doc.setId(random.nextInt(1000));
         doc.setName("Название документа");
-        doc.setText("Текс документа");
+        doc.setText("Текст документа");
         doc.setAuthor(takeRandomPerson());
         doc.setRegDate(takeRandomDate());
         doc.setRegId(random.nextInt(1000));
@@ -68,7 +68,7 @@ public class DataGeneratorUtils {
 
     public static Outgoing generateRandomDataForDocument(Outgoing doc){
 
-        generateRandomDataForDocument( (Document) doc);
+        generateRandomDataForDocument(doc);
 
         doc.setAddressee(takeRandomPerson());
         doc.setDeliveryType(takeRandomDeliveryType());

@@ -3,14 +3,14 @@ package com.company;
 import com.company.exception.DocumentExistsException;
 import com.company.factory.DocumentFactory;
 import com.company.models.documents.Document;
-import com.company.storage.DocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -27,8 +27,8 @@ public class Main {
         }
 
         //Сортировка List в TreeMap
-        TreeMap<String, List<Document>> docsGrouped = documents.stream()
-                .collect(Collectors.groupingBy(Document::getAuthor, TreeMap::new, Collectors.toList()));
+        Map<String, Collection<Document>> docsGrouped = documents.stream()
+                .collect(Collectors.groupingBy(Document::getAuthor, Collectors.toCollection(ArrayList::new)));
 
 
         docsGrouped.forEach( (s, docs) -> {

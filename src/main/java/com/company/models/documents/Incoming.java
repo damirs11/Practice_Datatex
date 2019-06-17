@@ -9,20 +9,7 @@ public class Incoming extends Document {
     private String outgoingNumber;
     private Date outgoingDate;
 
-    public Incoming(Integer id, String name, String text, Integer regId, Date regDate, String author) {
-        super(id, name, text, regId, regDate, author);
-    }
-
-    public Incoming(Integer id, String name, String text, Integer regId, Date regDate, String author, String sender, String addressee, String outgoingNumber, Date outgoingDate) {
-        super(id, name, text, regId, regDate, author);
-        this.sender = sender;
-        this.addressee = addressee;
-        this.outgoingNumber = outgoingNumber;
-        this.outgoingDate = outgoingDate;
-    }
-
     public Incoming() {
-        super();
     }
 
     public String getSender() {

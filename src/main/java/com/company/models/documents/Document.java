@@ -14,18 +14,6 @@ public abstract class Document implements Comparable<Document>, Storable {
     private Date regDate;
     private String author;
 
-    public Document() {
-    }
-
-    public Document(Integer id, String name, String text, Integer regId, Date regDate, String author) {
-        this.id = id;
-        this.name = name;
-        this.text = text;
-        this.regId = regId;
-        this.regDate = regDate;
-        this.author = author;
-    }
-
     public Integer getId() {
         return id;
     }

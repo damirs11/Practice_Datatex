@@ -1,24 +1,11 @@
 package com.company.models.documents;
 
-import java.util.Date;
-
 public class Outgoing extends Document {
 
     private String addressee;
     private String deliveryType;
 
-    public Outgoing(Integer id, String name, String text, Integer regId, Date regDate, String author) {
-        super(id, name, text, regId, regDate, author);
-    }
-
-    public Outgoing(Integer id, String name, String text, Integer regId, Date regDate, String author, String addressee, String deliveryType) {
-        super(id, name, text, regId, regDate, author);
-        this.addressee = addressee;
-        this.deliveryType = deliveryType;
-    }
-
     public Outgoing() {
-        super();
     }
 
     public String getAddressee() {
