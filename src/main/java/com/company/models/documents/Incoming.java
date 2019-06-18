@@ -1,7 +1,7 @@
 package com.company.models.documents;
 
 import com.company.annotation.RandomValue;
-import com.company.enumeration.randomTypes;
+import com.company.enumeration.RandomTypes;
 
 import java.util.Date;
 import java.util.Objects;
@@ -11,22 +11,22 @@ public class Incoming extends Document {
     /**
      * Sender of Incoming Document
      */
-    @RandomValue(randomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON)
     private String sender;
     /**
      * Addressee of Incoming Document
      */
-    @RandomValue(randomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON)
     private String addressee;
     /**
      * Outgoing number of Incoming Document
      */
-    @RandomValue(randomTypes.TEXT)
+    @RandomValue(RandomTypes.TEXT)
     private String outgoingNumber;
     /**
      * Outgoing date of Incoming Document
      */
-    @RandomValue(randomTypes.DATE)
+    @RandomValue(RandomTypes.DATE)
     private Date outgoingDate;
 
     public String getSender() {

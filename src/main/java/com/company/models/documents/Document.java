@@ -1,7 +1,7 @@
 package com.company.models.documents;
 
 import com.company.annotation.RandomValue;
-import com.company.enumeration.randomTypes;
+import com.company.enumeration.RandomTypes;
 import com.company.interfaces.Storable;
 
 import java.util.Date;
@@ -15,32 +15,32 @@ public abstract class Document implements Comparable<Document>, Storable {
     /**
      * id of Document
      */
-    @RandomValue(randomTypes.INTEGER)
+    @RandomValue(RandomTypes.INTEGER)
     private Integer id;
     /**
      * Name of Document
      */
-    @RandomValue(randomTypes.TEXT)
+    @RandomValue(RandomTypes.TEXT)
     private String name;
     /**
      * Text inside Document
      */
-    @RandomValue(randomTypes.TEXT)
+    @RandomValue(RandomTypes.TEXT)
     private String text;
     /**
      * Registration Id of Document
      */
-    @RandomValue(randomTypes.INTEGER)
+    @RandomValue(RandomTypes.INTEGER)
     private Integer regId;
     /**
      * Registration Date of Document
      */
-    @RandomValue(randomTypes.DATE)
+    @RandomValue(RandomTypes.DATE)
     private Date regDate;
     /**
      * Author of Document
      */
-    @RandomValue(randomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON)
     private String author;
 
     public Integer getId() {

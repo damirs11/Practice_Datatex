@@ -2,8 +2,8 @@ package com.company.utils;
 
 
 import com.company.annotation.RandomValue;
-import com.company.enumeration.deliveryType;
-import com.company.enumeration.docTypes;
+import com.company.enumeration.DeliveryType;
+import com.company.enumeration.DocTypes;
 import org.apache.hadoop.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -16,6 +16,8 @@ import java.util.Random;
  * Class with utils
  */
 public class DataGeneratorUtils {
+
+    private static final int UPPER_BOUND = 1000;
 
     private static Random random = new Random();
 
@@ -60,7 +62,7 @@ public class DataGeneratorUtils {
      * @return the string
      */
     public static String takeRandomDeliveryType() {
-        return randomEnum(deliveryType.class).getType();
+        return randomEnum(DeliveryType.class).getType();
     }
 
     /**
@@ -68,8 +70,8 @@ public class DataGeneratorUtils {
      *
      * @return the random doc type
      */
-    public static docTypes getRandomDocType() {
-        return randomEnum(docTypes.class);
+    public static DocTypes getRandomDocType() {
+        return randomEnum(DocTypes.class);
     }
 
     /**
@@ -96,7 +98,7 @@ public class DataGeneratorUtils {
                 Object value = null;
                 switch (field.getAnnotation(RandomValue.class).value()) {
                     case INTEGER:
-                        value = random.nextInt(1000);
+                        value = random.nextInt(UPPER_BOUND);
                         break;
                     case DATE:
                         value = DataGeneratorUtils.takeRandomDate();

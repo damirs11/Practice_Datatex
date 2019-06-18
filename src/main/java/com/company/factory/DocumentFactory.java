@@ -1,6 +1,6 @@
 package com.company.factory;
 
-import com.company.enumeration.docTypes;
+import com.company.enumeration.DocTypes;
 import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
 import com.company.storage.IdDocumentsStorage;
@@ -16,7 +16,7 @@ public abstract class DocumentFactory implements Factory {
      * @return  Document with generated data
      * @throws DocumentExistsException if idReg both documents are identical
      */
-    public static Document create(docTypes docType) throws DocumentExistsException, IllegalAccessException {
+    public static Document create(DocTypes docType) throws DocumentExistsException, IllegalAccessException {
 
         Document doc;
 

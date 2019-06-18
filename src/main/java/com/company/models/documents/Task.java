@@ -1,7 +1,7 @@
 package com.company.models.documents;
 
 import com.company.annotation.RandomValue;
-import com.company.enumeration.randomTypes;
+import com.company.enumeration.RandomTypes;
 
 import java.util.Date;
 import java.util.Objects;
@@ -11,27 +11,27 @@ public class Task extends Document {
     /**
      * Date of realize
      */
-    @RandomValue(randomTypes.DATE)
+    @RandomValue(RandomTypes.DATE)
     private Date dateRealize;
     /**
      * Period of execution
      */
-    @RandomValue(randomTypes.DATE)
+    @RandomValue(RandomTypes.DATE)
     private Date periodOfExecution;
     /**
      * Responsible executor
      */
-    @RandomValue(randomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON)
     private String responsibleExecutor;
     /**
      * Sign of controllability
      */
-    @RandomValue(randomTypes.TEXT)
+    @RandomValue(RandomTypes.TEXT)
     private String signOfControllability;
     /**
      * Controller of Task
      */
-    @RandomValue(randomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON)
     private String controller;
 
     public Date getDateRealize() {

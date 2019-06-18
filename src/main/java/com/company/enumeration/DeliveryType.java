@@ -3,7 +3,7 @@ package com.company.enumeration;
 /**
  * The enum Delivery type.
  */
-public enum deliveryType {
+public enum DeliveryType {
     TYPE1 ("Способ доставки 1"),
     TYPE2 ("Способ доставки 2"),
     TYPE3 ("Способ доставки 3"),
@@ -11,7 +11,7 @@ public enum deliveryType {
 
     private final String type;
 
-    deliveryType(String s) {
+    DeliveryType(String s) {
         this.type = s;
     }
 

@@ -1,7 +1,7 @@
 package com.company.models.documents;
 
 import com.company.annotation.RandomValue;
-import com.company.enumeration.randomTypes;
+import com.company.enumeration.RandomTypes;
 
 import java.util.Objects;
 
@@ -10,12 +10,12 @@ public class Outgoing extends Document {
     /**
      * Outgoing date of Outgoing Document
      */
-    @RandomValue(randomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON)
     private String addressee;
     /**
      * Type of DELIVERY
      */
-    @RandomValue(randomTypes.DELIVERY)
+    @RandomValue(RandomTypes.DELIVERY)
     private String deliveryType;
 
     public String getAddressee() {

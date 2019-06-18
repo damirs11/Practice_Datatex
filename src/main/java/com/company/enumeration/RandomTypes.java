@@ -3,7 +3,7 @@ package com.company.enumeration;
 /**
  * The enum of types for RandomType Annotation.
  */
-public enum randomTypes {
+public enum RandomTypes {
     DATE,
     DELIVERY,
     INTEGER,

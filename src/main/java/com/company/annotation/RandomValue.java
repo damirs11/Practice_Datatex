@@ -1,6 +1,6 @@
 package com.company.annotation;
 
-import com.company.enumeration.randomTypes;
+import com.company.enumeration.RandomTypes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,5 +17,5 @@ public @interface RandomValue {
      *
      * @return the random value of Type
      */
-    randomTypes value();
+    RandomTypes value();
 }
