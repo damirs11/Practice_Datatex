@@ -1,5 +1,8 @@
 package com.company.enumeration;
 
+/**
+ * The enum Delivery type.
+ */
 public enum deliveryType {
     TYPE1 ("Способ доставки 1"),
     TYPE2 ("Способ доставки 2"),

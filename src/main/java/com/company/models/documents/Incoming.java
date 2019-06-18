@@ -17,9 +17,6 @@ public class Incoming extends Document {
     @RandomValue(value = randomTypes.DATE)
     private Date outgoingDate;
 
-    public Incoming() {
-    }
-
     public String getSender() {
         return sender;
     }

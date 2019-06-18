@@ -7,9 +7,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * The interface Random value.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface RandomValue {
+    /**
+     *
+     * @return the random value of Type
+     */
     randomTypes value();
-    int upperBound() default 1000;
 }

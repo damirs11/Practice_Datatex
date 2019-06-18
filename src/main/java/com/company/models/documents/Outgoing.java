@@ -12,9 +12,6 @@ public class Outgoing extends Document {
     @RandomValue(value = randomTypes.DELIVERY)
     private String deliveryType;
 
-    public Outgoing() {
-    }
-
     public String getAddressee() {
         return addressee;
     }

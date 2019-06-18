@@ -15,22 +15,26 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void main(String[] args) throws DocumentExistsException, IllegalAccessException {
+    public static void main(String[] args) {
 
         Logger logger = LoggerFactory.getLogger(Main.class);
 
         List<Document> documents = new ArrayList<>();
 
+        //Создание документов
         for(int i = 0; i < 10; i++){
-            Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
-            documents.add(doc);
+            try {
+                documents.add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
+            } catch (DocumentExistsException | IllegalAccessException e) {
+                logger.error(e.toString());
+            }
         }
 
         //Сортировка List в TreeMap
         Map<String, Collection<Document>> docsGrouped = documents.stream()
                 .collect(Collectors.groupingBy(Document::getAuthor, Collectors.toCollection(ArrayList::new)));
 
-
+        //Вывод
         docsGrouped.forEach( (s, docs) -> {
             logger.info(s);
             for (Document doc : docs) {

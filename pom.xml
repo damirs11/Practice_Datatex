@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <maven-compiler-pluginVersion>3.8.0</maven-compiler-pluginVersion>
-        <configuration-sourceVersion>8</configuration-sourceVersion>
-        <configuration-targetVersion>8</configuration-targetVersion>
-        <slf4jVersion>1.7.25</slf4jVersion>
-        <commons-langVersion>2.6</commons-langVersion>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <configuration-source.version>8</configuration-source.version>
+        <configuration-target.version>8</configuration-target.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <org.apache.hadoop.version>3.2.0</org.apache.hadoop.version>
     </properties>
 
     <groupId>groupId</groupId>
@@ -20,10 +21,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-pluginVersion}</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${configuration-sourceVersion}</source>
-                    <target>${configuration-targetVersion}</target>
+                    <source>${configuration-source.version}</source>
+                    <target>${configuration-target.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -47,18 +48,17 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4jVersion}</version>
-        </dependency>
-        <!-- Binding for System.out -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4jVersion}</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>${commons-langVersion}</version>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${org.apache.hadoop.version}</version>
         </dependency>
     </dependencies>
 

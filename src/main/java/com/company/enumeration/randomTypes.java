@@ -1,5 +1,12 @@
 package com.company.enumeration;
 
+/**
+ * The enum of types for RandomType Annotation.
+ */
 public enum randomTypes {
-    INTEGER, DATE, PERSON, TEXT, DELIVERY
+    DATE,
+    DELIVERY,
+    INTEGER,
+    PERSON,
+    TEXT
 }

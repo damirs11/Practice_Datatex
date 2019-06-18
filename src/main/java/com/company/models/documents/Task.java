@@ -19,9 +19,6 @@ public class Task extends Document {
     @RandomValue(value = randomTypes.PERSON)
     private String controller;
 
-    public Task() {
-    }
-
     public Date getDateRealize() {
         return dateRealize;
     }

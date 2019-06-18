@@ -3,9 +3,8 @@ package com.company.factory;
 import com.company.enumeration.docTypes;
 import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
-import com.company.storage.DocumentsStorage;
-import com.company.utils.RandomValueProcessor;
-
+import com.company.storage.IdDocumentsStorage;
+import com.company.utils.DataGeneratorUtils;
 
 /**
  * factory for production documents
@@ -35,8 +34,10 @@ public abstract class DocumentFactory implements Factory {
                 throw new IllegalStateException("Unexpected value: " + docType);
         }
 
-        RandomValueProcessor.proccess(doc);
-        DocumentsStorage.add(doc);
+        //check doc for RandomValue annotation
+        DataGeneratorUtils.process(doc);
+        //add Id to Store
+        IdDocumentsStorage.add(doc);
         return doc;
     }
 }
