@@ -8,7 +8,6 @@ import org.apache.hadoop.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -38,7 +37,6 @@ public class DataGeneratorUtils {
     /**
      * Random value from enum
      *
-     * @param <T>   the type of enum
      * @param clazz the clazz of enum
      * @return the value from enum
      */
@@ -90,12 +88,9 @@ public class DataGeneratorUtils {
      * @param obj the target object
      * @throws IllegalAccessException the illegal access exception
      */
-    public static void process(Object obj) throws IllegalAccessException {
+    public static void generate(Object obj) throws IllegalAccessException {
 
-        Class clazz = obj.getClass();
-        Collection<Field> fields = ReflectionUtils.getDeclaredFieldsIncludingInherited(clazz);
-
-        for (Field field : fields)
+        for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass()))
             if (field.isAnnotationPresent(RandomValue.class)) {
 
                 Object value = null;

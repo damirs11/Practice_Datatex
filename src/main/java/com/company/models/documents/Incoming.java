@@ -8,13 +8,25 @@ import java.util.Objects;
 
 public class Incoming extends Document {
 
-    @RandomValue(value = randomTypes.PERSON)
+    /**
+     * Sender of Incoming Document
+     */
+    @RandomValue(randomTypes.PERSON)
     private String sender;
-    @RandomValue(value = randomTypes.PERSON)
+    /**
+     * Addressee of Incoming Document
+     */
+    @RandomValue(randomTypes.PERSON)
     private String addressee;
-    @RandomValue(value = randomTypes.TEXT)
+    /**
+     * Outgoing number of Incoming Document
+     */
+    @RandomValue(randomTypes.TEXT)
     private String outgoingNumber;
-    @RandomValue(value = randomTypes.DATE)
+    /**
+     * Outgoing date of Incoming Document
+     */
+    @RandomValue(randomTypes.DATE)
     private Date outgoingDate;
 
     public String getSender() {

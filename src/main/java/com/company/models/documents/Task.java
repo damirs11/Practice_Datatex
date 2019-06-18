@@ -8,15 +8,30 @@ import java.util.Objects;
 
 public class Task extends Document {
 
-    @RandomValue(value = randomTypes.DATE)
+    /**
+     * Date of realize
+     */
+    @RandomValue(randomTypes.DATE)
     private Date dateRealize;
-    @RandomValue(value = randomTypes.DATE)
+    /**
+     * Period of execution
+     */
+    @RandomValue(randomTypes.DATE)
     private Date periodOfExecution;
-    @RandomValue(value = randomTypes.PERSON)
+    /**
+     * Responsible executor
+     */
+    @RandomValue(randomTypes.PERSON)
     private String responsibleExecutor;
-    @RandomValue(value = randomTypes.TEXT)
+    /**
+     * Sign of controllability
+     */
+    @RandomValue(randomTypes.TEXT)
     private String signOfControllability;
-    @RandomValue(value = randomTypes.PERSON)
+    /**
+     * Controller of Task
+     */
+    @RandomValue(randomTypes.PERSON)
     private String controller;
 
     public Date getDateRealize() {

@@ -13,10 +13,6 @@ public class IdDocumentsStorage {
 
     private static Collection<Integer> idDocumentsList = new ArrayList<>();
 
-    /**
-     *
-     * @return the id documents list
-     */
     public static Collection<Integer> getIdDocumentsList() {
         return idDocumentsList;
     }

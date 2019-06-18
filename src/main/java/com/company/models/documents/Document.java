@@ -7,19 +7,40 @@ import com.company.interfaces.Storable;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * abstract class Document which implements Comparable<Document>, Storable
+ */
 public abstract class Document implements Comparable<Document>, Storable {
 
-    @RandomValue(value = randomTypes.INTEGER)
+    /**
+     * id of Document
+     */
+    @RandomValue(randomTypes.INTEGER)
     private Integer id;
-    @RandomValue(value = randomTypes.TEXT)
+    /**
+     * Name of Document
+     */
+    @RandomValue(randomTypes.TEXT)
     private String name;
-    @RandomValue(value = randomTypes.TEXT)
+    /**
+     * Text inside Document
+     */
+    @RandomValue(randomTypes.TEXT)
     private String text;
-    @RandomValue(value = randomTypes.INTEGER)
+    /**
+     * Registration Id of Document
+     */
+    @RandomValue(randomTypes.INTEGER)
     private Integer regId;
-    @RandomValue(value = randomTypes.DATE)
+    /**
+     * Registration Date of Document
+     */
+    @RandomValue(randomTypes.DATE)
     private Date regDate;
-    @RandomValue(value = randomTypes.PERSON)
+    /**
+     * Author of Document
+     */
+    @RandomValue(randomTypes.PERSON)
     private String author;
 
     public Integer getId() {

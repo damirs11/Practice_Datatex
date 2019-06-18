@@ -7,9 +7,15 @@ import java.util.Objects;
 
 public class Outgoing extends Document {
 
-    @RandomValue(value = randomTypes.PERSON)
+    /**
+     * Outgoing date of Outgoing Document
+     */
+    @RandomValue(randomTypes.PERSON)
     private String addressee;
-    @RandomValue(value = randomTypes.DELIVERY)
+    /**
+     * Type of DELIVERY
+     */
+    @RandomValue(randomTypes.DELIVERY)
     private String deliveryType;
 
     public String getAddressee() {

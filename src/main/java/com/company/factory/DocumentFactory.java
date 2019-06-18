@@ -35,7 +35,7 @@ public abstract class DocumentFactory implements Factory {
         }
 
         //check doc for RandomValue annotation
-        DataGeneratorUtils.process(doc);
+        DataGeneratorUtils.generate(doc);
         //add Id to Store
         IdDocumentsStorage.add(doc);
         return doc;
