@@ -4,7 +4,7 @@ import com.company.enumeration.docTypes;
 import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
 import com.company.storage.DocumentsStorage;
-import com.company.utils.DataGeneratorUtils;
+import com.company.utils.RandomValueProcessor;
 
 
 /**
@@ -17,9 +17,9 @@ public abstract class DocumentFactory implements Factory {
      * @return  Document with generated data
      * @throws DocumentExistsException if idReg both documents are identical
      */
-    public static Document create(docTypes docType) throws DocumentExistsException {
+    public static Document create(docTypes docType) throws DocumentExistsException, IllegalAccessException {
 
-        Document doc = null;
+        Document doc;
 
         switch (docType) {
             case OUTGOING:
@@ -35,7 +35,7 @@ public abstract class DocumentFactory implements Factory {
                 throw new IllegalStateException("Unexpected value: " + docType);
         }
 
-        DataGeneratorUtils.generateRandomDataForDocument(doc); //TODO переделать генерацию
+        RandomValueProcessor.proccess(doc);
         DocumentsStorage.add(doc);
         return doc;
     }
