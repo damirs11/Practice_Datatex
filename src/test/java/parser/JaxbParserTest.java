@@ -1,5 +1,6 @@
 package parser;
 
+import com.company.Main;
 import com.company.models.staff.Department;
 import com.company.models.staff.ListWrapper;
 import com.company.models.staff.Organization;
@@ -14,6 +15,7 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 public class JaxbParserTest {
 
@@ -26,10 +28,9 @@ public class JaxbParserTest {
 
     @Before
     public void setUp() {
-        String rootInResources = "src/main/resources/InputXML/";
-        filePerson = new File(rootInResources + "InputPerson.xml");
-        fileOrganization = new File(rootInResources + "InputOrganization.xml");
-        fileDepartment = new File(rootInResources + "InputDepartment.xml");
+        filePerson = new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("XML/Person.xml")).getFile());
+        fileOrganization = new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("XML/Organization.xml")).getFile());
+        fileDepartment = new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("XML/Department.xml")).getFile());
 
         phoneNumbers = new ArrayList<>();
         phoneNumbers.add("+79173626897");
