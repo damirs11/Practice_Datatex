@@ -1,5 +1,6 @@
 package com.company.parser;
 
+import com.company.models.documents.Document;
 import com.company.models.staff.ListWrapper;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -8,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.StringWriter;
 
 /**
  * The type Jaxb parser.
@@ -46,6 +48,22 @@ public class JaxbParser {
             Marshaller marshaller = context.createMarshaller();
             marshaller.marshal(elements, file);
         }
+    }
+
+    /**
+     * ListWrapper to String XML.
+     *
+     * @param list ListWrapper<T> which will be convert to String XML
+     * @throws JAXBException the jaxb exception
+     */
+    public static <T> String listWrapperToStringXML(ListWrapper<T> list) throws JAXBException {
+        StringWriter stringWriter = new StringWriter();
+
+        JAXBContext context = JAXBContext.newInstance(list.getClass(), Document.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.marshal(list, stringWriter);
+
+        return stringWriter.toString();
     }
 }
 

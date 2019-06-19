@@ -8,5 +8,9 @@ public enum RandomTypes {
     DELIVERY,
     INTEGER,
     PERSON,
+    PERSON_ID,
+    PERSON_MIDDLE_NAME,
+    PERSON_NAME,
+    PERSON_SECOND_NAME,
     TEXT
 }

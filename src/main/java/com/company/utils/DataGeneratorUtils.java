@@ -27,16 +27,15 @@ public class DataGeneratorUtils {
     private DataGeneratorUtils() {
     }
 
-    private static List<String> persons = Arrays.asList(
-            "А Иванов Кузнецов",
-            "Б Козлов Новиков",
-            "В Кузнецов Соколов",
-            "Г Лебедев Козлов",
-            "Д Морозов Петров",
-            "Е Новиков Морозов",
-            "Ж Попов Лебедев",
-            "З Смирнов Иванов",
-            "И Соколов Попов"
+    private static List<SimplePerson> persons = Arrays.asList(
+            new SimplePerson("Иванов", "А", "Кузнецов"),
+            new SimplePerson("Козлов", "Б", "Новиков"),
+            new SimplePerson("Кузнецов", "В", "Соколов"),
+            new SimplePerson("Морозов", "Г", "Козлов"),
+            new SimplePerson("Новиков", "Д", "Петров"),
+            new SimplePerson("Попов", "Е", "Морозов"),
+            new SimplePerson("Смирнов", "Ж", "Лебедев"),
+            new SimplePerson("Соколов", "З", "Иванов")
     );
 
     /**
@@ -69,11 +68,11 @@ public class DataGeneratorUtils {
     }
 
     /**
-     * Gets random doc type.
+     * Take random doc type.
      *
      * @return the random doc type
      */
-    public static DocTypes getRandomDocType() {
+    public static DocTypes takeRandomDocType() {
         return randomEnum(DocTypes.class);
     }
 
@@ -106,7 +105,19 @@ public class DataGeneratorUtils {
                         value = DataGeneratorUtils.takeRandomDate();
                         break;
                     case PERSON:
+                        value = persons.get(DataGeneratorUtils.takeRandomPerson());
+                        break;
+                    case PERSON_ID:
                         value = DataGeneratorUtils.takeRandomPerson();
+                        break;
+                    case PERSON_MIDDLE_NAME:
+                        value = persons.get(DataGeneratorUtils.takeRandomPerson()).getMiddleName();
+                        break;
+                    case PERSON_NAME:
+                        value = persons.get(DataGeneratorUtils.takeRandomPerson()).getName();
+                        break;
+                    case PERSON_SECOND_NAME:
+                        value = persons.get(DataGeneratorUtils.takeRandomPerson()).getSecondName();
                         break;
                     case TEXT:
                         value = field.getName();

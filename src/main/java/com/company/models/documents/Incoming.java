@@ -11,12 +11,12 @@ public class Incoming extends Document {
     /**
      * Sender of Incoming Document
      */
-    @RandomValue(RandomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON_ID)
     private Integer sender;
     /**
      * Addressee of Incoming Document
      */
-    @RandomValue(RandomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON_ID)
     private Integer addressee;
     /**
      * Outgoing number of Incoming Document

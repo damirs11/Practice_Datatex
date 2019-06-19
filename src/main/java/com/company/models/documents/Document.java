@@ -40,7 +40,7 @@ public abstract class Document implements Comparable<Document>, Storable {
     /**
      * Author of Document
      */
-    @RandomValue(RandomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON_ID)
     private Integer author;
 
     public Integer getId() {

@@ -10,7 +10,7 @@ public class Outgoing extends Document {
     /**
      * Outgoing date of Outgoing Document
      */
-    @RandomValue(RandomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON_ID)
     private Integer addressee;
     /**
      * Type of DELIVERY

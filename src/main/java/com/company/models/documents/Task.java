@@ -21,7 +21,7 @@ public class Task extends Document {
     /**
      * Responsible executor
      */
-    @RandomValue(RandomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON_ID)
     private Integer responsibleExecutor;
     /**
      * Sign of controllability
@@ -31,7 +31,7 @@ public class Task extends Document {
     /**
      * Controller of Task
      */
-    @RandomValue(RandomTypes.PERSON)
+    @RandomValue(RandomTypes.PERSON_ID)
     private Integer controller;
 
     public Date getDateRealize() {
