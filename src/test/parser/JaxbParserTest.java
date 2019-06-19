@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class JaxbParserTest {
 
@@ -22,6 +22,7 @@ public class JaxbParserTest {
     private File filePerson;
     private File fileOrganization;
     private File fileDepartment;
+    private Collection<String> phoneNumbers;
 
     @Before
     public void setUp() {
@@ -29,68 +30,73 @@ public class JaxbParserTest {
         filePerson = new File(rootInResources + "InputPerson.xml");
         fileOrganization = new File(rootInResources + "InputOrganization.xml");
         fileDepartment = new File(rootInResources + "InputDepartment.xml");
+
+        phoneNumbers = new ArrayList<>();
+        phoneNumbers.add("+79173626897");
+        phoneNumbers.add("+79128156825");
+        phoneNumbers.add("+79257812444");
     }
 
     @Test
-    public void testSaveObject() throws JAXBException {
-
-        Person person1 = new Person(1, "", "", "", "", 1);
-        Person person2 = new Person(2, "", "", "", "", 2);
-        Person person3 = new Person(3, "", "", "", "", 3);
+    public void testPersonListSave() throws JAXBException {
 
         ListWrapper<Person> personListWrapper = new ListWrapper<>();
-        personListWrapper.getList().add(person1);
-        personListWrapper.getList().add(person2);
-        personListWrapper.getList().add(person3);
+
+        for (int i = 1; i < 10; i++) {
+            Person person = new Person(i, "Фамилия", "Имя", "Отчество", "Должность", i);
+            personListWrapper.getList().add(person);
+        }
         JaxbParser.saveObject(filePerson, personListWrapper);
+    }
 
-        List<String> phoneNumbers = new ArrayList<>();
-        phoneNumbers.add("+79173628888");
-        phoneNumbers.add("+78883628888");
-        phoneNumbers.add("+78883828888");
-
-        Organization organization1 = new Organization(1, "", "", 1, phoneNumbers);
-        Organization organization2 = new Organization(2, "", "", 2, phoneNumbers);
-        Organization organization3 = new Organization(3, "", "", 3, phoneNumbers);
+    @Test
+    public void testOrganizationListSave() throws JAXBException {
 
         ListWrapper<Organization> organizationListWrapper = new ListWrapper<>();
-        organizationListWrapper.getList().add(organization1);
-        organizationListWrapper.getList().add(organization2);
-        organizationListWrapper.getList().add(organization3);
+
+        for (int i = 1; i < 10; i++) {
+            Organization organization = new Organization(i, "Полное название", "Короткое название", i, phoneNumbers);
+            organizationListWrapper.getList().add(organization);
+        }
         JaxbParser.saveObject(fileOrganization, organizationListWrapper);
+    }
 
-
-        Department department1 = new Department(1, "", "", 1, phoneNumbers);
-        Department department2 = new Department(2, "", "", 2, phoneNumbers);
-        Department department3 = new Department(3, "", "", 3, phoneNumbers);
+    @Test
+    public void testDepartmentListSave() throws JAXBException {
 
         ListWrapper<Department> departmentListWrapper = new ListWrapper<>();
-        departmentListWrapper.getList().add(department1);
-        departmentListWrapper.getList().add(department2);
-        departmentListWrapper.getList().add(department3);
+
+        for (int i = 1; i < 10; i++) {
+            Department department = new Department(i, "Полное название", "Короткое название", i, phoneNumbers, i);
+            departmentListWrapper.getList().add(department);
+        }
         JaxbParser.saveObject(fileDepartment, departmentListWrapper);
     }
 
     @Test
-    public void testGetObject() throws JAXBException {
+    public void testPersonListPrint() throws JAXBException {
         ListWrapper<Person> personListWrapper = JaxbParser.getObject(filePerson, Person.class);
         for (Person person : personListWrapper.getList()) {
             logger.info(String.valueOf(person));
         }
+    }
 
+    @Test
+    public void testOrganizationListPrint() throws JAXBException {
         ListWrapper<Organization> organizationListWrapper = JaxbParser.getObject(fileOrganization, Organization.class);
         for (Organization organization : organizationListWrapper.getList()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug(String.valueOf(organization));
-            }
+            logger.info(String.valueOf(organization));
         }
+    }
 
+    @Test
+    public void testDepartmentListPrint() throws JAXBException {
         ListWrapper<Department> departmentListWrapper = JaxbParser.getObject(fileDepartment, Department.class);
         for (Department department : departmentListWrapper.getList()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug(String.valueOf(department));
-            }
+            logger.info(String.valueOf(department));
         }
     }
 
 }
+
+

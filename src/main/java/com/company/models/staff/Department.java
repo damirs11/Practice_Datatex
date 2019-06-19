@@ -21,12 +21,13 @@ public class Department extends Staff {
         super(id);
     }
 
-    public Department(int id, String fullName, String shortName, Integer departmentHead, Collection<String> phoneNumbers) {
+    public Department(Integer id, String fullName, String shortName, Integer departmentHead, Collection<String> phoneNumbers, Integer organizationId) {
         super(id);
         this.fullName = fullName;
         this.shortName = shortName;
         this.departmentHead = departmentHead;
         this.phoneNumbers = phoneNumbers;
+        this.organizationId = organizationId;
     }
 
     public String getFullName() {

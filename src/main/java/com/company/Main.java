@@ -6,13 +6,15 @@ import com.company.factory.DocumentFactory;
 import com.company.models.documents.Document;
 import com.company.models.staff.ListWrapper;
 import com.company.models.staff.Person;
-import com.company.parser.GsonParser;
 import com.company.parser.JaxbParser;
 import com.company.utils.DataGeneratorUtils;
+import com.google.gson.Gson;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +41,6 @@ public class Main {
         for(Person person: personsList) {
             File filename = new File(pathName.getAbsolutePath(), person.getId() + " " + person.getSecondName() + ".json");
 
-
             TreeSet<Document> personDocuments = new TreeSet<>();
             for(Document doc: documents) {
                 if(person.getId().equals(doc.getAuthor())) {
@@ -47,7 +48,10 @@ public class Main {
                 }
             }
 
-            GsonParser.saveObject(filename, personDocuments);
+            try (Writer writer = new FileWriter(filename)) {
+                Gson gson = new Gson();
+                gson.toJson(personDocuments, writer);
+            }
         }
 
 
