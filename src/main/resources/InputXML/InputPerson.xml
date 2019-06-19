@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elements>
+    <Person>
+        <id>1</id>
+        <departmentId>1</departmentId>
+        <middleName></middleName>
+        <name></name>
+        <position></position>
+        <secondName></secondName>
+    </Person>
+    <Person>
+        <id>2</id>
+        <departmentId>2</departmentId>
+        <middleName></middleName>
+        <name></name>
+        <position></position>
+        <secondName></secondName>
+    </Person>
+    <Person>
+        <id>3</id>
+        <departmentId>3</departmentId>
+        <middleName></middleName>
+        <name></name>
+        <position></position>
+        <secondName></secondName>
+    </Person>
+</elements>

@@ -11,14 +11,14 @@ public class Outgoing extends Document {
      * Outgoing date of Outgoing Document
      */
     @RandomValue(RandomTypes.PERSON)
-    private String addressee;
+    private Integer addressee;
     /**
      * Type of DELIVERY
      */
     @RandomValue(RandomTypes.DELIVERY)
     private String deliveryType;
 
-    public String getAddressee() {
+    public Integer getAddressee() {
         return addressee;
     }
 
@@ -26,7 +26,7 @@ public class Outgoing extends Document {
         return deliveryType;
     }
 
-    public void setAddressee(String addressee) {
+    public void setAddressee(Integer addressee) {
         this.addressee = addressee;
     }
 

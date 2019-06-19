@@ -16,7 +16,7 @@ public abstract class DocumentFactory implements Factory {
      * @return  Document with generated data
      * @throws DocumentExistsException if idReg both documents are identical
      */
-    public static Document create(DocTypes docType) throws DocumentExistsException, IllegalAccessException {
+    public static Document create(DocTypes docType) throws DocumentExistsException {
 
         Document doc;
 

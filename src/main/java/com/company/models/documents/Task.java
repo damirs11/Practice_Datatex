@@ -22,7 +22,7 @@ public class Task extends Document {
      * Responsible executor
      */
     @RandomValue(RandomTypes.PERSON)
-    private String responsibleExecutor;
+    private Integer responsibleExecutor;
     /**
      * Sign of controllability
      */
@@ -32,7 +32,7 @@ public class Task extends Document {
      * Controller of Task
      */
     @RandomValue(RandomTypes.PERSON)
-    private String controller;
+    private Integer controller;
 
     public Date getDateRealize() {
         return dateRealize;
@@ -42,7 +42,7 @@ public class Task extends Document {
         return periodOfExecution;
     }
 
-    public String getResponsibleExecutor() {
+    public Integer getResponsibleExecutor() {
         return responsibleExecutor;
     }
 
@@ -50,7 +50,7 @@ public class Task extends Document {
         return signOfControllability;
     }
 
-    public String getController() {
+    public Integer getController() {
         return controller;
     }
 
@@ -62,7 +62,7 @@ public class Task extends Document {
         this.periodOfExecution = periodOfExecution;
     }
 
-    public void setResponsibleExecutor(String executiveOfficer) {
+    public void setResponsibleExecutor(Integer executiveOfficer) {
         this.responsibleExecutor = executiveOfficer;
     }
 
@@ -70,7 +70,7 @@ public class Task extends Document {
         this.signOfControllability = signOfControllability;
     }
 
-    public void setController(String controller) {
+    public void setController(Integer controller) {
         this.controller = controller;
     }
 

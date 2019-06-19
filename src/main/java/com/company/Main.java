@@ -1,47 +1,56 @@
 package com.company;
 
+
 import com.company.exception.DocumentExistsException;
 import com.company.factory.DocumentFactory;
 import com.company.models.documents.Document;
+import com.company.models.staff.ListWrapper;
+import com.company.models.staff.Person;
+import com.company.parser.GsonParser;
+import com.company.parser.JaxbParser;
 import com.company.utils.DataGeneratorUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.TreeSet;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JAXBException, IOException, DocumentExistsException {
 
-        Logger logger = LoggerFactory.getLogger(Main.class);
+        File filePerson = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
 
-        List<Document> documents = new ArrayList<>();
+        ListWrapper<Person> personListWrapper = JaxbParser.getObject(filePerson, Person.class);
+        List<Person> personsList = personListWrapper.getList();
 
-        //Создание документов
-        for(int i = 0; i < 10; i++){
-            try {
-                documents.add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
-            } catch (DocumentExistsException | IllegalAccessException e) {
-                logger.error(e.toString());
-            }
+        int numberOfDocuments = 10;
+        List<Document> documents = new ArrayList<>(numberOfDocuments);
+        for(int i = 0; i < numberOfDocuments; i++){
+            Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
+            documents.add(doc);
         }
 
-        //Сортировка List в TreeMap
-        Map<String, List<Document>> docsGrouped = documents
-                .stream()
-                .collect(Collectors.groupingBy(Document::getAuthor, TreeMap::new, Collectors.toList()));
+        File pathName = new File("src/main/resources/OutputJson/");
+        pathName.mkdir();
+        for(Person person: personsList) {
+            File filename = new File(pathName.getAbsolutePath(), person.getId() + " " + person.getSecondName() + ".json");
 
-        //Вывод
-        docsGrouped.forEach( (s, docs) -> {
-            logger.info(s);
-            for (Document doc : docs) {
-                logger.info(String.valueOf(doc));
+
+            TreeSet<Document> personDocuments = new TreeSet<>();
+            for(Document doc: documents) {
+                if(person.getId().equals(doc.getAuthor())) {
+                    personDocuments.add(doc);
+                }
             }
-        });
+
+            GsonParser.saveObject(filename, personDocuments);
+        }
+
+
     }
 
 }

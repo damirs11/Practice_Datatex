@@ -12,12 +12,12 @@ public class Incoming extends Document {
      * Sender of Incoming Document
      */
     @RandomValue(RandomTypes.PERSON)
-    private String sender;
+    private Integer sender;
     /**
      * Addressee of Incoming Document
      */
     @RandomValue(RandomTypes.PERSON)
-    private String addressee;
+    private Integer addressee;
     /**
      * Outgoing number of Incoming Document
      */
@@ -29,11 +29,11 @@ public class Incoming extends Document {
     @RandomValue(RandomTypes.DATE)
     private Date outgoingDate;
 
-    public String getSender() {
+    public Integer getSender() {
         return sender;
     }
 
-    public String getAddressee() {
+    public Integer getAddressee() {
         return addressee;
     }
 
@@ -45,11 +45,11 @@ public class Incoming extends Document {
         return outgoingDate;
     }
 
-    public void setSender(String sender) {
+    public void setSender(Integer sender) {
         this.sender = sender;
     }
 
-    public void setAddressee(String addressee) {
+    public void setAddressee(Integer addressee) {
         this.addressee = addressee;
     }
 

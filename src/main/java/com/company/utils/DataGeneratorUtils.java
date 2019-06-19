@@ -52,8 +52,8 @@ public class DataGeneratorUtils {
      *
      * @return the string
      */
-    public static String takeRandomPerson() {
-        return persons.get(random.nextInt(persons.size()));
+    public static Integer takeRandomPerson() {
+        return random.nextInt(persons.size());
     }
 
     /**
@@ -90,7 +90,7 @@ public class DataGeneratorUtils {
      * @param obj the target object
      * @throws IllegalAccessException the illegal access exception
      */
-    public static void generate(Object obj) throws IllegalAccessException {
+    public static void generate(Object obj) {
 
         for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass()))
             if (field.isAnnotationPresent(RandomValue.class)) {
@@ -115,7 +115,11 @@ public class DataGeneratorUtils {
                 }
 
                 field.setAccessible(true);
-                field.set(obj, value);
+                try {
+                    field.set(obj, value);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
     }
 }
