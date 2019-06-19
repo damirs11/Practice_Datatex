@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -31,8 +31,9 @@ public class Main {
         }
 
         //Сортировка List в TreeMap
-        Map<String, Collection<Document>> docsGrouped = documents.stream()
-                .collect(Collectors.groupingBy(Document::getAuthor, Collectors.toCollection(ArrayList::new)));
+        Map<String, List<Document>> docsGrouped = documents
+                .stream()
+                .collect(Collectors.groupingBy(Document::getAuthor, TreeMap::new, Collectors.toList()));
 
         //Вывод
         docsGrouped.forEach( (s, docs) -> {
