@@ -18,7 +18,7 @@ public class JaxbParser {
     }
 
     /**
-     * Gets object.
+     * Gets data from file and translate it to specify Class<T>
      *
      * @param file Path to the file
      * @param clazz Class of object being unmarshaled
@@ -33,7 +33,7 @@ public class JaxbParser {
     }
 
     /**
-     * Save object.
+     * Save object which wrapped into generic ListWrapper<T> to @param file
      *
      * @param file Path to the file
      * @param list ListWrapper<T> which will be saved into @param file

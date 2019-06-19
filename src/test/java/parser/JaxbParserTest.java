@@ -1,6 +1,5 @@
 package parser;
 
-import com.company.Main;
 import com.company.models.staff.Department;
 import com.company.models.staff.ListWrapper;
 import com.company.models.staff.Organization;

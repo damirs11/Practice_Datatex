@@ -16,32 +16,33 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.TreeSet;
 
 public class Main {
+
+    private static final int NUMBER_DOCUMENT = 10;
 
     public static void main(String[] args) throws JAXBException, IOException, DocumentExistsException {
 
         File filePerson = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
 
         ListWrapper<Person> personListWrapper = JaxbParser.getObject(filePerson, Person.class);
-        List<Person> personsList = personListWrapper.getList();
+        Collection<Person> personsList = personListWrapper.getList();
 
-        int numberOfDocuments = 10;
-        List<Document> documents = new ArrayList<>(numberOfDocuments);
-        for(int i = 0; i < numberOfDocuments; i++){
+        Collection<Document> documents = new ArrayList<>(NUMBER_DOCUMENT);
+        for (int i = 0; i < NUMBER_DOCUMENT; i++) {
             Document doc = DocumentFactory.create(DataGeneratorUtils.getRandomDocType());
             documents.add(doc);
         }
 
-        File pathName = new File("src/main/resources/OutputJson/");
+        File pathName = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("")).getPath() + "OutputJson/");
         pathName.mkdir();
         for(Person person: personsList) {
             File filename = new File(pathName.getAbsolutePath(), person.getId() + " " + person.getSecondName() + ".json");
 
-            TreeSet<Document> personDocuments = new TreeSet<>();
+            Collection<Document> personDocuments = new TreeSet<>();
             for(Document doc: documents) {
                 if(person.getId().equals(doc.getAuthor())) {
                     personDocuments.add(doc);
@@ -53,8 +54,6 @@ public class Main {
                 gson.toJson(personDocuments, writer);
             }
         }
-
-
     }
 
 }
