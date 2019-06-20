@@ -27,16 +27,18 @@ public class Main {
     private static final String PERSON_INPUT_PATH = "InputXML/InputPerson.xml";
     private static final String OUTPUT_JSON_PATH = "OutputJson/";
 
-
     private static Gson gson = new Gson();
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         try {
-            Collection<Person> persons = null;
-
-            persons = JaxbParser.getObject(new File(RESOURCE_PATH, PERSON_INPUT_PATH), Person.class).getList();
-
+            Collection<Person> persons =
+                    JaxbParser.getObject(new File(RESOURCE_PATH, PERSON_INPUT_PATH), Person.class).getList();
 
             Collection<Document> documents = IntStream.range(0, NUMBER_DOCUMENT)
                     .mapToObj(value -> DocumentFactory.create(DataGeneratorUtils.getRandomDocType()))
@@ -52,14 +54,14 @@ public class Main {
                 personDocuments.forEach(document -> logger.info(document.toString()));
 
                 File filename = new File(String.format(RESOURCE_PATH + OUTPUT_JSON_PATH + "%s %s.json", person.getId(), person.getSecondName()));
-                Writer writer = new FileWriter(filename);
-                gson.toJson(personDocuments, writer);
-
+                try (Writer writer = new FileWriter(filename)) {
+                    gson.toJson(personDocuments, writer);
+                }
             }
         } catch (IOException | JAXBException e) {
-            logger.error(e.toString());
+            logger.error("Error reading of XML file {}", e.getMessage());
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("Unexpected exception " + e.getMessage());
         }
     }
 

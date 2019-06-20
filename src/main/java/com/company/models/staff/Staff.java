@@ -3,7 +3,14 @@ package com.company.models.staff;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * Abstract class which contain an id
+ * of children
+ */
 public abstract class Staff {
+    /**
+     * Id of Staff
+     */
     private Integer id;
 
     public Integer getId() {

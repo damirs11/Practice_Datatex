@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class DocumentFactory implements Factory {
 
-    static Logger logger = LoggerFactory.getLogger(DocumentFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(DocumentFactory.class);
 
     /**
      * @param docType Document type
-     * @return  Document with generated data
+     * @return Document with generated data
      * @throws DocumentExistsException if idReg both documents are identical
      */
     public static Document create(DocTypes docType) {
@@ -45,7 +45,7 @@ public abstract class DocumentFactory implements Factory {
 
             return doc;
         } catch (DocumentExistsException e) {
-            logger.error(e.toString());
+            logger.error(e.getMessage());
         }
         return null;
     }
