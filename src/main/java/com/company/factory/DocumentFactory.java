@@ -45,7 +45,7 @@ public abstract class DocumentFactory implements Factory {
 
             return doc;
         } catch (DocumentExistsException e) {
-            logger.error(e.getMessage());
+            logger.error("Error while try to create document " + e.getMessage());
         }
         return null;
     }

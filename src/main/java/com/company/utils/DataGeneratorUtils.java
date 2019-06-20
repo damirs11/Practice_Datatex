@@ -120,7 +120,7 @@ public class DataGeneratorUtils {
                 try {
                     field.set(obj, value);
                 } catch (IllegalAccessException e) {
-                    logger.error(e.toString());
+                    logger.error("Error while to update field value " + e.getMessage());
                 }
             }
     }

@@ -24,8 +24,8 @@ public class Main {
 
     private static final int NUMBER_DOCUMENT = 10;
     private static final String RESOURCE_PATH = Objects.requireNonNull(Main.class.getClassLoader().getResource("")).getPath();
-    private static final String PERSON_INPUT_PATH = "InputXML/InputPerson.xml";
-    private static final String OUTPUT_JSON_PATH = "OutputJson/";
+    private static final String PERSON_INPUT_PATH = RESOURCE_PATH + "InputXML/InputPerson.xml";
+    private static final String OUTPUT_JSON_PATH = RESOURCE_PATH + "OutputJson/";
 
     private static Gson gson = new Gson();
     private static Logger logger = LoggerFactory.getLogger(Main.class);
@@ -38,7 +38,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Collection<Person> persons =
-                    JaxbParser.getObject(new File(RESOURCE_PATH, PERSON_INPUT_PATH), Person.class).getList();
+                    JaxbParser.getObject(new File(PERSON_INPUT_PATH), Person.class).getList();
 
             Collection<Document> documents = IntStream.range(0, NUMBER_DOCUMENT)
                     .mapToObj(value -> DocumentFactory.create(DataGeneratorUtils.getRandomDocType()))
@@ -53,7 +53,7 @@ public class Main {
                 logger.info(person.toString());
                 personDocuments.forEach(document -> logger.info(document.toString()));
 
-                File filename = new File(String.format(RESOURCE_PATH + OUTPUT_JSON_PATH + "%s %s.json", person.getId(), person.getSecondName()));
+                File filename = new File(String.format(OUTPUT_JSON_PATH + "%s %s.json", person.getId(), person.getSecondName()));
                 try (Writer writer = new FileWriter(filename)) {
                     gson.toJson(personDocuments, writer);
                 }
@@ -64,5 +64,4 @@ public class Main {
             logger.error("Unexpected exception " + e.getMessage());
         }
     }
-
 }
