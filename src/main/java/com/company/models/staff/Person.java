@@ -1,8 +1,5 @@
 package com.company.models.staff;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -77,11 +74,5 @@ public class Person extends Staff {
     @XmlElement
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
-    }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE,
-                true, true);
     }
 }

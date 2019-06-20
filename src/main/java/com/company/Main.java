@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -25,38 +24,42 @@ public class Main {
 
     private static final int NUMBER_DOCUMENT = 10;
     private static final String RESOURCE_PATH = Objects.requireNonNull(Main.class.getClassLoader().getResource("")).getPath();
+    private static final String PERSON_INPUT_PATH = "InputXML/InputPerson.xml";
+    private static final String OUTPUT_JSON_PATH = "OutputJson/";
+
 
     private static Gson gson = new Gson();
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-
-        Collection<Person> persons = null;
         try {
-            persons = JaxbParser.getObject(new File(RESOURCE_PATH + "InputXML/InputPerson.xml"), Person.class).getList();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
+            Collection<Person> persons = null;
 
-        Collection<Document> documents = new ArrayList<>();
-        IntStream.range(0, NUMBER_DOCUMENT)
-                .forEach(value -> documents.add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType())));
+            persons = JaxbParser.getObject(new File(RESOURCE_PATH, PERSON_INPUT_PATH), Person.class).getList();
 
-        for (Person person : persons) {
 
-            Collection<Document> personDocuments = documents.stream()
-                    .filter(document -> person.getId().equals(document.getAuthor()))
-                    .collect(Collectors.toCollection(TreeSet::new));
+            Collection<Document> documents = IntStream.range(0, NUMBER_DOCUMENT)
+                    .mapToObj(value -> DocumentFactory.create(DataGeneratorUtils.getRandomDocType()))
+                    .collect(Collectors.toList());
 
-            logger.info(person.toString());
-            personDocuments.forEach(document -> logger.info(document.toString()));
+            for (Person person : persons) {
 
-            File filename = new File(RESOURCE_PATH, "OutputJson/" + person.getId() + " " + person.getSecondName() + ".json");
-            try (Writer writer = new FileWriter(filename)) {
+                Collection<Document> personDocuments = documents.stream()
+                        .filter(document -> person.getId().equals(document.getAuthor()))
+                        .collect(Collectors.toCollection(TreeSet::new));
+
+                logger.info(person.toString());
+                personDocuments.forEach(document -> logger.info(document.toString()));
+
+                File filename = new File(String.format(RESOURCE_PATH + OUTPUT_JSON_PATH + "%s %s.json", person.getId(), person.getSecondName()));
+                Writer writer = new FileWriter(filename);
                 gson.toJson(personDocuments, writer);
-            } catch (IOException e) {
-                e.printStackTrace();
+
             }
+        } catch (IOException | JAXBException e) {
+            logger.error(e.toString());
+        } catch (Exception e) {
+            logger.error(e.toString());
         }
     }
 

@@ -5,11 +5,15 @@ import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
 import com.company.storage.IdDocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * factory for production documents
  */
 public abstract class DocumentFactory implements Factory {
+
+    static Logger logger = LoggerFactory.getLogger(DocumentFactory.class);
 
     /**
      * @param docType Document type
@@ -17,31 +21,32 @@ public abstract class DocumentFactory implements Factory {
      * @throws DocumentExistsException if idReg both documents are identical
      */
     public static Document create(DocTypes docType) {
-
-        Document doc;
-
-        switch (docType) {
-            case OUTGOING:
-                doc = OutgoingFactory.create();
-                break;
-            case INCOMING:
-                doc = IncomingFactory.create();
-                break;
-            case TASK:
-                doc = TaskFactory.create();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + docType);
-        }
-
-        //check doc for RandomValue annotation
-        DataGeneratorUtils.generate(doc);
-        //add Id to Store
         try {
+            Document doc;
+
+            switch (docType) {
+                case OUTGOING:
+                    doc = OutgoingFactory.create();
+                    break;
+                case INCOMING:
+                    doc = IncomingFactory.create();
+                    break;
+                case TASK:
+                    doc = TaskFactory.create();
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + docType);
+            }
+
+            //check doc for RandomValue annotation
+            DataGeneratorUtils.generate(doc);
+            //add Id to Store
             IdDocumentsStorage.add(doc);
+
+            return doc;
         } catch (DocumentExistsException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
-        return doc;
+        return null;
     }
 }

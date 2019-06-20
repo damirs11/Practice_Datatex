@@ -44,8 +44,6 @@ public class JaxbParser {
             JAXBContext context = JAXBContext.newInstance(elements.getClass(), elements.getList().get(0).getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.marshal(elements, file);
-        } else {
-            throw new NullPointerException();
         }
     }
 }

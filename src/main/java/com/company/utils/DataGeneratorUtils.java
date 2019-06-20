@@ -120,7 +120,7 @@ public class DataGeneratorUtils {
                 try {
                     field.set(obj, value);
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    logger.error(e.toString());
                 }
             }
     }
