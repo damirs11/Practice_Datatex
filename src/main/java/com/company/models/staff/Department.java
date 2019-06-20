@@ -1,34 +1,40 @@
 package com.company.models.staff;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 
+/**
+ * Department class contain a object of some department
+ * which have unique id form abstract class Staff
+ */
 @XmlRootElement
 public class Department extends Staff {
 
+    /**
+     * Full name of Department
+     */
     private String fullName;
+    /**
+     * Short name of Department
+     */
     private String shortName;
+    /**
+     * Department head = id of Person
+     */
     private Integer departmentHead;
+    /**
+     * Collection of phone numbers
+     */
     private Collection<String> phoneNumbers;
+    /**
+     * Organization id where Department contain
+     */
     private Integer organizationId;
-
-    public Department() {
-    }
-
-    public Department(int id) {
-        super(id);
-    }
-
-    public Department(Integer id, String fullName, String shortName, Integer departmentHead, Collection<String> phoneNumbers, Integer organizationId) {
-        super(id);
-        this.fullName = fullName;
-        this.shortName = shortName;
-        this.departmentHead = departmentHead;
-        this.phoneNumbers = phoneNumbers;
-        this.organizationId = organizationId;
-    }
 
     public String getFullName() {
         return fullName;
@@ -78,12 +84,7 @@ public class Department extends Staff {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "fullName='" + fullName + '\'' +
-                ", shortName='" + shortName + '\'' +
-                ", departmentHead='" + departmentHead + '\'' +
-                ", phoneNumbers=" + phoneNumbers +
-                ", organizationId=" + organizationId +
-                "} " + super.toString();
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE,
+                true, true);
     }
 }

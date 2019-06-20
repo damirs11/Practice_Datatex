@@ -7,7 +7,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * List wrapper create for (de)serialize objects
+ * which is root element of <T> class
+ *
+ * @param <T> the type parameter
+ */
 @XmlRootElement(name = "elements")
 public class ListWrapper<T> {
 

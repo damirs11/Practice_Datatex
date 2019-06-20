@@ -1,34 +1,38 @@
 package com.company.models.staff;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Person class contain a object of some person
+ * which have unique id form abstract class Staff
+ */
 @XmlRootElement(name = "Person")
 public class Person extends Staff {
 
+    /**
+     * Second name of Person
+     */
     private String secondName;
+    /**
+     * Name of Person
+     */
     private String name;
+    /**
+     * Middle name of Person
+     */
     private String middleName;
+    /**
+     * Position of Person
+     */
     private String position;
-
+    /**
+     * Department id where Person work
+     */
     private Integer departmentId;
-
-
-    public Person() {
-    }
-
-    public Person(int id) {
-        super(id);
-    }
-
-    public Person(int id, String secondName, String name, String middleName, String position, Integer departmentId) {
-        super(id);
-        this.secondName = secondName;
-        this.name = name;
-        this.middleName = middleName;
-        this.position = position;
-        this.departmentId = departmentId;
-    }
 
     public String getSecondName() {
         return secondName;
@@ -77,12 +81,7 @@ public class Person extends Staff {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "secondName='" + secondName + '\'' +
-                ", name='" + name + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", position='" + position + '\'' +
-                ", departmentId=" + departmentId +
-                "} " + super.toString();
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE,
+                true, true);
     }
 }

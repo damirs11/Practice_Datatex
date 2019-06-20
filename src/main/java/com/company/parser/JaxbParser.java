@@ -36,13 +36,17 @@ public class JaxbParser {
      * Save object which wrapped into generic ListWrapper<T> to @param file
      *
      * @param file Path to the file
-     * @param list ListWrapper<T> which will be saved into @param file
+     * @param elements ListWrapper<T> which will be saved into @param file
      * @throws JAXBException the jaxb exception
      */
-    public static <T> void saveObject(File file, ListWrapper<T> list) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(list.getClass(), list.getList().get(0).getClass());
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(list, file);
+    public static <T> void saveObject(File file, ListWrapper<T> elements) throws JAXBException {
+        if (!elements.getList().isEmpty()) {
+            JAXBContext context = JAXBContext.newInstance(elements.getClass(), elements.getList().get(0).getClass());
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.marshal(elements, file);
+        } else {
+            throw new NullPointerException();
+        }
     }
 }
 

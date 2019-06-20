@@ -16,7 +16,7 @@ public abstract class DocumentFactory implements Factory {
      * @return  Document with generated data
      * @throws DocumentExistsException if idReg both documents are identical
      */
-    public static Document create(DocTypes docType) throws DocumentExistsException {
+    public static Document create(DocTypes docType) {
 
         Document doc;
 
@@ -37,7 +37,11 @@ public abstract class DocumentFactory implements Factory {
         //check doc for RandomValue annotation
         DataGeneratorUtils.generate(doc);
         //add Id to Store
-        IdDocumentsStorage.add(doc);
+        try {
+            IdDocumentsStorage.add(doc);
+        } catch (DocumentExistsException e) {
+            e.printStackTrace();
+        }
         return doc;
     }
 }
