@@ -92,7 +92,7 @@ public class DataGeneratorUtils {
      *
      * @param obj the target object
      */
-    public static void generate(Object obj) {
+    public static void generate(Object obj) throws IllegalAccessException {
 
         for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass()))
             if (field.isAnnotationPresent(RandomValue.class)) {
@@ -115,13 +115,8 @@ public class DataGeneratorUtils {
                         value = DataGeneratorUtils.takeRandomDeliveryType();
                         break;
                 }
-
                 field.setAccessible(true);
-                try {
-                    field.set(obj, value);
-                } catch (IllegalAccessException e) {
-                    logger.error("Error while to update field value " + e.getMessage());
-                }
+                field.set(obj, value);
             }
     }
 }

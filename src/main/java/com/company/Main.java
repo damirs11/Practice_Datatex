@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
-
     private static final int NUMBER_DOCUMENT = 10;
     private static final String RESOURCE_PATH = Objects.requireNonNull(Main.class.getClassLoader().getResource("")).getPath();
     private static final String PERSON_INPUT_PATH = RESOURCE_PATH + "InputXML/InputPerson.xml";
@@ -45,11 +44,9 @@ public class Main {
                     .collect(Collectors.toList());
 
             for (Person person : persons) {
-
                 Collection<Document> personDocuments = documents.stream()
                         .filter(document -> person.getId().equals(document.getAuthor()))
                         .collect(Collectors.toCollection(TreeSet::new));
-
                 logger.info(person.toString());
                 personDocuments.forEach(document -> logger.info(document.toString()));
 

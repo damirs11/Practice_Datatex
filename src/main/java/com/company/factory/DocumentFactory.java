@@ -18,7 +18,6 @@ public abstract class DocumentFactory implements Factory {
     /**
      * @param docType Document type
      * @return Document with generated data
-     * @throws DocumentExistsException if idReg both documents are identical
      */
     public static Document create(DocTypes docType) {
         try {
@@ -43,7 +42,7 @@ public abstract class DocumentFactory implements Factory {
             //add Id to Store
             IdDocumentsStorage.add(doc);
             return doc;
-        } catch (DocumentExistsException e) {
+        } catch (DocumentExistsException | IllegalAccessException e) {
             logger.error("Error while try to create document " + e.getMessage());
         }
         return null;
