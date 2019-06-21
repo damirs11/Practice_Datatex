@@ -1,5 +1,7 @@
 package com.company.models.staff;
 
+import com.company.annotation.RandomValue;
+import com.company.enumeration.RandomTypes;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -11,6 +13,7 @@ public abstract class Staff {
     /**
      * Id of Staff
      */
+    @RandomValue(RandomTypes.UNIQUE_ID)
     private Integer id;
 
     public Integer getId() {

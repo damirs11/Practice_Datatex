@@ -20,6 +20,7 @@ import java.util.Random;
 public class DataGeneratorUtils {
 
     private static final int UPPER_BOUND = 1000;
+    private static int idGenerator = 1;
 
     private static Random random = new Random();
     private static Logger logger = LoggerFactory.getLogger(DataGeneratorUtils.class);
@@ -85,6 +86,7 @@ public class DataGeneratorUtils {
         return new Date(System.currentTimeMillis() - random.nextInt(1000 * 3600 * 24 * 1000));
     }
 
+
     /**
      * View all items for @RandomValue annotation and put specific random value
      * taken from annotation.value()
@@ -104,11 +106,11 @@ public class DataGeneratorUtils {
                     case DATE:
                         value = DataGeneratorUtils.takeRandomDate();
                         break;
-                    case PERSON:
-                        value = persons.get(DataGeneratorUtils.takeRandomPerson());
-                        break;
                     case PERSON_ID:
                         value = DataGeneratorUtils.takeRandomPerson();
+                        break;
+                    case UNIQUE_ID:
+                        value = idGenerator++;
                         break;
                     case PERSON_MIDDLE_NAME:
                         value = persons.get(DataGeneratorUtils.takeRandomPerson()).getMiddleName();

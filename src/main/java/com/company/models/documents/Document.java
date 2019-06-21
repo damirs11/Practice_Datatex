@@ -4,12 +4,15 @@ import com.company.annotation.RandomValue;
 import com.company.enumeration.RandomTypes;
 import com.company.interfaces.Storable;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * abstract class Document which implements Comparable<Document>, Storable
  */
+@XmlSeeAlso({Incoming.class, Outgoing.class, Task.class})
 public abstract class Document implements Comparable<Document>, Storable {
 
     /**
@@ -71,22 +74,27 @@ public abstract class Document implements Comparable<Document>, Storable {
         this.id = id;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
 
+    @XmlElement
     public void setText(String text) {
         this.text = text;
     }
 
+    @XmlElement
     public void setRegId(Integer regId) {
         this.regId = regId;
     }
 
+    @XmlElement
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
 
+    @XmlElement
     public void setAuthor(Integer author) {
         this.author = author;
     }

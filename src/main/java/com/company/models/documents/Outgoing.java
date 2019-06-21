@@ -3,8 +3,11 @@ package com.company.models.documents;
 import com.company.annotation.RandomValue;
 import com.company.enumeration.RandomTypes;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+@XmlRootElement
 public class Outgoing extends Document {
 
     /**
@@ -26,10 +29,12 @@ public class Outgoing extends Document {
         return deliveryType;
     }
 
+    @XmlElement
     public void setAddressee(Integer addressee) {
         this.addressee = addressee;
     }
 
+    @XmlElement
     public void setDeliveryType(String deliveryType) {
         this.deliveryType = deliveryType;
     }

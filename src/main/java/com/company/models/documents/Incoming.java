@@ -3,9 +3,12 @@ package com.company.models.documents;
 import com.company.annotation.RandomValue;
 import com.company.enumeration.RandomTypes;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.Objects;
 
+@XmlRootElement
 public class Incoming extends Document {
 
     /**
@@ -45,18 +48,22 @@ public class Incoming extends Document {
         return outgoingDate;
     }
 
+    @XmlElement
     public void setSender(Integer sender) {
         this.sender = sender;
     }
 
+    @XmlElement
     public void setAddressee(Integer addressee) {
         this.addressee = addressee;
     }
 
+    @XmlElement
     public void setOutgoingNumber(String outgoingNumber) {
         this.outgoingNumber = outgoingNumber;
     }
 
+    @XmlElement
     public void setOutgoingDate(Date outgoingDate) {
         this.outgoingDate = outgoingDate;
     }

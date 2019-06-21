@@ -3,9 +3,12 @@ package com.company.models.documents;
 import com.company.annotation.RandomValue;
 import com.company.enumeration.RandomTypes;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.Objects;
 
+@XmlRootElement
 public class Task extends Document {
 
     /**
@@ -54,22 +57,27 @@ public class Task extends Document {
         return controller;
     }
 
+    @XmlElement
     public void setDateRealize(Date dateRealize) {
         this.dateRealize = dateRealize;
     }
 
+    @XmlElement
     public void setPeriodOfExecution(Date periodOfExecution) {
         this.periodOfExecution = periodOfExecution;
     }
 
+    @XmlElement
     public void setResponsibleExecutor(Integer executiveOfficer) {
         this.responsibleExecutor = executiveOfficer;
     }
 
+    @XmlElement
     public void setSignOfControllability(String signOfControllability) {
         this.signOfControllability = signOfControllability;
     }
 
+    @XmlElement
     public void setController(Integer controller) {
         this.controller = controller;
     }
