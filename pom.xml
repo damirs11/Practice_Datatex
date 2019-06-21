@@ -10,9 +10,7 @@
         <configuration-target.version>8</configuration-target.version>
 
         <javax.activation-api.version>1.2.0</javax.activation-api.version>
-        <jaxb-api.version>2.3.1</jaxb-api.version>
-        <jaxb-core.version>2.3.0.1</jaxb-core.version>
-        <jaxb-impl.version>2.3.1</jaxb-impl.version>
+        <jaxb.version>2.3.0</jaxb.version>
 
         <junit.version>4.12</junit.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -61,17 +59,17 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>${jaxb-api.version}</version>
+            <version>${jaxb.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
-            <version>${jaxb-core.version}</version>
+            <version>${jaxb.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb-impl.version}</version>
+            <version>${jaxb.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

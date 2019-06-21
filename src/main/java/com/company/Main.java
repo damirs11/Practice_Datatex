@@ -53,8 +53,8 @@ public class Main {
                 logger.info(person.toString());
                 personDocuments.forEach(document -> logger.info(document.toString()));
 
-                File filename = new File(String.format(OUTPUT_JSON_PATH + "%s %s.json", person.getId(), person.getSecondName()));
-                try (Writer writer = new FileWriter(filename)) {
+                File personJsonFile = new File(String.format(OUTPUT_JSON_PATH + "%s %s.json", person.getId(), person.getSecondName()));
+                try (Writer writer = new FileWriter(personJsonFile)) {
                     gson.toJson(personDocuments, writer);
                 }
             }

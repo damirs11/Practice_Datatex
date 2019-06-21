@@ -1,6 +1,7 @@
 package com.company.parser;
 
 import com.company.models.staff.ListWrapper;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -40,7 +41,7 @@ public class JaxbParser {
      * @throws JAXBException the jaxb exception
      */
     public static <T> void saveObject(File file, ListWrapper<T> elements) throws JAXBException {
-        if (!elements.getList().isEmpty()) {
+        if (ArrayUtils.isNotEmpty(elements.getList().toArray())) {
             JAXBContext context = JAXBContext.newInstance(elements.getClass(), elements.getList().get(0).getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.marshal(elements, file);
