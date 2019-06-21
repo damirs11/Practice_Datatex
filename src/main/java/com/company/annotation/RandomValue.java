@@ -14,7 +14,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface RandomValue {
     /**
-     *
      * @return the random value of Type
      */
     RandomTypes value();

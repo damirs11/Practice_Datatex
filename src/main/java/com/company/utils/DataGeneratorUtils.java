@@ -5,6 +5,8 @@ import com.company.annotation.RandomValue;
 import com.company.enumeration.DeliveryType;
 import com.company.enumeration.DocTypes;
 import org.apache.hadoop.util.ReflectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -20,6 +22,7 @@ public class DataGeneratorUtils {
     private static final int UPPER_BOUND = 1000;
 
     private static Random random = new Random();
+    private static Logger logger = LoggerFactory.getLogger(DataGeneratorUtils.class);
 
     private DataGeneratorUtils() {
     }
@@ -52,8 +55,8 @@ public class DataGeneratorUtils {
      *
      * @return the string
      */
-    public static String takeRandomPerson() {
-        return persons.get(random.nextInt(persons.size()));
+    public static Integer takeRandomPerson() {
+        return random.nextInt(persons.size());
     }
 
     /**
@@ -88,7 +91,6 @@ public class DataGeneratorUtils {
      * taken from annotation.value()
      *
      * @param obj the target object
-     * @throws IllegalAccessException the illegal access exception
      */
     public static void generate(Object obj) throws IllegalAccessException {
 
@@ -113,7 +115,6 @@ public class DataGeneratorUtils {
                         value = DataGeneratorUtils.takeRandomDeliveryType();
                         break;
                 }
-
                 field.setAccessible(true);
                 field.set(obj, value);
             }

@@ -41,7 +41,7 @@ public abstract class Document implements Comparable<Document>, Storable {
      * Author of Document
      */
     @RandomValue(RandomTypes.PERSON)
-    private String author;
+    private Integer author;
 
     public Integer getId() {
         return id;
@@ -63,7 +63,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         return regDate;
     }
 
-    public String getAuthor() {
+    public Integer getAuthor() {
         return author;
     }
 
@@ -87,7 +87,7 @@ public abstract class Document implements Comparable<Document>, Storable {
         this.regDate = regDate;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Integer author) {
         this.author = author;
     }
 
