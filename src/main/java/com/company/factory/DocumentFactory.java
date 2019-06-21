@@ -42,7 +42,6 @@ public abstract class DocumentFactory implements Factory {
             DataGeneratorUtils.generate(doc);
             //add Id to Store
             IdDocumentsStorage.add(doc);
-
             return doc;
         } catch (DocumentExistsException e) {
             logger.error("Error while try to create document " + e.getMessage());
