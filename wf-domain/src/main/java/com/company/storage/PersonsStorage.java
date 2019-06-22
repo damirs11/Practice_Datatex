@@ -5,6 +5,9 @@ import com.company.models.staff.Person;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Store all existing Persons
+ */
 public class PersonsStorage {
 
     private PersonsStorage() {

@@ -16,9 +16,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 
+/**
+ * Person controller
+ * <p>
+ * Can display all employees and exist documents
+ * of every employee
+ */
 @Path("/ecm")
 public class PersonController {
 
+    /**
+     * Return all existing employees
+     *
+     * @return employees in json format
+     */
     @Path("/employees")
     @GET
     @Produces("application/json")
@@ -30,12 +41,22 @@ public class PersonController {
         }
     }
 
+    /**
+     * Return all documents of employee by id
+     *
+     * Because list store elements form 0 @param id
+     * should be reduced by 1
+     *
+     * @param id the id of employee
+     * @return documents of employee in XML format
+     * @throws JAXBException the jaxb exception
+     */
     @Path("/employees/{id}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public Response getEmployeeDocuments(@PathParam("id") Integer id) throws JAXBException {
         try {
-            Person person = PersonsStorage.getPersonList().get(id);
+            Person person = PersonsStorage.getPersonList().get(id - 1);
 
             ListWrapper<Document> documentListWrapper = new ListWrapper<>();
 

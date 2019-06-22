@@ -5,6 +5,9 @@ import com.company.models.documents.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Store all existing Documents
+ */
 public class DocumentsStorage {
 
     private DocumentsStorage() {

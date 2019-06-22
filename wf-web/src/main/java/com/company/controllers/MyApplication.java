@@ -11,11 +11,23 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
 
+/**
+ * Root of rest
+ */
 @ApplicationPath("/")
 public class MyApplication extends javax.ws.rs.core.Application {
 
+    /**
+     * The Logger.
+     */
     Logger logger = LoggerFactory.getLogger(MyApplication.class);
 
+    /**
+     * Instantiates a new My application.
+     * <p>
+     * Before application start work
+     * Need to generate date like Persons and Documents
+     */
     public MyApplication() {
         try {
             int numberOfPersons = 10;
