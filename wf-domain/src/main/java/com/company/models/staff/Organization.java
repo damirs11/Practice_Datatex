@@ -60,8 +60,8 @@ public class Organization extends Staff {
         this.organizationHead = organizationHead;
     }
 
-    @XmlElementWrapper(name="phoneNumbers")
-    @XmlElement(name="phoneNumber")
+    @XmlElementWrapper(name = "phoneNumbers")
+    @XmlElement(name = "phoneNumber")
     public void setPhoneNumber(Collection<String> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }

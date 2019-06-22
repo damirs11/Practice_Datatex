@@ -45,7 +45,7 @@ public class DataGeneratorUtils {
      * @param clazz the clazz of enum
      * @return the value from enum
      */
-    public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
+    public static <T extends Enum<?>> T randomEnum(Class<T> clazz) {
         int x = random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];
     }
@@ -82,7 +82,7 @@ public class DataGeneratorUtils {
      *
      * @return the date
      */
-    public static Date takeRandomDate(){
+    public static Date takeRandomDate() {
         return new Date(System.currentTimeMillis() - random.nextInt(1000 * 3600 * 24 * 1000));
     }
 

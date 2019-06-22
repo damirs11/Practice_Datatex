@@ -16,14 +16,14 @@ import java.io.StringWriter;
  */
 public class JaxbParser {
 
-    private JaxbParser(){
+    private JaxbParser() {
         throw new IllegalStateException();
     }
 
     /**
      * Gets data from file and translate it to specify Class<T>
      *
-     * @param file Path to the file
+     * @param file  Path to the file
      * @param clazz Class of object being unmarshaled
      * @return ListWrapper<clazz>
      * @throws JAXBException the jaxb exception
@@ -38,7 +38,7 @@ public class JaxbParser {
     /**
      * Save object which wrapped into generic ListWrapper<T> to @param file
      *
-     * @param file Path to the file
+     * @param file     Path to the file
      * @param elements ListWrapper<T> which will be saved into @param file
      * @throws JAXBException the jaxb exception
      */

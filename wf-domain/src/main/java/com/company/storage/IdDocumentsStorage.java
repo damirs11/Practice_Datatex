@@ -24,7 +24,7 @@ public class IdDocumentsStorage {
      * @throws DocumentExistsException the document exists exception
      */
     public static void add(Document doc) throws DocumentExistsException {
-        if(idDocumentsList.contains(doc.getId())) {
+        if (idDocumentsList.contains(doc.getId())) {
             throw new DocumentExistsException(doc);
         } else {
             idDocumentsList.add(doc.getId());
