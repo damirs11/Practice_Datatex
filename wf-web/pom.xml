@@ -79,7 +79,7 @@
                         <configuration>
                             <resources>
                                 <resource>
-                                    <directory>../wf-domain/src/main/resources</directory>
+                                    <directory>src/main/resources</directory>
                                 </resource>
                             </resources>
                         </configuration>
