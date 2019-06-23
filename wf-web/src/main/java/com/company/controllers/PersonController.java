@@ -6,6 +6,7 @@ import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
 import com.company.storage.DocumentsStorage;
 import com.company.storage.PersonsStorage;
+import services.DataBaseService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,6 +16,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
+import java.sql.SQLException;
 
 /**
  * Person controller
@@ -33,7 +35,10 @@ public class PersonController {
     @Path("/employees")
     @GET
     @Produces("application/json")
-    public Response getEmployeesJSON() {
+    public Response getEmployeesJSON() throws SQLException {
+
+        DataBaseService.getPersons();
+
         if (!PersonsStorage.getPersonList().isEmpty()) {
             return Response.ok(PersonsStorage.getPersonList()).build();
         } else {
