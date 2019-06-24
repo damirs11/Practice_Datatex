@@ -52,7 +52,7 @@ public class DataGeneratorUtils {
      *
      * @return the random doc type
      */
-    public static DocTypes takeRandomDocType() {
+    public static DocTypes getRandomDocType() {
         return randomEnum(DocTypes.class);
     }
 
@@ -61,7 +61,7 @@ public class DataGeneratorUtils {
      *
      * @return the date
      */
-    public static Date takeRandomDate() {
+    public static Date getRandomDate() {
         return new Date(System.currentTimeMillis() - random.nextInt(1000 * 3600 * 24 * 1000));
     }
 
@@ -83,7 +83,7 @@ public class DataGeneratorUtils {
                         value = random.nextInt(UPPER_BOUND);
                         break;
                     case DATE:
-                        value = DataGeneratorUtils.takeRandomDate();
+                        value = DataGeneratorUtils.getRandomDate();
                         break;
                     case TEXT:
                         value = field.getName();

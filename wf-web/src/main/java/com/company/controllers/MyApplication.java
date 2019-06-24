@@ -42,7 +42,7 @@ public class MyApplication extends javax.ws.rs.core.Application {
                     JaxbParser.getObject(PERSON_INPUT, Person.class).getList());
 
             for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
-                DocumentsStorage.getDocumentList().add(DocumentFactory.create(DataGeneratorUtils.takeRandomDocType()));
+                DocumentsStorage.getDocumentList().add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
             }
         } catch (JAXBException e) {
             logger.error("Error while try init MyApplication class " + e.getMessage());

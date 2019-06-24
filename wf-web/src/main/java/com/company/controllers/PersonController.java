@@ -2,13 +2,17 @@ package com.company.controllers;
 
 import com.company.models.documents.Document;
 import com.company.models.staff.ListWrapper;
-import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
 import com.company.storage.DocumentsStorage;
 import com.company.storage.PersonsStorage;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
@@ -23,9 +27,11 @@ import java.io.IOException;
 @Path("/ecm")
 public class PersonController {
 
+    private static Logger logger = LoggerFactory.getLogger(PersonController.class);
+
     private static final String ZERO_DOCUMENTS = "Person hasn't documents";
     private static final String ZERO_PERSONS = "No Persons right time";
-    private static final String PERSON_DONT_EXIST = "Person don't exist";
+    private static final String PERSON_DONST_EXIST = "Person dons't exist";
 
     /**
      * Return all existing employees
@@ -50,30 +56,27 @@ public class PersonController {
     @Produces(MediaType.APPLICATION_XML)
     public Response getEmployeeDocuments(@PathParam("id") Integer id) {
         try {
-            for (Person person : PersonsStorage.getPersonList()) {
-                if (person.getId().equals(id)) {
-                    ListWrapper<Document> documentListWrapper = new ListWrapper<>();
+            ListWrapper<Document> documentListWrapper = new ListWrapper<>();
 
-                    DocumentsStorage.getDocumentList().forEach(document -> {
-                        if (document.getAuthor().equals(person.getId())) {
-                            documentListWrapper.getList().add(document);
-                        }
-                    });
-
-                    return createResponse(JaxbParser.listWrapperToStringXML(documentListWrapper), ZERO_DOCUMENTS);
-                }
-            }
-            return createResponse(null, PERSON_DONT_EXIST);
-        } catch (IndexOutOfBoundsException | JAXBException | IOException e) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            PersonsStorage.getPersonList().stream().filter(person -> person.getId().equals(id)).forEach(person -> {
+                DocumentsStorage.getDocumentList().forEach(document -> {
+                    if (document.getAuthor().equals(person.getId())) {
+                        documentListWrapper.getList().add(document);
+                    }
+                });
+            });
+            return createResponse(JaxbParser.listWrapperToStringXML(documentListWrapper), ZERO_DOCUMENTS);
+        } catch (JAXBException | IOException e) {
+            logger.error(e.getMessage());
         }
+        return createResponse("", PERSON_DONST_EXIST);
     }
 
     private Response createResponse(String output, String errorOutput) {
-        if (!(output == null || output.isEmpty())) {
+        if (output != null && !output.isEmpty()) {
             return Response.ok().entity(output).build();
         } else {
-            return Response.ok().entity(errorOutput).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorOutput).build();
         }
     }
 }
