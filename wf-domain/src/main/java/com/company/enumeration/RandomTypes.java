@@ -7,10 +7,6 @@ public enum RandomTypes {
     DATE,
     DELIVERY,
     INTEGER,
-    PERSON_ID,
-    PERSON_MIDDLE_NAME,
-    PERSON_NAME,
-    PERSON_SECOND_NAME,
     TEXT,
-    UNIQUE_ID
+    PERSON_ID
 }

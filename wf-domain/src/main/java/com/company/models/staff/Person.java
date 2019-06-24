@@ -1,8 +1,5 @@
 package com.company.models.staff;
 
-import com.company.annotation.RandomValue;
-import com.company.enumeration.RandomTypes;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,22 +13,18 @@ public class Person extends Staff {
     /**
      * Second name of Person
      */
-    @RandomValue(RandomTypes.PERSON_SECOND_NAME)
     private String secondName;
     /**
      * Name of Person
      */
-    @RandomValue(RandomTypes.PERSON_NAME)
     private String name;
     /**
      * Middle name of Person
      */
-    @RandomValue(RandomTypes.PERSON_MIDDLE_NAME)
     private String middleName;
     /**
      * Position of Person
      */
-    @RandomValue(RandomTypes.TEXT)
     private String position;
     /**
      * Department id where Person work

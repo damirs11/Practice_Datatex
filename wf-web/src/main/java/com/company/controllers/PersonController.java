@@ -6,17 +6,13 @@ import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
 import com.company.storage.DocumentsStorage;
 import com.company.storage.PersonsStorage;
-import services.DataBaseService;
+import com.google.gson.Gson;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
-import java.sql.SQLException;
+import java.io.IOException;
 
 /**
  * Person controller
@@ -27,6 +23,10 @@ import java.sql.SQLException;
 @Path("/ecm")
 public class PersonController {
 
+    private static final String ZERO_DOCUMENTS = "Person hasn't documents";
+    private static final String ZERO_PERSONS = "No Persons right time";
+    private static final String PERSON_DONT_EXIST = "Person don't exist";
+
     /**
      * Return all existing employees
      *
@@ -35,51 +35,45 @@ public class PersonController {
     @Path("/employees")
     @GET
     @Produces("application/json")
-    public Response getEmployeesJSON() throws SQLException {
-
-        DataBaseService.getPersons();
-
-        if (!PersonsStorage.getPersonList().isEmpty()) {
-            return Response.ok(PersonsStorage.getPersonList()).build();
-        } else {
-            return Response.noContent().entity("No Persons right time").build();
-        }
+    public Response getEmployeesJSON() {
+        return createResponse(new Gson().toJson(PersonsStorage.getPersonList()), ZERO_PERSONS);
     }
 
     /**
      * Return all documents of employee by id
      *
-     * Because list store elements form 0 @param id
-     * should be reduced by 1
-     *
      * @param id the id of employee
      * @return documents of employee in XML format
-     * @throws JAXBException the jaxb exception
      */
     @Path("/employees/{id}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Response getEmployeeDocuments(@PathParam("id") Integer id) throws JAXBException {
+    public Response getEmployeeDocuments(@PathParam("id") Integer id) {
         try {
-            Person person = PersonsStorage.getPersonList().get(id - 1);
+            for (Person person : PersonsStorage.getPersonList()) {
+                if (person.getId().equals(id)) {
+                    ListWrapper<Document> documentListWrapper = new ListWrapper<>();
 
-            ListWrapper<Document> documentListWrapper = new ListWrapper<>();
+                    DocumentsStorage.getDocumentList().forEach(document -> {
+                        if (document.getAuthor().equals(person.getId())) {
+                            documentListWrapper.getList().add(document);
+                        }
+                    });
 
-            DocumentsStorage.getDocumentList().forEach(document -> {
-                if (document.getAuthor().equals(person.getId())) {
-                    documentListWrapper.getList().add(document);
+                    return createResponse(JaxbParser.listWrapperToStringXML(documentListWrapper), ZERO_DOCUMENTS);
                 }
-            });
-
-            String output = "Person hasn't documents";
-            if (!documentListWrapper.getList().isEmpty()) {
-                output = JaxbParser.listWrapperToStringXML(documentListWrapper);
-                return Response.ok().entity(output).build();
-            } else {
-                return Response.ok().entity(output).build();
             }
-        } catch (IndexOutOfBoundsException e) {
+            return createResponse(null, PERSON_DONT_EXIST);
+        } catch (IndexOutOfBoundsException | JAXBException | IOException e) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+    }
+
+    private Response createResponse(String output, String errorOutput) {
+        if (!(output == null || output.isEmpty())) {
+            return Response.ok().entity(output).build();
+        } else {
+            return Response.ok().entity(errorOutput).build();
         }
     }
 }

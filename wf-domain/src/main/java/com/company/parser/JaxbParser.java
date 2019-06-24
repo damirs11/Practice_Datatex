@@ -9,16 +9,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 
 /**
  * The type Jaxb parser.
  */
 public class JaxbParser {
-
-    private JaxbParser() {
-        throw new IllegalStateException();
-    }
 
     /**
      * Gets data from file and translate it to specify Class<T>
@@ -56,14 +53,17 @@ public class JaxbParser {
      * @param list ListWrapper<T> which will be convert to String XML
      * @throws JAXBException the jaxb exception
      */
-    public static <T> String listWrapperToStringXML(ListWrapper<T> list) throws JAXBException {
-        StringWriter stringWriter = new StringWriter();
+    public static <T> String listWrapperToStringXML(ListWrapper<T> list) throws JAXBException, IOException {
+        try (StringWriter stringWriter = new StringWriter()) {
+            if (list != null && CollectionUtils.isNotEmpty(list.getList())) {
+                JAXBContext context = JAXBContext.newInstance(list.getClass(), Document.class);
+                Marshaller marshaller = context.createMarshaller();
+                marshaller.marshal(list, stringWriter);
 
-        JAXBContext context = JAXBContext.newInstance(list.getClass(), Document.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(list, stringWriter);
-
-        return stringWriter.toString();
+                return stringWriter.toString();
+            }
+        }
+        return null;
     }
 }
 

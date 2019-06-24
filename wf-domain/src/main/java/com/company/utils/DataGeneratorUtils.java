@@ -4,14 +4,13 @@ package com.company.utils;
 import com.company.annotation.RandomValue;
 import com.company.enumeration.DeliveryType;
 import com.company.enumeration.DocTypes;
+import com.company.storage.PersonsStorage;
 import org.apache.hadoop.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -28,17 +27,6 @@ public class DataGeneratorUtils {
     private DataGeneratorUtils() {
     }
 
-    private static List<SimplePerson> persons = Arrays.asList(
-            new SimplePerson("Иванов", "А", "Кузнецов"),
-            new SimplePerson("Козлов", "Б", "Новиков"),
-            new SimplePerson("Кузнецов", "В", "Соколов"),
-            new SimplePerson("Морозов", "Г", "Козлов"),
-            new SimplePerson("Новиков", "Д", "Петров"),
-            new SimplePerson("Попов", "Е", "Морозов"),
-            new SimplePerson("Смирнов", "Ж", "Лебедев"),
-            new SimplePerson("Соколов", "З", "Иванов")
-    );
-
     /**
      * Random value from enum
      *
@@ -48,15 +36,6 @@ public class DataGeneratorUtils {
     public static <T extends Enum<?>> T randomEnum(Class<T> clazz) {
         int x = random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];
-    }
-
-    /**
-     * Take random person string.
-     *
-     * @return the string
-     */
-    public static Integer takeRandomPerson() {
-        return random.nextInt(persons.size());
     }
 
     /**
@@ -106,26 +85,14 @@ public class DataGeneratorUtils {
                     case DATE:
                         value = DataGeneratorUtils.takeRandomDate();
                         break;
-                    case PERSON_ID:
-                        value = DataGeneratorUtils.takeRandomPerson();
-                        break;
-                    case UNIQUE_ID:
-                        value = idGenerator++;
-                        break;
-                    case PERSON_MIDDLE_NAME:
-                        value = persons.get(DataGeneratorUtils.takeRandomPerson()).getMiddleName();
-                        break;
-                    case PERSON_NAME:
-                        value = persons.get(DataGeneratorUtils.takeRandomPerson()).getName();
-                        break;
-                    case PERSON_SECOND_NAME:
-                        value = persons.get(DataGeneratorUtils.takeRandomPerson()).getSecondName();
-                        break;
                     case TEXT:
                         value = field.getName();
                         break;
                     case DELIVERY:
                         value = DataGeneratorUtils.takeRandomDeliveryType();
+                        break;
+                    case PERSON_ID:
+                        value = random.nextInt(PersonsStorage.getPersonList().size()) + 1;
                         break;
                 }
                 field.setAccessible(true);
