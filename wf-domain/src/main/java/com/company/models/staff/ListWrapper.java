@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * List wrapper create for (de)serialize objects
@@ -17,14 +17,14 @@ import java.util.List;
 public class ListWrapper<T> {
 
     @SerializedName("elements")
-    private List<T> list = new ArrayList<>();
+    private Collection<T> list = new ArrayList<>();
 
-    public List<T> getList() {
+    public Collection<T> getList() {
         return list;
     }
 
     @XmlAnyElement(lax = true)
-    public void setList(List<T> list) {
+    public void setList(Collection<T> list) {
         this.list = list;
     }
 }
