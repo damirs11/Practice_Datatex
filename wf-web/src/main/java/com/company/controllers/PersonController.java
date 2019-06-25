@@ -3,8 +3,8 @@ package com.company.controllers;
 import com.company.models.documents.Document;
 import com.company.models.staff.ListWrapper;
 import com.company.parser.JaxbParser;
+import com.company.services.DataBaseService;
 import com.company.storage.DocumentsStorage;
-import com.company.storage.PersonsStorage;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class PersonController {
     @GET
     @Produces("application/json")
     public Response getEmployeesJSON() {
-        return createResponse(new Gson().toJson(PersonsStorage.getPersonList()), ZERO_PERSONS);
+        return createResponse(new Gson().toJson(DataBaseService.getPersons()), ZERO_PERSONS);
     }
 
     /**
@@ -58,7 +58,7 @@ public class PersonController {
         try {
             ListWrapper<Document> documentListWrapper = new ListWrapper<>();
 
-            PersonsStorage.getPersonList().stream().filter(person -> person.getId().equals(id)).forEach(person -> {
+            DataBaseService.getPersons().stream().filter(person -> person.getId().equals(id)).forEach(person -> {
                 DocumentsStorage.getDocumentList().forEach(document -> {
                     if (document.getAuthor().equals(person.getId())) {
                         documentListWrapper.getList().add(document);

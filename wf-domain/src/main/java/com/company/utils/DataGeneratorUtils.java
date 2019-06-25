@@ -4,7 +4,8 @@ package com.company.utils;
 import com.company.annotation.RandomValue;
 import com.company.enumeration.DeliveryType;
 import com.company.enumeration.DocTypes;
-import com.company.storage.PersonsStorage;
+import com.company.services.DataBaseService;
+import com.company.services.Tables;
 import org.apache.hadoop.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +92,7 @@ public class DataGeneratorUtils {
                         value = DataGeneratorUtils.takeRandomDeliveryType();
                         break;
                     case PERSON_ID:
-                        value = random.nextInt(PersonsStorage.getPersonList().size()) + 1;
+                        value = random.nextInt(DataBaseService.countOf(Tables.PERSONS)) + 1;
                         break;
                 }
                 field.setAccessible(true);

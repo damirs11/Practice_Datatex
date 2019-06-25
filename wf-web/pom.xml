@@ -14,13 +14,13 @@
 
     <groupId>wf-web</groupId>
     <artifactId>wf-web</artifactId>
-    <version>${project.version}</version>
+    <version>${parent.version}</version>
     <packaging>war</packaging>
 
     <name>Web</name>
 
     <build>
-        <finalName>Third-task</finalName>
+        <finalName>Fourth-task</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
