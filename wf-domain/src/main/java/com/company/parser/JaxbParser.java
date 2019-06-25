@@ -17,6 +17,9 @@ import java.io.StringWriter;
  */
 public class JaxbParser {
 
+    private JaxbParser() {
+    }
+
     /**
      * Gets data from file and translate it to specify Class<T>
      *

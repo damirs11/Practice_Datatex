@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class DocumentFactory implements Factory {
 
-    private static Logger logger = LoggerFactory.getLogger(DocumentFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(DocumentFactory.class);
 
     /**
      * @param docType Document type

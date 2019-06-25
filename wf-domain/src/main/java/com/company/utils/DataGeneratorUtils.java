@@ -19,10 +19,9 @@ import java.util.Random;
 public class DataGeneratorUtils {
 
     private static final int UPPER_BOUND = 1000;
-    private static int idGenerator = 1;
 
     private static Random random = new Random();
-    private static Logger logger = LoggerFactory.getLogger(DataGeneratorUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataGeneratorUtils.class);
 
     private DataGeneratorUtils() {
     }

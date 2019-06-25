@@ -23,9 +23,10 @@ public class MyApplication extends javax.ws.rs.core.Application {
     /**
      * The Logger.
      */
-    private Logger logger = LoggerFactory.getLogger(MyApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyApplication.class);
 
     private static final int NUMBER_OF_DOCUMENTS = 20;
+    private static File PERSON_INPUT = new File(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
 
     /**
      * Instantiates a new My application.
@@ -36,8 +37,6 @@ public class MyApplication extends javax.ws.rs.core.Application {
      */
     public MyApplication() {
         try {
-            File PERSON_INPUT = new File(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
-
             PersonsStorage.setPersonList(
                     JaxbParser.getObject(PERSON_INPUT, Person.class).getList());
 
