@@ -31,7 +31,7 @@ public class PersonController {
 
     private static final String ZERO_DOCUMENTS = "Person hasn't documents";
     private static final String ZERO_PERSONS = "No Persons right time";
-    private static final String PERSON_DONST_EXIST = "Person dons't exist";
+    private static final String PERSON_DOSNT_EXIST = "Person dosn't exist";
 
     /**
      * Return all existing employees
@@ -69,7 +69,7 @@ public class PersonController {
         } catch (JAXBException | IOException e) {
             logger.error(e.getMessage());
         }
-        return createResponse("", PERSON_DONST_EXIST);
+        return createResponse("", PERSON_DOSNT_EXIST);
     }
 
     private Response createResponse(String output, String errorOutput) {
