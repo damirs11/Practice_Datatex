@@ -2,6 +2,7 @@ package com.company.controllers;
 
 import com.company.models.documents.Document;
 import com.company.models.staff.ListWrapper;
+import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
 import com.company.services.DataBaseService;
 import com.company.storage.DocumentsStorage;
@@ -42,7 +43,7 @@ public class PersonController {
     @GET
     @Produces("application/json")
     public Response getEmployeesJSON() {
-        return createResponse(new Gson().toJson(DataBaseService.getPersons()), ZERO_PERSONS);
+        return createResponse(new Gson().toJson(DataBaseService.readTable(Person.class)), ZERO_PERSONS);
     }
 
     /**
@@ -58,13 +59,12 @@ public class PersonController {
         try {
             ListWrapper<Document> documentListWrapper = new ListWrapper<>();
 
-            DataBaseService.getPersons().stream().filter(person -> person.getId().equals(id)).forEach(person -> {
-                DocumentsStorage.getDocumentList().forEach(document -> {
+            DataBaseService.readTable(Person.class).stream().filter(person -> person.getId().equals(id))
+                    .forEach(person -> DocumentsStorage.getDocumentList().forEach(document -> {
                     if (document.getAuthor().equals(person.getId())) {
                         documentListWrapper.getList().add(document);
                     }
-                });
-            });
+                    }));
             return createResponse(JaxbParser.listWrapperToStringXML(documentListWrapper), ZERO_DOCUMENTS);
         } catch (JAXBException | IOException e) {
             logger.error(e.getMessage());
