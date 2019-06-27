@@ -44,7 +44,7 @@ public class JaxbParser {
      */
     public static <T> void saveObject(File file, ListWrapper<T> elements) throws JAXBException {
         if (elements != null && CollectionUtils.isNotEmpty(elements.getList())) {
-            JAXBContext context = JAXBContext.newInstance(elements.getClass(), elements.getList().toArray()[0].getClass());
+            JAXBContext context = JAXBContext.newInstance(elements.getClass(), elements.getList().get(0).getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.marshal(elements, file);
         }

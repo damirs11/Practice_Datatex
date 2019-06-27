@@ -19,11 +19,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Data access class for DB
@@ -34,6 +33,12 @@ public class DataBaseService {
     private static final String JDBC_URL = "jdbc:derby:testdb;create=true";
     private static final File personInput = new File(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
     private static final Logger logger = LoggerFactory.getLogger(DataBaseService.class);
+
+    private static final String CREATE_TABLE_QUERY_TEMPLATE = "CREATE TABLE %s (%s)";
+    private static final String READ_TABLE_QUERY_TEMPLATE = "SELECT %s FROM %s)";
+    private static final String DROP_TABLE_QUERY_TEMPLATE = "DROP TABLE %s";
+    private static final String INSERT_INTO_QUERY_TEMPLATE = "INSERT INTO %s (%s) VALUES (%s)";
+    private static final String COUNT_OF_QUERY_TEMPLATE = "SELECT COUNT(*) FROM %s";
 
     private DataBaseService() {
     }
@@ -47,25 +52,17 @@ public class DataBaseService {
             Class.forName(DRIVER).newInstance();
             load(Person.class, JaxbParser.getObject(personInput, Person.class).getList());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | JAXBException e) {
-            logger.error(e.getMessage());
+            logger.error("Error while try init {}: {}", DataBaseService.class, e.getMessage());
         }
     }
 
-    /**
-     * Query template: "SELECT COUNT(*) FROM tableName"
-     *
-     * @return count of fields
-     */
     public static <T> Integer countOf(Class<T> clazz) {
-        StringBuilder query = new StringBuilder().append("SELECT COUNT(*) FROM ").append(getTableName(clazz));
-
-        try (Statement preparedStatement = getConnection().createStatement()) {
-            try (ResultSet resultSet = preparedStatement.executeQuery(query.toString())) {
-                resultSet.next();
-                return resultSet.getInt(1);
-            }
+        String query = String.format(COUNT_OF_QUERY_TEMPLATE, getTableName(clazz));
+        try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
+            resultSet.next();
+            return resultSet.getInt(1);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.error("Error while try SELECT all columns from table {}", e.getMessage());
         }
         return -1;
     }
@@ -82,31 +79,25 @@ public class DataBaseService {
             createTable(connection, clazz);
             insertData(connection, clazz, collection);
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            logger.error("Error while try load table {}", e.getMessage());
         }
     }
 
-    /**
-     * Query template: "CREATE TABLE tableName (columnName Type, columnName Type, ...)
-     *
-     */
     private static <T> void createTable(Connection connection, Class<T> clazz) throws SQLException {
-        StringBuilder query = new StringBuilder();
-        query.append("CREATE TABLE ").append(getTableName(clazz)).append(getAnnotatedFields(clazz, true));
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+        String query = String.format(CREATE_TABLE_QUERY_TEMPLATE,
+                getTableName(clazz), getAnnotatedFields(clazz, true));
+        System.out.println(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.execute();
         }
     }
 
-    /**
-     * Query template: "SELECT field, field, ... FROM tableName
-     */
     public static <T> Collection<T> readTable(Class<T> clazz) {
-        StringBuilder query = new StringBuilder().append("SELECT * FROM ").append(getTableName(clazz));
+        String query = String.format(READ_TABLE_QUERY_TEMPLATE,
+                getAnnotatedFields(clazz, false), getTableName(clazz));
         Collection<T> collection = new ArrayList<>();
 
-        try (ResultSet resultSet = getConnection().prepareStatement(query.toString()).executeQuery()) {
+        try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
             while (resultSet.next()) {
                 int parameterNumber = 1;
                 T obj = clazz.newInstance();
@@ -125,32 +116,23 @@ public class DataBaseService {
                 collection.add(obj);
             }
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | SQLException e) {
-            logger.error(e.getMessage());
+            logger.error("Error while try read table {}", e.getMessage());
         }
         return collection;
     }
 
-    /**
-     * Query template: "DROP TABLE tableName
-     */
     private static <T> boolean deleteTable(Connection connection, Class<T> clazz) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("DROP TABLE " + getTableName(clazz))) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                String.format(DROP_TABLE_QUERY_TEMPLATE, getTableName(clazz)))) {
             return preparedStatement.execute();
         }
     }
 
-    /**
-     * Query template: "INSERT INTO tableName (columnName, columnName, ...) VALUES (?, ?, ...)
-     *
-     */
     private static <T> void insertData(Connection connection, Class<T> clazz, Collection<T> collection) {
-        StringBuilder query = new StringBuilder();
-
-        query.append("INSERT INTO ").append(getTableName(clazz)).append(getAnnotatedFields(clazz, false))
-                .append("VALUES ").append(getQuestionMarksForInsert(clazz));
-
+        String query = String.format(INSERT_INTO_QUERY_TEMPLATE,
+                getTableName(clazz), getAnnotatedFields(clazz, false), getQuestionMarksForInsert(clazz));
         for (T obj : collection) {
-            inputDataInPreparedStatement(connection, query.toString(), obj);
+            inputDataInPreparedStatement(connection, query, obj);
         }
     }
 
@@ -159,6 +141,7 @@ public class DataBaseService {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             for (Method method : obj.getClass().getMethods()) {
                 if (method.getName().startsWith("get")) {
+                    System.out.println(method.getName());
                     switch (method.getReturnType().getSimpleName()) {
                         case "Integer":
                         case "int":
@@ -177,7 +160,7 @@ public class DataBaseService {
 
     /**
      * @return current connection
-     * @throws SQLException
+     * @throws SQLException SQLException
      */
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL);
@@ -194,23 +177,11 @@ public class DataBaseService {
     }
 
     private static String getQuestionMarksForInsert(Class clazz) {
-        StringBuilder string = new StringBuilder();
-
-        string.append(" (");
-        List<Field> fields = ReflectionUtils.getDeclaredFieldsIncludingInherited(clazz);
-        for (int i = 0; i < fields.size(); i++) {
-            Field field = fields.get(i);
-            if (field.isAnnotationPresent(Column.class)) {
-                if (i == fields.size() - 1) {
-                    string.append("?");
-                } else {
-                    string.append("?, ");
-                }
-            }
-        }
-        string.append(")");
-
-        return string.toString();
+        return ReflectionUtils.getDeclaredFieldsIncludingInherited(clazz)
+                .stream()
+                .filter(field -> field.isAnnotationPresent(Column.class))
+                .map(field -> "?")
+                .collect(Collectors.joining(", "));
     }
 
     private static <T> String getTableName(Class<T> clazz) {
@@ -225,34 +196,27 @@ public class DataBaseService {
         return tableName;
     }
 
-    private static <T> String getAnnotatedFields(Class<T> clazz, boolean typesInputEnable) {
-        StringBuilder string = new StringBuilder();
-
-        string.append(" (");
-        List<Field> fields = ReflectionUtils.getDeclaredFieldsIncludingInherited(clazz);
-        for (int i = 0; i < fields.size(); i++) {
-            Field field = fields.get(i);
-            if (field.isAnnotationPresent(Column.class)) {
-
-                if (field.getAnnotation(Column.class).value().equals("")) {
-                    string.append(field.getName());
-                } else {
-                    string.append(field.getAnnotation(Column.class).value());
-                }
-
-                if (typesInputEnable) {
-                    string.append(" ").append(getDerbyType(field.getType().getSimpleName()));
-                }
-
-                if (i != fields.size() - 1) {
-                    string.append(", ");
-                }
-
-            }
+    private static String getColumnName(Field annotatedField) {
+        String string;
+        if (annotatedField.getAnnotation(Column.class).value().equals("")) {
+            string = annotatedField.getName();
+        } else {
+            string = annotatedField.getAnnotation(Column.class).value();
         }
-        string.append(") ");
+        return string;
+    }
 
-        return string.toString();
+    private static <T> String getAnnotatedFields(Class<T> clazz, boolean typesInputEnable) {
+        return ReflectionUtils.getDeclaredFieldsIncludingInherited(clazz).stream()
+                .filter(field -> field.isAnnotationPresent(Column.class))
+                .map(field -> {
+                    if (typesInputEnable) {
+                        return String.format("%s %s", DataBaseService.getColumnName(field), DataBaseService.getDerbyType(field.getType().getSimpleName()));
+                    } else {
+                        return String.format("%s", DataBaseService.getColumnName(field));
+                    }
+                })
+                .collect(Collectors.joining(", "));
     }
 
     private static <T> boolean getTableExists(Connection connection, Class<T> clazz) throws SQLException {
