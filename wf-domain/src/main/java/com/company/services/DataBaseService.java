@@ -4,6 +4,7 @@ import com.company.annotation.Column;
 import com.company.annotation.Table;
 import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.hadoop.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class DataBaseService {
     private static final Logger logger = LoggerFactory.getLogger(DataBaseService.class);
 
     private static final String CREATE_TABLE_QUERY_TEMPLATE = "CREATE TABLE %s (%s)";
-    private static final String READ_TABLE_QUERY_TEMPLATE = "SELECT %s FROM %s)";
+    private static final String READ_TABLE_QUERY_TEMPLATE = "SELECT %s FROM %s";
     private static final String DROP_TABLE_QUERY_TEMPLATE = "DROP TABLE %s";
     private static final String INSERT_INTO_QUERY_TEMPLATE = "INSERT INTO %s (%s) VALUES (%s)";
     private static final String COUNT_OF_QUERY_TEMPLATE = "SELECT COUNT(*) FROM %s";
@@ -95,27 +96,27 @@ public class DataBaseService {
     public static <T> Collection<T> readTable(Class<T> clazz) {
         String query = String.format(READ_TABLE_QUERY_TEMPLATE,
                 getAnnotatedFields(clazz, false), getTableName(clazz));
+        System.out.println(query);
         Collection<T> collection = new ArrayList<>();
 
         try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
             while (resultSet.next()) {
                 int parameterNumber = 1;
                 T obj = clazz.newInstance();
-                for (Method method : obj.getClass().getMethods()) {
-                    if (method.getName().startsWith("set") && parameterNumber <= resultSet.getMetaData().getColumnCount()) {
-                        switch (resultSet.getObject(parameterNumber).getClass().getSimpleName()) {
-                            case "Integer":
-                            case "int":
-                                method.invoke(obj, resultSet.getInt(parameterNumber++));
-                                break;
-                            case "String":
-                                method.invoke(obj, resultSet.getString(parameterNumber++));
-                        }
+
+                for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
+                    switch (resultSet.getObject(parameterNumber).getClass().getSimpleName()) {
+                        case "Integer":
+                            PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getInt(parameterNumber++));
+                            break;
+                        case "String":
+                            PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getString(parameterNumber++));
+                            break;
                     }
                 }
                 collection.add(obj);
             }
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | SQLException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | SQLException | NoSuchMethodException e) {
             logger.error("Error while try read table {}", e.getMessage());
         }
         return collection;
@@ -139,21 +140,24 @@ public class DataBaseService {
     private static <T> void inputDataInPreparedStatement(Connection connection, String query, T obj) {
         int parameterNumber = 1;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            for (Method method : obj.getClass().getMethods()) {
-                if (method.getName().startsWith("get")) {
-                    System.out.println(method.getName());
-                    switch (method.getReturnType().getSimpleName()) {
-                        case "Integer":
-                        case "int":
-                            preparedStatement.setInt(parameterNumber++, (Integer) method.invoke(obj));
-                            break;
-                        case "String":
-                            preparedStatement.setString(parameterNumber++, (String) method.invoke(obj));
-                    }
+
+            for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
+                String name = field.getName();
+                name = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
+
+                Method method = obj.getClass().getMethod(name);
+
+                switch (method.getReturnType().getSimpleName()) {
+                    case "Integer":
+                    case "int":
+                        preparedStatement.setInt(parameterNumber++, (Integer) method.invoke(obj));
+                        break;
+                    case "String":
+                        preparedStatement.setString(parameterNumber++, (String) method.invoke(obj));
                 }
             }
             preparedStatement.execute();
-        } catch (IllegalAccessException | InvocationTargetException | SQLException e) {
+        } catch (IllegalAccessException | InvocationTargetException | SQLException | NoSuchMethodException e) {
             logger.error(e.getMessage());
         }
     }
