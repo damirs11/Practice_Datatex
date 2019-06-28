@@ -12,7 +12,6 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -72,21 +71,21 @@ public class DataBaseService {
     private static <T> void load(Class<T> clazz, Collection<T> collection) {
         try (Connection connection = getConnection()) {
             if (AnnotationUtils.getTableExists(connection, clazz)) {
-                deleteTable(connection, clazz);
+                deleteTable(clazz);
             }
-            createTable(connection, clazz);
-            insertData(connection, clazz, collection);
+            createTable(clazz);
+            insertData(clazz, collection);
         } catch (SQLException e) {
             logger.error("Error while try load table {}", e.getMessage());
         }
     }
 
-    private static <T> void createTable(Connection connection, Class<T> clazz) throws SQLException {
+    private static <T> void createTable(Class<T> clazz) throws SQLException {
         String query = String.format(CREATE_TABLE_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
                 AnnotationUtils.getAnnotatedFields(clazz, true));
         System.out.println(query);
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.execute();
         }
     }
@@ -104,13 +103,13 @@ public class DataBaseService {
                 T obj = clazz.newInstance();
 
                 for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
-                    switch (resultSet.getObject(parameterNumber).getClass().getSimpleName()) {
-                        case "Integer":
-                            PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getInt(parameterNumber++));
-                            break;
-                        case "String":
-                            PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getString(parameterNumber++));
-                            break;
+                    String simpleName = resultSet.getObject(parameterNumber).getClass().getSimpleName();
+                    if (Integer.class.getSimpleName().equals(simpleName)) {
+                        PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getInt(parameterNumber++));
+                    } else if (String.class.getSimpleName().equals(simpleName)) {
+                        PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getString(parameterNumber++));
+                    } else {
+                        throw new IllegalStateException("Unexpected value: " + resultSet.getObject(parameterNumber).getClass().getSimpleName());
                     }
                 }
                 collection.add(obj);
@@ -121,40 +120,38 @@ public class DataBaseService {
         return collection;
     }
 
-    private static <T> boolean deleteTable(Connection connection, Class<T> clazz) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
+    private static <T> boolean deleteTable(Class<T> clazz) throws SQLException {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
                 String.format(DROP_TABLE_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz)))) {
             return preparedStatement.execute();
         }
     }
 
-    private static <T> void insertData(Connection connection, Class<T> clazz, Collection<T> collection) {
+    private static <T> void insertData(Class<T> clazz, Collection<T> collection) {
         String query = String.format(INSERT_INTO_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
                 AnnotationUtils.getAnnotatedFields(clazz, false),
                 AnnotationUtils.getQuestionMarksForInsert(clazz));
         for (T obj : collection) {
-            inputDataInPreparedStatement(connection, query, obj);
+            try (Connection connection = getConnection()) {
+                inputDataInPreparedStatement(connection, query, obj);
+            } catch (SQLException e) {
+                logger.error("Error while try input data in prepared statement {}", e.getMessage());
+            }
         }
     }
 
     private static <T> void inputDataInPreparedStatement(Connection connection, String query, T obj) {
         int parameterNumber = 1;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
             for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
-                String name = field.getName();
-                name = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
-
-                Method method = obj.getClass().getMethod(name);
-
-                switch (method.getReturnType().getSimpleName()) {
-                    case "Integer":
-                    case "int":
-                        preparedStatement.setInt(parameterNumber++, (Integer) method.invoke(obj));
-                        break;
-                    case "String":
-                        preparedStatement.setString(parameterNumber++, (String) method.invoke(obj));
+                String name = field.getType().getName();
+                if (Integer.class.getSimpleName().equals(name)) {
+                    preparedStatement.setInt(parameterNumber++, (Integer) PropertyUtils.getProperty(obj, field.getName()));
+                } else if (String.class.getSimpleName().equals(name)) {
+                    preparedStatement.setString(parameterNumber++, (String) PropertyUtils.getProperty(obj, field.getName()));
+                } else {
+                    throw new IllegalStateException("Unexpected value: " + field.getType());
                 }
             }
             preparedStatement.execute();
