@@ -1,36 +1,43 @@
 package com.company.models.staff;
 
+import com.company.annotation.Column;
+import com.company.annotation.Table;
+
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
 
 /**
  * Department class contain a object of some department
  * which have unique id form abstract class Staff
  */
+@Table
 @XmlRootElement
 public class Department extends Staff {
 
     /**
      * Full name of Department
      */
+    @Column
     private String fullName;
     /**
      * Short name of Department
      */
+    @Column
     private String shortName;
     /**
      * Department head = id of Person
      */
+    @Column
     private Integer departmentHead;
     /**
      * Collection of phone numbers
      */
-    private Collection<String> phoneNumbers;
+    @Column
+    private String phoneNumber;
     /**
      * Organization id where Department contain
      */
+    @Column
     private Integer organizationId;
 
     public String getFullName() {
@@ -45,8 +52,8 @@ public class Department extends Staff {
         return departmentHead;
     }
 
-    public Collection<String> getPhoneNumbers() {
-        return phoneNumbers;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public Integer getOrganizationId() {
@@ -68,10 +75,9 @@ public class Department extends Staff {
         this.departmentHead = departmentHead;
     }
 
-    @XmlElementWrapper(name = "phoneNumbers")
-    @XmlElement(name = "phoneNumber")
-    public void setPhoneNumbers(Collection<String> phoneNumber) {
-        this.phoneNumbers = phoneNumber;
+    @XmlElement
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @XmlElement

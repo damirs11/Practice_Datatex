@@ -5,11 +5,7 @@
         <departmentHead>1</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>1</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79173626897</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -17,11 +13,7 @@
         <departmentHead>2</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>2</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79128156825</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -29,11 +21,7 @@
         <departmentHead>3</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>3</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -41,11 +29,7 @@
         <departmentHead>4</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>4</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -53,11 +37,7 @@
         <departmentHead>5</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>5</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -65,11 +45,7 @@
         <departmentHead>6</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>6</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -77,11 +53,7 @@
         <departmentHead>7</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>7</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -89,11 +61,7 @@
         <departmentHead>8</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>8</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
     <department>
@@ -101,11 +69,7 @@
         <departmentHead>9</departmentHead>
         <fullName>Полное название</fullName>
         <organizationId>9</organizationId>
-        <phoneNumbers>
-            <phoneNumber>+79173626897</phoneNumber>
-            <phoneNumber>+79128156825</phoneNumber>
-            <phoneNumber>+79257812444</phoneNumber>
-        </phoneNumbers>
+        <phoneNumber>+79257812444</phoneNumber>
         <shortName>Короткое название</shortName>
     </department>
 </elements>

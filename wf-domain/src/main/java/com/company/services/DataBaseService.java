@@ -1,5 +1,7 @@
 package com.company.services;
 
+import com.company.models.staff.Department;
+import com.company.models.staff.Organization;
 import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
 import com.company.utils.AnnotationUtils;
@@ -29,6 +31,8 @@ public class DataBaseService {
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
     private static final String JDBC_URL = "jdbc:derby:testdb;create=true";
     private static final File personInput = new File(Objects.requireNonNull(DataBaseService.class.getClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
+    private static final File departmentInput = new File(Objects.requireNonNull(DataBaseService.class.getClassLoader().getResource("InputXML/InputDepartment.xml")).getFile());
+    private static final File organizationInput = new File(Objects.requireNonNull(DataBaseService.class.getClassLoader().getResource("InputXML/InputOrganization.xml")).getFile());
     private static final Logger logger = LoggerFactory.getLogger(DataBaseService.class);
 
     private static final String CREATE_TABLE_QUERY_TEMPLATE = "CREATE TABLE %s (%s)";
@@ -48,6 +52,8 @@ public class DataBaseService {
         try {
             Class.forName(DRIVER).newInstance();
             load(Person.class, JaxbParser.getObject(personInput, Person.class).getList());
+            load(Department.class, JaxbParser.getObject(departmentInput, Department.class).getList());
+            load(Organization.class, JaxbParser.getObject(organizationInput, Organization.class).getList());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | JAXBException e) {
             logger.error("Error while try init {}: {}", DataBaseService.class, e.getMessage());
         }
@@ -55,6 +61,7 @@ public class DataBaseService {
 
     public static <T> Integer countOf(Class<T> clazz) {
         String query = String.format(COUNT_OF_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz));
+        logger.info(query);
         try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
             resultSet.next();
             return resultSet.getInt(1);
@@ -83,8 +90,8 @@ public class DataBaseService {
     private static <T> void createTable(Class<T> clazz) throws SQLException {
         String query = String.format(CREATE_TABLE_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
-                AnnotationUtils.getAnnotatedFields(clazz, true));
-        System.out.println(query);
+                AnnotationUtils.getColumnFields(clazz, true));
+        logger.info(query);
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.execute();
         }
@@ -92,9 +99,9 @@ public class DataBaseService {
 
     public static <T> Collection<T> readTable(Class<T> clazz) {
         String query = String.format(READ_TABLE_QUERY_TEMPLATE,
-                AnnotationUtils.getAnnotatedFields(clazz, false),
+                AnnotationUtils.getColumnFields(clazz, false),
                 AnnotationUtils.getTableName(clazz));
-        System.out.println(query);
+        logger.info(query);
         Collection<T> collection = new ArrayList<>();
 
         try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
@@ -121,8 +128,9 @@ public class DataBaseService {
     }
 
     private static <T> boolean deleteTable(Class<T> clazz) throws SQLException {
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(
-                String.format(DROP_TABLE_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz)))) {
+        String query = String.format(DROP_TABLE_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz));
+        logger.info(query);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             return preparedStatement.execute();
         }
     }
@@ -130,8 +138,9 @@ public class DataBaseService {
     private static <T> void insertData(Class<T> clazz, Collection<T> collection) {
         String query = String.format(INSERT_INTO_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
-                AnnotationUtils.getAnnotatedFields(clazz, false),
+                AnnotationUtils.getColumnFields(clazz, false),
                 AnnotationUtils.getQuestionMarksForInsert(clazz));
+        logger.info(query);
         for (T obj : collection) {
             try (Connection connection = getConnection()) {
                 inputDataInPreparedStatement(connection, query, obj);
@@ -142,13 +151,14 @@ public class DataBaseService {
     }
 
     private static <T> void inputDataInPreparedStatement(Connection connection, String query, T obj) {
+        logger.info("{} - {}", query, obj);
         int parameterNumber = 1;
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
-                String name = field.getType().getName();
-                if (Integer.class.getSimpleName().equals(name)) {
+                String typeName = field.getType().getSimpleName();
+                if (Integer.class.getSimpleName().equals(typeName)) {
                     preparedStatement.setInt(parameterNumber++, (Integer) PropertyUtils.getProperty(obj, field.getName()));
-                } else if (String.class.getSimpleName().equals(name)) {
+                } else if (String.class.getSimpleName().equals(typeName)) {
                     preparedStatement.setString(parameterNumber++, (String) PropertyUtils.getProperty(obj, field.getName()));
                 } else {
                     throw new IllegalStateException("Unexpected value: " + field.getType());

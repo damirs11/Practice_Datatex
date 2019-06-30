@@ -1,33 +1,39 @@
 package com.company.models.staff;
 
+import com.company.annotation.Column;
+import com.company.annotation.Table;
+
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
 
 /**
  * Organization class contain a object of some organization
  * which have unique id form abstract class Staff
  */
+@Table
 @XmlRootElement
 public class Organization extends Staff {
 
     /**
      * Full name of Organization
      */
+    @Column
     private String fullName;
     /**
      * Short name of Organization
      */
+    @Column
     private String shortName;
     /**
      * Organization head = id of Person
      */
+    @Column
     private Integer organizationHead;
     /**
-     * Collection of phone numbers
+     * phone number
      */
-    private Collection<String> phoneNumbers;
+    @Column
+    private String phoneNumber;
 
     public String getFullName() {
         return fullName;
@@ -41,8 +47,8 @@ public class Organization extends Staff {
         return organizationHead;
     }
 
-    public Collection<String> getPhoneNumber() {
-        return phoneNumbers;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     @XmlElement
@@ -60,9 +66,8 @@ public class Organization extends Staff {
         this.organizationHead = organizationHead;
     }
 
-    @XmlElementWrapper(name = "phoneNumbers")
-    @XmlElement(name = "phoneNumber")
-    public void setPhoneNumber(Collection<String> phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
+    @XmlElement
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

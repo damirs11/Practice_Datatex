@@ -43,7 +43,7 @@ public class AnnotationUtils {
         return string;
     }
 
-    public static <T> String getAnnotatedFields(Class<T> clazz, boolean typesInputEnable) {
+    public static <T> String getColumnFields(Class<T> clazz, boolean typesInputEnable) {
         return ReflectionUtils.getDeclaredFieldsIncludingInherited(clazz).stream()
                 .filter(field -> field.isAnnotationPresent(Column.class))
                 .map(field -> {

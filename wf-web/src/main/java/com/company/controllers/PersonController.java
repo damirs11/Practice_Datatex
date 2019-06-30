@@ -19,6 +19,8 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
+import static com.company.controllers.MyApplication.createResponse;
+
 /**
  * Person controller
  * <p>
@@ -31,7 +33,7 @@ public class PersonController {
     private static Logger logger = LoggerFactory.getLogger(PersonController.class);
 
     private static final String ZERO_DOCUMENTS = "Person hasn't documents";
-    private static final String ZERO_PERSONS = "No Persons right time";
+    private static final String ZERO_PERSONS = "No Persons right now";
     private static final String PERSON_DOEST_EXIST = "Person does't exist";
 
     /**
@@ -70,13 +72,5 @@ public class PersonController {
             logger.error(e.getMessage());
         }
         return createResponse("", PERSON_DOEST_EXIST);
-    }
-
-    private Response createResponse(String output, String errorOutput) {
-        if (output != null && !output.isEmpty()) {
-            return Response.ok().entity(output).build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorOutput).build();
-        }
     }
 }

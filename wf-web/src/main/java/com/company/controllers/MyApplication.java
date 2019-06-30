@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Response;
 
 /**
  * Root of rest
@@ -31,6 +32,14 @@ public class MyApplication extends javax.ws.rs.core.Application {
 
         for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
             DocumentsStorage.getDocumentList().add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
+        }
+    }
+
+    static Response createResponse(String output, String errorOutput) {
+        if (output != null && !output.isEmpty()) {
+            return Response.ok().entity(output).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorOutput).build();
         }
     }
 }
