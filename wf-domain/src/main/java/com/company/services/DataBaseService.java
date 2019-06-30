@@ -59,6 +59,12 @@ public class DataBaseService {
         }
     }
 
+    /**
+     * Count of entities in DB
+     *
+     * @param clazz the POJO
+     * @return count of entities
+     */
     public static <T> Integer countOf(Class<T> clazz) {
         String query = String.format(COUNT_OF_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz));
         logger.info(query);
@@ -71,9 +77,12 @@ public class DataBaseService {
         return -1;
     }
 
+
     /**
-     * EntryPoint for query
+     * Delete table if exists and create table with {@param collection}
      *
+     * @param clazz target
+     * @param collection of data
      */
     private static <T> void load(Class<T> clazz, Collection<T> collection) {
         try (Connection connection = getConnection()) {
@@ -87,19 +96,31 @@ public class DataBaseService {
         }
     }
 
+    /**
+     * Create table with taken name from @Table annotation
+     *
+     * @param clazz target
+     * @throws SQLException
+     */
     private static <T> void createTable(Class<T> clazz) throws SQLException {
         String query = String.format(CREATE_TABLE_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
-                AnnotationUtils.getColumnFields(clazz, true));
+                AnnotationUtils.getAnnotatedColumnFields(clazz, true));
         logger.info(query);
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.execute();
         }
     }
 
+    /**
+     * Select all data from {@param clazz} table
+     *
+     * @param clazz the clazz
+     * @return collection of {@param <T>}
+     */
     public static <T> Collection<T> readTable(Class<T> clazz) {
         String query = String.format(READ_TABLE_QUERY_TEMPLATE,
-                AnnotationUtils.getColumnFields(clazz, false),
+                AnnotationUtils.getAnnotatedColumnFields(clazz, false),
                 AnnotationUtils.getTableName(clazz));
         logger.info(query);
         Collection<T> collection = new ArrayList<>();
@@ -127,6 +148,13 @@ public class DataBaseService {
         return collection;
     }
 
+    /**
+     * Delete table
+     *
+     * @param clazz target
+     * @return status
+     * @throws SQLException
+     */
     private static <T> boolean deleteTable(Class<T> clazz) throws SQLException {
         String query = String.format(DROP_TABLE_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz));
         logger.info(query);
@@ -135,10 +163,16 @@ public class DataBaseService {
         }
     }
 
+    /**
+     * Insert collection to table
+     *
+     * @param clazz      target
+     * @param collection for input
+     */
     private static <T> void insertData(Class<T> clazz, Collection<T> collection) {
         String query = String.format(INSERT_INTO_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
-                AnnotationUtils.getColumnFields(clazz, false),
+                AnnotationUtils.getAnnotatedColumnFields(clazz, false),
                 AnnotationUtils.getQuestionMarksForInsert(clazz));
         logger.info(query);
         for (T obj : collection) {
@@ -150,6 +184,12 @@ public class DataBaseService {
         }
     }
 
+    /**
+     * Take a {@param query} and input specify data in it
+     *
+     * @param query Prepared Statement with ?
+     * @param obj to insert
+     */
     private static <T> void inputDataInPreparedStatement(Connection connection, String query, T obj) {
         logger.info("{} - {}", query, obj);
         int parameterNumber = 1;
