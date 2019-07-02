@@ -14,7 +14,7 @@
 
     <groupId>wf-domain</groupId>
     <artifactId>wf-domain</artifactId>
-    <version>${project.version}</version>
+    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>Domain</name>

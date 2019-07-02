@@ -1,18 +1,15 @@
 package com.company.controllers;
 
 import com.company.factory.DocumentFactory;
-import com.company.models.staff.Person;
-import com.company.parser.JaxbParser;
+import com.company.services.DataBaseService;
 import com.company.storage.DocumentsStorage;
-import com.company.storage.PersonsStorage;
 import com.company.utils.DataGeneratorUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
-import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.util.Objects;
+import javax.ws.rs.core.Response;
 
 /**
  * Root of rest
@@ -26,25 +23,24 @@ public class MyApplication extends javax.ws.rs.core.Application {
     private static final Logger logger = LoggerFactory.getLogger(MyApplication.class);
 
     private static final int NUMBER_OF_DOCUMENTS = 20;
-    private static File PERSON_INPUT = new File(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
 
     /**
      * Instantiates a new My application.
-     * <p>
-     * Before application start work
-     * Need to input data like Persons and
-     * generate data for Documents
      */
     public MyApplication() {
-        try {
-            PersonsStorage.setPersonList(
-                    JaxbParser.getObject(PERSON_INPUT, Person.class).getList());
 
-            for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
-                DocumentsStorage.getDocumentList().add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
-            }
-        } catch (JAXBException e) {
-            logger.error("Error while try init MyApplication class " + e.getMessage());
+        DataBaseService.init();
+
+        for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
+            DocumentsStorage.getDocumentList().add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
+        }
+    }
+
+    static Response createResponse(String output, String errorOutput) {
+        if (!StringUtils.isEmpty(output)) {
+            return Response.ok().entity(output).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorOutput).build();
         }
     }
 }

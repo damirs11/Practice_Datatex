@@ -1,5 +1,6 @@
 package com.company.models.staff;
 
+import com.company.annotation.Column;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -11,6 +12,7 @@ public abstract class Staff {
     /**
      * Id of Staff
      */
+    @Column
     private Integer id;
 
     public Integer getId() {
