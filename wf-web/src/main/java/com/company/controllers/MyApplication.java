@@ -4,6 +4,7 @@ import com.company.factory.DocumentFactory;
 import com.company.services.DataBaseService;
 import com.company.storage.DocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public class MyApplication extends javax.ws.rs.core.Application {
     }
 
     static Response createResponse(String output, String errorOutput) {
-        if (output != null && !output.isEmpty()) {
+        if (!StringUtils.isEmpty(output)) {
             return Response.ok().entity(output).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).entity(errorOutput).build();

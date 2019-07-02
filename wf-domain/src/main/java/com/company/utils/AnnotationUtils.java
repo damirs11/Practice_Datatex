@@ -3,6 +3,7 @@ package com.company.utils;
 import com.company.annotation.Column;
 import com.company.annotation.Table;
 import org.apache.hadoop.util.ReflectionUtils;
+import org.eclipse.jetty.util.StringUtil;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -39,7 +40,7 @@ public class AnnotationUtils {
     public static <T> String getTableName(Class<T> clazz) {
         String tableName = null;
         if (clazz.isAnnotationPresent(Table.class)) {
-            if (clazz.getAnnotation(Table.class).value().equals("")) {
+            if (StringUtil.isBlank(clazz.getAnnotation(Table.class).value())) {
                 tableName = clazz.getSimpleName().toUpperCase();
             } else {
                 tableName = clazz.getAnnotation(Table.class).value().toUpperCase();
@@ -105,11 +106,9 @@ public class AnnotationUtils {
      * @return translated java type to derby
      */
     private static String getDerbyType(String javaType) {
-        switch (javaType) {
-            case "String":
-                return "VARCHAR(50)";
-            default:
-                return javaType;
+        if ("String".equals(javaType)) {
+            return "VARCHAR(50)";
         }
+        return javaType;
     }
 }
