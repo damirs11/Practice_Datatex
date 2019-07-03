@@ -19,6 +19,7 @@
 
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
 
+        <jsp.version>2.2</jsp.version>
         <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
         <javax.activation-api.version>1.2.0</javax.activation-api.version>
         <jaxb.version>2.3.0</jaxb.version>
@@ -33,6 +34,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${jsp.version}</version>
+            </dependency>
             <dependency>
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>javax.ws.rs-api</artifactId>

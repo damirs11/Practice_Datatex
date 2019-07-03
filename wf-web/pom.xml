@@ -20,7 +20,7 @@
     <name>Web</name>
 
     <build>
-        <finalName>Fourth-task</finalName>
+        <finalName>Fifth-task</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -46,6 +46,10 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>

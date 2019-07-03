@@ -5,6 +5,7 @@ import com.company.annotation.Table;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * Department class contain a object of some department
@@ -83,5 +84,23 @@ public class Department extends Staff {
     @XmlElement
     public void setOrganizationId(Integer organizationId) {
         this.organizationId = organizationId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Department)) return false;
+        if (!super.equals(o)) return false;
+        Department that = (Department) o;
+        return Objects.equals(fullName, that.fullName) &&
+                Objects.equals(shortName, that.shortName) &&
+                Objects.equals(departmentHead, that.departmentHead) &&
+                Objects.equals(phoneNumber, that.phoneNumber) &&
+                Objects.equals(organizationId, that.organizationId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), fullName, shortName, departmentHead, phoneNumber, organizationId);
     }
 }

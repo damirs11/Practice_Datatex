@@ -5,6 +5,7 @@ import com.company.annotation.Table;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * Organization class contain a object of some organization
@@ -69,5 +70,22 @@ public class Organization extends Staff {
     @XmlElement
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Organization)) return false;
+        if (!super.equals(o)) return false;
+        Organization that = (Organization) o;
+        return Objects.equals(fullName, that.fullName) &&
+                Objects.equals(shortName, that.shortName) &&
+                Objects.equals(organizationHead, that.organizationHead) &&
+                Objects.equals(phoneNumber, that.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), fullName, shortName, organizationHead, phoneNumber);
     }
 }

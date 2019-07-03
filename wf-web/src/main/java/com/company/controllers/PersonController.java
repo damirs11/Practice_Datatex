@@ -5,7 +5,6 @@ import com.company.models.staff.ListWrapper;
 import com.company.models.staff.Person;
 import com.company.parser.JaxbParser;
 import com.company.services.DataBaseService;
-import com.company.storage.DocumentsStorage;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +17,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.Map;
 
 import static com.company.controllers.MyApplication.createResponse;
+import static com.company.storage.PersonsAndDocumentsStorage.getPersonsWithDocuments;
 
 /**
  * Person controller
@@ -60,13 +61,11 @@ public class PersonController {
     public Response getEmployeeDocuments(@PathParam("id") Integer id) {
         try {
             ListWrapper<Document> documentListWrapper = new ListWrapper<>();
+            documentListWrapper.setList(getPersonsWithDocuments().entrySet().stream()
+                    .filter(entry -> entry.getKey().getId().equals(id))
+                    .findFirst()
+                    .map(Map.Entry::getValue).orElse(null));
 
-            DataBaseService.readTable(Person.class).stream().filter(person -> person.getId().equals(id))
-                    .forEach(person -> DocumentsStorage.getDocumentList().forEach(document -> {
-                    if (document.getAuthor().equals(person.getId())) {
-                        documentListWrapper.getList().add(document);
-                    }
-                    }));
             return createResponse(JaxbParser.listWrapperToStringXML(documentListWrapper), ZERO_DOCUMENTS);
         } catch (JAXBException | IOException e) {
             logger.error(e.getMessage());

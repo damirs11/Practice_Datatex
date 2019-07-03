@@ -55,7 +55,7 @@ public class DataBaseService {
             load(Department.class, JaxbParser.getObject(departmentInput, Department.class).getList());
             load(Organization.class, JaxbParser.getObject(organizationInput, Organization.class).getList());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | JAXBException e) {
-            logger.error("Error while try init {}: {}", DataBaseService.class, e.getMessage());
+            logger.error("Error while try init {}", e.getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class DataBaseService {
      * Create table with taken name from @Table annotation
      *
      * @param clazz target
-     * @throws SQLException
+     * @throws SQLException -
      */
     private static <T> void createTable(Class<T> clazz) throws SQLException {
         String query = String.format(CREATE_TABLE_QUERY_TEMPLATE,
@@ -128,7 +128,7 @@ public class DataBaseService {
         try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
             while (resultSet.next()) {
                 int parameterNumber = 1;
-                T obj = clazz.newInstance();
+                T obj = clazz.getDeclaredConstructor().newInstance();
 
                 for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
                     String simpleName = resultSet.getObject(parameterNumber).getClass().getSimpleName();
@@ -153,7 +153,7 @@ public class DataBaseService {
      *
      * @param clazz target
      * @return status
-     * @throws SQLException
+     * @throws SQLException -
      */
     private static <T> boolean deleteTable(Class<T> clazz) throws SQLException {
         String query = String.format(DROP_TABLE_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz));

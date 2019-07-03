@@ -1,8 +1,9 @@
 package com.company.controllers;
 
 import com.company.factory.DocumentFactory;
+import com.company.models.staff.Person;
 import com.company.services.DataBaseService;
-import com.company.storage.DocumentsStorage;
+import com.company.storage.PersonsAndDocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -31,8 +32,10 @@ public class MyApplication extends javax.ws.rs.core.Application {
 
         DataBaseService.init();
 
+        DataBaseService.readTable(Person.class).forEach(PersonsAndDocumentsStorage::addPerson);
+
         for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
-            DocumentsStorage.getDocumentList().add(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
+            PersonsAndDocumentsStorage.addDocument(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
         }
     }
 
