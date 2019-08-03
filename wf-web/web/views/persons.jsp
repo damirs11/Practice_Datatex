@@ -3,7 +3,7 @@
 <%@ page import="com.company.models.staff.Person" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@page contentType="text/html;charset=utf-8" %>
+<%@ page contentType="text/html;charset=utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -21,7 +21,7 @@
     </tr>
     <%
         for (Map.Entry<Person, List<Document>> link : getPersonsWithDocuments().entrySet()) {
-            out.print("<tr onclick=location.href='authorDocuments?id=" + link.getKey().getId() + "'>" +
+            out.print("<tr onclick=location.href='authorDocuments.jsp?id=" + link.getKey().getId() + "'>" +
                     "<td>" + link.getKey().getId() + "</td>" +
                     "<td>" + link.getKey().getName() + "</td>" +
                     "<td>" + link.getKey().getSecondName() + "</td>" +

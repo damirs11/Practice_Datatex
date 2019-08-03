@@ -10,13 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Root of rest
  */
-@ApplicationPath("/")
-public class MyApplication extends javax.ws.rs.core.Application {
+@ApplicationPath("/rest")
+public class MyApplication extends Application {
 
     /**
      * The Logger.
@@ -25,11 +28,15 @@ public class MyApplication extends javax.ws.rs.core.Application {
 
     private static final int NUMBER_OF_DOCUMENTS = 20;
 
+
+
     /**
      * Instantiates a new My application.
      */
     public MyApplication() {
+    }
 
+    static {
         DataBaseService.init();
 
         DataBaseService.readTable(Person.class).forEach(PersonsAndDocumentsStorage::addPerson);
@@ -37,6 +44,15 @@ public class MyApplication extends javax.ws.rs.core.Application {
         for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
             PersonsAndDocumentsStorage.addDocument(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
         }
+    }
+
+    @Override
+    public Set<Class<?>> getClasses() {
+        final Set<Class<?>> classes = new HashSet<>();
+        classes.add(PersonController.class);
+        classes.add(OrganizationController.class);
+        classes.add(DepartmentController.class);
+        return classes;
     }
 
     static Response createResponse(String output, String errorOutput) {

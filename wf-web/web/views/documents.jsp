@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
-<table>
+    <button type="button" name="back" onclick="history.back()">Назад</button><br>
     <%
         if (request.getParameter("id") != null) {
             for (Document document : getDocuments()) {
@@ -22,6 +22,5 @@
             }
         }
     %>
-</table>
 </body>
 </html>

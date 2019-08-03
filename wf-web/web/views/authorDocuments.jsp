@@ -9,15 +9,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
+<button type="button" name="back" onclick="history.back()">Назад</button><br>
 <table>
     <%
         if (request.getParameter("id") != null) {
             for (Entry<Person, List<Document>> link : getPersonsWithDocuments().entrySet()) {
                 if (link.getKey().getId() == Integer.parseInt(request.getParameter("id"))) {
                     for (Document document : link.getValue()) {
-                        out.print("Идентификатор документа: <a href='documents?id=" + document.getId() + "'> " + document.getId() + "</a></br>");
+                        out.print("<tr onclick=location.href='documents.jsp?id=" + document.getId() + "'>");
+                        out.print("<td>Идентификатор документа: </br></td>");
+                        out.print("<td>" + document.getId() + "</td>");
+                        out.print("</tr>");
                     }
                 }
             }
