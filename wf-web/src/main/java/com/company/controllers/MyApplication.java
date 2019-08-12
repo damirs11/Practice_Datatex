@@ -25,22 +25,14 @@ public class MyApplication extends Application {
      * The Logger.
      */
     private static final Logger logger = LoggerFactory.getLogger(MyApplication.class);
-
     private static final int NUMBER_OF_DOCUMENTS = 20;
-
-
 
     /**
      * Instantiates a new My application.
      */
     public MyApplication() {
-    }
-
-    static {
         DataBaseService.init();
-
         DataBaseService.readTable(Person.class).forEach(PersonsAndDocumentsStorage::addPerson);
-
         for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
             PersonsAndDocumentsStorage.addDocument(DocumentFactory.create(DataGeneratorUtils.getRandomDocType()));
         }

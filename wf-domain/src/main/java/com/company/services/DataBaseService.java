@@ -29,7 +29,7 @@ import java.util.Objects;
 public class DataBaseService {
 
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static final String JDBC_URL = "jdbc:derby:testdb;create=true";
+    private static final String JDBC_URL = "jdbc:derby:testdb;create=true;";
     private static final File personInput = new File(Objects.requireNonNull(DataBaseService.class.getClassLoader().getResource("InputXML/InputPerson.xml")).getFile());
     private static final File departmentInput = new File(Objects.requireNonNull(DataBaseService.class.getClassLoader().getResource("InputXML/InputDepartment.xml")).getFile());
     private static final File organizationInput = new File(Objects.requireNonNull(DataBaseService.class.getClassLoader().getResource("InputXML/InputOrganization.xml")).getFile());
@@ -142,7 +142,7 @@ public class DataBaseService {
                 }
                 collection.add(obj);
             }
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | SQLException | NoSuchMethodException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | SQLException | NoSuchMethodException | IllegalStateException e) {
             logger.error("Error while try read table {}", e.getMessage());
         }
         return collection;

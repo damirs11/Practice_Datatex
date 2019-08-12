@@ -2,6 +2,7 @@ package com.company.models.staff;
 
 import com.company.annotation.Column;
 import com.company.annotation.Table;
+import com.company.enumeration.DerbyTypes;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,71 +20,85 @@ public class Person extends Staff {
      * Second name of Person
      */
     @Column
-    private String secondName;
+    private String surname;
     /**
      * Name of Person
      */
     @Column
-    private String name;
+    private String firstname;
     /**
      * Middle name of Person
      */
     @Column
-    private String middleName;
+    private String patronymic;
     /**
      * Position of Person
      */
     @Column
-    private String position;
+    private String post;
     /**
      * Department id where Person work
      */
     @Column
     private Integer departmentId;
+    /**
+     * Store image in Base64 format
+     */
+    @Column(dataType = DerbyTypes.LONG_VARCHAR)
+    private String photo;
 
-    public String getSecondName() {
-        return secondName;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPost() {
+        return post;
     }
 
     public Integer getDepartmentId() {
         return departmentId;
     }
 
-    @XmlElement
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public String getPhoto() {
+        return photo;
     }
 
     @XmlElement
-    public void setName(String name) {
-        this.name = name;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @XmlElement
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     @XmlElement
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    @XmlElement
+    public void setPost(String post) {
+        this.post = post;
     }
 
     @XmlElement
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
+    }
+
+    @XmlElement
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override
@@ -92,15 +107,15 @@ public class Person extends Staff {
         if (!(o instanceof Person)) return false;
         if (!super.equals(o)) return false;
         Person person = (Person) o;
-        return Objects.equals(secondName, person.secondName) &&
-                Objects.equals(name, person.name) &&
-                Objects.equals(middleName, person.middleName) &&
-                Objects.equals(position, person.position) &&
+        return Objects.equals(surname, person.surname) &&
+                Objects.equals(firstname, person.firstname) &&
+                Objects.equals(patronymic, person.patronymic) &&
+                Objects.equals(post, person.post) &&
                 Objects.equals(departmentId, person.departmentId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), secondName, name, middleName, position, departmentId);
+        return Objects.hash(super.hashCode(), surname, firstname, patronymic, post, departmentId);
     }
 }

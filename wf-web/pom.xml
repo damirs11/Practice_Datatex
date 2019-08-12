@@ -7,23 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>wf-web</artifactId>
-    <packaging>war</packaging>
+    <artifactId>wf-rest</artifactId>
+    <packaging>jar</packaging>
 
-    <name>wf-web</name>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <name>wf-rest</name>
 
     <dependencies>
         <dependency>
@@ -58,7 +45,7 @@
         <dependency>
             <groupId>org.student</groupId>
             <artifactId>wf-domain</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 </project>

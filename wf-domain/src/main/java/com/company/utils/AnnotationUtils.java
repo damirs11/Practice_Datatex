@@ -2,6 +2,7 @@ package com.company.utils;
 
 import com.company.annotation.Column;
 import com.company.annotation.Table;
+import com.company.enumeration.DerbyTypes;
 import org.apache.hadoop.util.ReflectionUtils;
 import org.eclipse.jetty.util.StringUtil;
 
@@ -79,13 +80,14 @@ public class AnnotationUtils {
                 .filter(field -> field.isAnnotationPresent(Column.class))
                 .map(field -> {
                     if (typesInputEnable) {
-                        return String.format("%s %s", getColumnName(field), getDerbyType(field.getType().getSimpleName()));
+                        return String.format("%s %s", getColumnName(field), getDataType(field));
                     } else {
                         return String.format("%s", getColumnName(field));
                     }
                 })
                 .collect(Collectors.joining(", "));
     }
+
 
     /**
      * Check table for existence
@@ -99,6 +101,14 @@ public class AnnotationUtils {
         DatabaseMetaData meta = connection.getMetaData();
         ResultSet result = meta.getTables(null, null, getTableName(clazz), null);
         return result.next();
+    }
+
+    private static String getDataType(Field field) {
+        if (field.getAnnotation(Column.class).dataType() == DerbyTypes.AUTO) {
+            return getDerbyType(field.getType().getSimpleName());
+        } else {
+            return field.getAnnotation(Column.class).dataType().getType();
+        }
     }
 
     /**

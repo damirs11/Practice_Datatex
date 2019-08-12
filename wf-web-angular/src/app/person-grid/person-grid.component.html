@@ -1,0 +1,19 @@
+<table>
+    <thead>
+    <tr>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let person of personList">
+        <td>{{ person.id }}</td>
+        <td>{{ person.firstname }}</td>
+        <td>{{ person.patronymic }}</td>
+        <td>{{ person.surname }}</td>
+    </tr>
+    </tbody>
+</table>
