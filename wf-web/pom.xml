@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>wf-rest</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>wf-web</artifactId>
+    <packaging>war</packaging>
 
-    <name>wf-rest</name>
+    <name>wf-web</name>
 
     <dependencies>
         <dependency>
@@ -48,4 +48,106 @@
             <version>${parent.version}</version>
         </dependency>
     </dependencies>
+
+    <properties>
+        <angular.project.location>webapp</angular.project.location>
+        <angular.project.name>wf-web-angular</angular.project.name>
+        <angular.project.nodeinstallation>${angular.project.location}/node_installation
+        </angular.project.nodeinstallation>
+
+        <frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
+        <nodejs.version>v10.16.2</nodejs.version>
+        <npm.version>6.9.0</npm.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>${frontend-maven-plugin.version}</version>
+                <configuration>
+                    <installDirectory>${angular.project.nodeinstallation}</installDirectory>
+                </configuration>
+                <executions>
+                    <!-- It will install nodejs and npm -->
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${angular.project.location}</workingDirectory>
+                            <nodeVersion>${nodejs.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                        </configuration>
+                    </execution>
+                    <!-- It will execute command "npm install" inside "/e2e-angular2" directory -->
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${angular.project.location}</workingDirectory>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <!-- It will execute command "npm build" inside "/e2e-angular2" directory
+                    to clean and create "/dist" directory -->
+                    <execution>
+                        <id>npm build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${angular.project.location}</workingDirectory>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Plugin to copy the content of /angular/dist/ directory to output
+            directory (ie/ /target/transactionManager-1.0/) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.2</version>
+                <executions>
+                    <execution>
+                        <id>default-copy-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <!-- This folder is the folder where your angular files
+                            will be copied to. It must match the resulting war-file name.
+                            So if you have customized the name of war-file for ex. as "app.war"
+                            then below value should be ${project.build.directory}/app/
+                            Value given below is as per default war-file name -->
+                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>
+                                        ${project.basedir}/${angular.project.location}/dist/${angular.project.name}
+                                    </directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -7,12 +7,14 @@ import {AppComponent} from './app.component';
 import {HeaderMenuComponent} from './header-menu/header-menu.component';
 import {PersonGridComponent} from './person-grid/person-grid.component';
 import {PersonService} from './shared/person.service';
+import {PersonFormComponent} from "./person-form/person-form.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderMenuComponent,
-        PersonGridComponent
+        PersonGridComponent,
+        PersonFormComponent
     ],
     imports: [
         BrowserModule,

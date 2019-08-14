@@ -115,6 +115,5 @@
     <modules>
         <module>wf-domain</module>
         <module>wf-web</module>
-        <module>wf-web-angular</module>
     </modules>
 </project>
