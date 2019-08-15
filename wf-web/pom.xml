@@ -61,6 +61,9 @@
     </properties>
 
     <build>
+
+        <finalName>${angular.project.name}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
@@ -71,28 +74,28 @@
                 </configuration>
                 <executions>
                     <!-- It will install nodejs and npm -->
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <workingDirectory>${angular.project.location}</workingDirectory>
-                            <nodeVersion>${nodejs.version}</nodeVersion>
-                            <npmVersion>${npm.version}</npmVersion>
-                        </configuration>
-                    </execution>
-                    <!-- It will execute command "npm install" inside "/e2e-angular2" directory -->
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <workingDirectory>${angular.project.location}</workingDirectory>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
+                    <!--<execution>-->
+                    <!--<id>install node and npm</id>-->
+                    <!--<goals>-->
+                    <!--<goal>install-node-and-npm</goal>-->
+                    <!--</goals>-->
+                    <!--<configuration>-->
+                    <!--<workingDirectory>${angular.project.location}</workingDirectory>-->
+                    <!--<nodeVersion>${nodejs.version}</nodeVersion>-->
+                    <!--<npmVersion>${npm.version}</npmVersion>-->
+                    <!--</configuration>-->
+                    <!--</execution>-->
+                    <!--&lt;!&ndash; It will execute command "npm install" inside "/e2e-angular2" directory &ndash;&gt;-->
+                    <!--<execution>-->
+                    <!--<id>npm install</id>-->
+                    <!--<goals>-->
+                    <!--<goal>npm</goal>-->
+                    <!--</goals>-->
+                    <!--<configuration>-->
+                    <!--<workingDirectory>${angular.project.location}</workingDirectory>-->
+                    <!--<arguments>install</arguments>-->
+                    <!--</configuration>-->
+                    <!--</execution>-->
                     <!-- It will execute command "npm build" inside "/e2e-angular2" directory
                     to clean and create "/dist" directory -->
                     <execution>
@@ -127,7 +130,7 @@
                             So if you have customized the name of war-file for ex. as "app.war"
                             then below value should be ${project.build.directory}/app/
                             Value given below is as per default war-file name -->
-                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/
+                            <outputDirectory>${project.build.directory}/${build.finalName}/
                             </outputDirectory>
                             <resources>
                                 <resource>
