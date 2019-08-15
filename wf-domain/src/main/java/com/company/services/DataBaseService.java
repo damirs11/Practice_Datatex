@@ -39,6 +39,8 @@ public class DataBaseService {
     private static final String READ_TABLE_QUERY_TEMPLATE = "SELECT %s FROM %s";
     private static final String DROP_TABLE_QUERY_TEMPLATE = "DROP TABLE %s";
     private static final String INSERT_INTO_QUERY_TEMPLATE = "INSERT INTO %s (%s) VALUES (%s)";
+    private static final String DELETE_QUERY_TEMPLATE = "DELETE FROM %s WHERE %s";
+    private static final String UPDATE_QUERY_TEMPLATE = "UPDATE %s SET %s WHERE %s";
     private static final String COUNT_OF_QUERY_TEMPLATE = "SELECT COUNT(*) FROM %s";
 
     private DataBaseService() {
@@ -155,12 +157,53 @@ public class DataBaseService {
      * @return status
      * @throws SQLException -
      */
-    private static <T> boolean deleteTable(Class<T> clazz) throws SQLException {
+    public static <T> boolean deleteTable(Class<T> clazz) throws SQLException {
         String query = String.format(DROP_TABLE_QUERY_TEMPLATE, AnnotationUtils.getTableName(clazz));
         logger.info(query);
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             return preparedStatement.execute();
+        } catch (SQLException e) {
+            logger.error("Error while try delete {} {}", clazz, e.getMessage());
         }
+        return false;
+    }
+
+    /**
+     * Delete {@param clazz} entity by Id
+     *
+     * @param clazz target
+     * @param id    entity id
+     */
+    public static <T> boolean deleteEntityById(Class<T> clazz, Integer id) {
+        String query = String.format(DELETE_QUERY_TEMPLATE,
+                AnnotationUtils.getTableName(clazz), id);
+        logger.info(query);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            return preparedStatement.execute();
+        } catch (SQLException e) {
+            logger.error("Error while try delete table {} with id = {} {}", clazz, id, e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * Update {@param entity} with {@param id} in table {@param clazz}
+     *
+     * @param clazz  target
+     * @param id     entity id
+     * @param entity entity
+     */
+    public static <T> boolean updateEntityById(Class<T> clazz, Integer id, T entity) {
+        String query = String.format(UPDATE_QUERY_TEMPLATE,
+                AnnotationUtils.getTableName(clazz),
+                AnnotationUtils.getAnnotatedColumnFieldsWithDataForUpdateQ(entity), id);
+        logger.info(query);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            return preparedStatement.execute();
+        } catch (SQLException e) {
+            logger.error("Error while try update data in table {} with id = {} {}", AnnotationUtils.getTableName(clazz), id, e.getMessage());
+        }
+        return false;
     }
 
     /**

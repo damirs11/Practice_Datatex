@@ -3,10 +3,12 @@ package com.company.utils;
 import com.company.annotation.Column;
 import com.company.annotation.Table;
 import com.company.enumeration.DerbyTypes;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.hadoop.util.ReflectionUtils;
 import org.eclipse.jetty.util.StringUtil;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -83,6 +85,20 @@ public class AnnotationUtils {
                         return String.format("%s %s", getColumnName(field), getDataType(field));
                     } else {
                         return String.format("%s", getColumnName(field));
+                    }
+                })
+                .collect(Collectors.joining(", "));
+    }
+
+    public static <T> String getAnnotatedColumnFieldsWithDataForUpdateQ(T entity) {
+        return ReflectionUtils.getDeclaredFieldsIncludingInherited(entity.getClass()).stream()
+                .filter(field -> field.isAnnotationPresent(Column.class))
+                .map(field -> {
+                    try {
+                        return String.format("%s = %s", getColumnName(field), PropertyUtils.getProperty(entity, field.getName()));
+                    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                        e.printStackTrace();
+                        throw new IllegalStateException();
                     }
                 })
                 .collect(Collectors.joining(", "));

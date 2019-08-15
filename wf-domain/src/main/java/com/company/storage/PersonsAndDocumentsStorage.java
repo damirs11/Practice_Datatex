@@ -1,9 +1,11 @@
 package com.company.storage;
 
+import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
 import com.company.models.staff.Person;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,18 +18,28 @@ public class PersonsAndDocumentsStorage {
     private PersonsAndDocumentsStorage() {
     }
 
-    private static List<Document> documents = new ArrayList<>();
-    private static List<Person> persons = new ArrayList<>();
+    private static Collection<Document> documents = new ArrayList<>();
+    private static Collection<Person> persons = new ArrayList<>();
 
-    public static List<Document> getDocuments() {
+    public static Collection<Document> getDocuments() {
         return documents;
     }
 
-    public static void addDocument(Document document) {
-        documents.add(document);
+    /**
+     * Add Document with DocumentExistsException check
+     *
+     * @param doc the Document
+     * @throws DocumentExistsException the document exists exception
+     */
+    public static void addDocument(Document doc) throws DocumentExistsException {
+        if (documents.contains(doc)) {
+            throw new DocumentExistsException(doc);
+        } else {
+            documents.add(doc);
+        }
     }
 
-    public static List<Person> getPersons() {
+    public static Collection<Person> getPersons() {
         return persons;
     }
 
@@ -45,5 +57,18 @@ public class PersonsAndDocumentsStorage {
             }
         }
         return map;
+    }
+
+    public static void deletePersonWithDocumentById(Integer id) {
+        persons.removeIf(person -> person.getId().equals(id));
+        documents.removeIf(document -> document.getAuthor().equals(id));
+    }
+
+    public static void updatePerson(Person updatedPerson) {
+        persons.forEach(person -> {
+            if (person.getId().equals(updatedPerson.getId())) {
+                person = updatedPerson;
+            }
+        });
     }
 }

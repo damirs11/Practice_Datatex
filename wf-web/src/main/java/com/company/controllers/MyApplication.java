@@ -1,11 +1,11 @@
 package com.company.controllers;
 
+import com.company.exception.DocumentExistsException;
 import com.company.factory.DocumentFactory;
 import com.company.models.staff.Person;
 import com.company.services.DataBaseService;
 import com.company.storage.PersonsAndDocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +30,7 @@ public class MyApplication extends Application {
     /**
      * Instantiates a new My application.
      */
-    public MyApplication() {
+    public MyApplication() throws DocumentExistsException {
         DataBaseService.init();
         DataBaseService.readTable(Person.class).forEach(PersonsAndDocumentsStorage::addPerson);
         for (int i = 0; i < NUMBER_OF_DOCUMENTS; i++) {
@@ -47,11 +47,11 @@ public class MyApplication extends Application {
         return classes;
     }
 
-    static Response createResponse(String output, String errorOutput) {
-        if (!StringUtils.isEmpty(output)) {
-            return Response.ok().entity(output).build();
+    static Response createResponse(Response output, Response errorOutput, Boolean status) {
+        if (status) {
+            return output;
         } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorOutput).build();
+            return errorOutput;
         }
     }
 }
