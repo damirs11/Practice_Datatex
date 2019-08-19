@@ -176,7 +176,8 @@ public class DataBaseService {
      */
     public static <T> boolean deleteEntityById(Class<T> clazz, Integer id) {
         String query = String.format(DELETE_QUERY_TEMPLATE,
-                AnnotationUtils.getTableName(clazz), id);
+                AnnotationUtils.getTableName(clazz),
+                "id = " + id);
         logger.info(query);
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             return preparedStatement.execute();
@@ -196,7 +197,8 @@ public class DataBaseService {
     public static <T> boolean updateEntityById(Class<T> clazz, Integer id, T entity) {
         String query = String.format(UPDATE_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
-                AnnotationUtils.getAnnotatedColumnFieldsWithDataForUpdateQ(entity), id);
+                AnnotationUtils.getAnnotatedColumnFieldsWithDataForUpdateQ(entity),
+                "id = " + id);
         logger.info(query);
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             return preparedStatement.execute();

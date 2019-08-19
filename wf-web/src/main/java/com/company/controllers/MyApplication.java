@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.Response;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,13 +44,5 @@ public class MyApplication extends Application {
         classes.add(OrganizationController.class);
         classes.add(DepartmentController.class);
         return classes;
-    }
-
-    static Response createResponse(Response output, Response errorOutput, Boolean status) {
-        if (status) {
-            return output;
-        } else {
-            return errorOutput;
-        }
     }
 }

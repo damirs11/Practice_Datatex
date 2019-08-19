@@ -1,6 +1,7 @@
 package com.company.utils;
 
 import com.company.annotation.Column;
+import com.company.annotation.Id;
 import com.company.annotation.Table;
 import com.company.enumeration.DerbyTypes;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -92,7 +93,7 @@ public class AnnotationUtils {
 
     public static <T> String getAnnotatedColumnFieldsWithDataForUpdateQ(T entity) {
         return ReflectionUtils.getDeclaredFieldsIncludingInherited(entity.getClass()).stream()
-                .filter(field -> field.isAnnotationPresent(Column.class))
+                .filter(field -> field.isAnnotationPresent(Column.class) && !field.isAnnotationPresent(Id.class))
                 .map(field -> {
                     try {
                         return String.format("%s = %s", getColumnName(field), PropertyUtils.getProperty(entity, field.getName()));

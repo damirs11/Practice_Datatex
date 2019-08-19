@@ -5,7 +5,8 @@ import {PersonFormComponent} from './person-form/person-form.component';
 
 const routes: Routes = [
     {path: '', component: PersonGridComponent},
-    {path: 'create', component: PersonFormComponent}
+    {path: 'person/:id', component: PersonFormComponent},
+    {path: 'person', component: PersonFormComponent}
 ];
 
 @NgModule({

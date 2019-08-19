@@ -9,7 +9,8 @@ import {catchError, retry} from 'rxjs/operators';
 })
 export class PersonService {
 
-    baseUrl: String = location.href.replace(location.hash, "") + 'rest/';
+    //baseUrl: String = location.href.replace(location.hash, "") + 'rest/';
+    baseUrl: String = "http://localhost:3000/rest/";
 
     // Http Headers
     httpOptions = {
@@ -23,6 +24,14 @@ export class PersonService {
 
     getAll(): Observable<Person> {
         return this.http.get<Person>(this.baseUrl + 'ecm/employees')
+            .pipe(
+                retry(1),
+                catchError(this.errorHandle)
+            )
+    }
+
+    getById(id: number): Observable<Person> {
+        return this.http.get<Person>(this.baseUrl + 'ecm/employees/' + id)
             .pipe(
                 retry(1),
                 catchError(this.errorHandle)

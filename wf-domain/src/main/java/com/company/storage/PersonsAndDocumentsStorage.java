@@ -3,6 +3,8 @@ package com.company.storage;
 import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
 import com.company.models.staff.Person;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +16,8 @@ import java.util.TreeMap;
  * Store all existing Documents
  */
 public class PersonsAndDocumentsStorage {
+
+    private static final Logger logger = LoggerFactory.getLogger(PersonsAndDocumentsStorage.class);
 
     private PersonsAndDocumentsStorage() {
     }
@@ -32,6 +36,7 @@ public class PersonsAndDocumentsStorage {
      * @throws DocumentExistsException the document exists exception
      */
     public static void addDocument(Document doc) throws DocumentExistsException {
+        logger.info(String.valueOf(doc));
         if (documents.contains(doc)) {
             throw new DocumentExistsException(doc);
         } else {

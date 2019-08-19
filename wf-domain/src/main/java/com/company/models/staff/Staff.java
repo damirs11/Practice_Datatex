@@ -1,6 +1,7 @@
 package com.company.models.staff;
 
 import com.company.annotation.Column;
+import com.company.annotation.Id;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,6 +15,7 @@ public abstract class Staff implements Comparable<Staff> {
     /**
      * Id of Staff
      */
+    @Id
     @Column
     private Integer id;
 

@@ -1,9 +1,7 @@
 package com.company.factory;
 
 import com.company.enumeration.DocTypes;
-import com.company.exception.DocumentExistsException;
 import com.company.models.documents.Document;
-import com.company.storage.PersonsAndDocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,11 +37,9 @@ public abstract class DocumentFactory implements Factory {
 
             //check doc for RandomValue annotation
             DataGeneratorUtils.generate(doc);
-            //add Id to Store
-            PersonsAndDocumentsStorage.addDocument(doc);
             return doc;
-        } catch (DocumentExistsException | IllegalAccessException e) {
-            logger.error("Error while try to create document " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            logger.error("Error while try to create document {}", e.getMessage());
         }
         return null;
     }

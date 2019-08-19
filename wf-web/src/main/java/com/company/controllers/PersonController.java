@@ -45,7 +45,12 @@ public class PersonController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeesJSON() {
-        return Response.ok().entity(new Gson().toJson(DataBaseService.readTable(Person.class))).build();
+        try {
+            return Response.ok().entity(new Gson().toJson(DataBaseService.readTable(Person.class))).build();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     /**
@@ -81,7 +86,7 @@ public class PersonController {
     @Path("/employees/{id}")
     @DELETE
     public Response deleteEmployeeById(@PathParam("id") Integer id) {
-        if (DataBaseService.deleteEntityById(Person.class, id)) {
+        if (!DataBaseService.deleteEntityById(Person.class, id)) {
             PersonsAndDocumentsStorage.deletePersonWithDocumentById(id);
             return Response.ok().build();
         } else {

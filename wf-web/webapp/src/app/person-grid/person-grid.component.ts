@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {PersonService} from '../shared/person.service';
+import {HeaderMenuService} from '../header-menu/header-menu.service';
 
 @Component({
     selector: 'app-person-grid',
@@ -8,15 +9,19 @@ import {PersonService} from '../shared/person.service';
 })
 export class PersonGridComponent implements OnInit {
 
+    @Output() title: string = "Работники";
+
     personList: any = [];
 
     constructor(
-        public personService: PersonService
+        public personService: PersonService,
+        private headerMenuService: HeaderMenuService
     ) {
     }
 
     ngOnInit() {
         this.loadPersons();
+        this.headerMenuService.setTitle(this.title);
     }
 
     loadPersons() {

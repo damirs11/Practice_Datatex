@@ -9,9 +9,8 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import static com.company.controllers.MyApplication.createResponse;
 
 /**
  * Person controller
@@ -24,8 +23,6 @@ public class OrganizationController {
 
     private static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
-    private static final String ZERO_ORGANIZATIONS = "No Organizations right now";
-
     /**
      * Return all existing organizations
      *
@@ -33,8 +30,13 @@ public class OrganizationController {
      */
     @Path("/organizations")
     @GET
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeesJSON() {
-        return createResponse(new Gson().toJson(DataBaseService.readTable(Organization.class)), ZERO_ORGANIZATIONS);
+        try {
+            return Response.ok().entity(new Gson().toJson(DataBaseService.readTable(Organization.class))).build();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
