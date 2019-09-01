@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 
 import static com.company.storage.PersonsAndDocumentsStorage.getPersonsWithDocuments;
@@ -61,6 +63,19 @@ public class PersonController {
      */
     @Path("/employees/{id}")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmployeeById(@PathParam("id") Integer id) {
+        return Response.ok().entity(new Gson().toJson(DataBaseService.getById(Person.class, id))).build();
+    }
+
+    /**
+     * Return all documents of employee by id
+     *
+     * @param id the id of employee
+     * @return documents of employee in XML format
+     */
+    @Path("/employees/{id}/docs")
+    @GET
     @Produces(MediaType.APPLICATION_XML)
     public Response getEmployeeDocuments(@PathParam("id") Integer id) {
         try {
@@ -100,6 +115,19 @@ public class PersonController {
     public Response updateEmployeeById(@PathParam("id") Integer id, Person person) {
         if (DataBaseService.updateEntityById(Person.class, id, person)) {
             PersonsAndDocumentsStorage.updatePerson(person);
+            return Response.ok().build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+
+    @Path("/employees")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createEmployeeBy(Person person) {
+        person.setId(DataBaseService.getLastId(Person.class) + 1);
+        if (DataBaseService.insertData(Person.class, Collections.singleton(person))) {
+            PersonsAndDocumentsStorage.addPerson(person);
             return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();

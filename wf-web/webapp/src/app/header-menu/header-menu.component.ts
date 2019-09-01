@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HeaderMenuService} from './header-menu.service';
+import {HeaderMenuService} from '../shared/header-menu.service';
+import {MenuItem} from '../models/menuItem.model';
 
 @Component({
     selector: 'app-header-menu',
@@ -9,6 +10,7 @@ import {HeaderMenuService} from './header-menu.service';
 export class HeaderMenuComponent implements OnInit {
 
     title: String;
+    menuItems: MenuItem[];
 
     constructor(
         private headerMenuService: HeaderMenuService
@@ -16,8 +18,11 @@ export class HeaderMenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.headerMenuService.change.subscribe((title: String) => {
+        this.headerMenuService.changeTitle.subscribe((title: String) => {
             this.title = title;
+        });
+        this.headerMenuService.changeMenuItems.subscribe((menuItems: MenuItem[]) => {
+            this.menuItems = menuItems;
         });
     }
 }

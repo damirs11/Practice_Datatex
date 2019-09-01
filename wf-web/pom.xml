@@ -85,17 +85,17 @@
                     <!--<npmVersion>${npm.version}</npmVersion>-->
                     <!--</configuration>-->
                     <!--</execution>-->
-                    <!--&lt;!&ndash; It will execute command "npm install" inside "/e2e-angular2" directory &ndash;&gt;-->
-                    <!--<execution>-->
-                    <!--<id>npm install</id>-->
-                    <!--<goals>-->
-                    <!--<goal>npm</goal>-->
-                    <!--</goals>-->
-                    <!--<configuration>-->
-                    <!--<workingDirectory>${angular.project.location}</workingDirectory>-->
-                    <!--<arguments>install</arguments>-->
-                    <!--</configuration>-->
-                    <!--</execution>-->
+                    <!-- It will execute command "npm install" inside "/e2e-angular2" directory -->
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${angular.project.location}</workingDirectory>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
                     <!-- It will execute command "npm build" inside "/e2e-angular2" directory
                     to clean and create "/dist" directory -->
                     <execution>

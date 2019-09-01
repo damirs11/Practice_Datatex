@@ -6,8 +6,6 @@ import com.company.models.staff.Person;
 import com.company.services.DataBaseService;
 import com.company.storage.PersonsAndDocumentsStorage;
 import com.company.utils.DataGeneratorUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -20,10 +18,6 @@ import java.util.Set;
 @ApplicationPath("/rest")
 public class MyApplication extends Application {
 
-    /**
-     * The Logger.
-     */
-    private static final Logger logger = LoggerFactory.getLogger(MyApplication.class);
     private static final int NUMBER_OF_DOCUMENTS = 20;
 
     /**

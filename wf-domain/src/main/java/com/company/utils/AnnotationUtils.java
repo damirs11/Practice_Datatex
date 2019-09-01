@@ -96,7 +96,11 @@ public class AnnotationUtils {
                 .filter(field -> field.isAnnotationPresent(Column.class) && !field.isAnnotationPresent(Id.class))
                 .map(field -> {
                     try {
-                        return String.format("%s = %s", getColumnName(field), PropertyUtils.getProperty(entity, field.getName()));
+                        if (field.getType().getSimpleName().equals("Integer")) {
+                            return String.format("%s=%d", getColumnName(field), PropertyUtils.getProperty(entity, field.getName()));
+                        } else {
+                            return String.format("%s='%s'", getColumnName(field), PropertyUtils.getProperty(entity, field.getName()));
+                        }
                     } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                         e.printStackTrace();
                         throw new IllegalStateException();

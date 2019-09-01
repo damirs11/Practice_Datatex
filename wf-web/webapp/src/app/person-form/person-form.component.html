@@ -2,53 +2,54 @@
     <div class="personForm">
         <div>
             <div>
-                <div>
-                    <img [src]="'data:image/jpg;base64,' + person.photo"/>
+                <div *ngIf="person.photo">
+                    <img [src]="getPhoto()"/>
                 </div>
 
-                <input type="file">
+                <input type="file" name="image" (change)="fileProgress($event)">
             </div>
         </div>
-        <div>
-            <form>
+        <form name="form" (ngSubmit)="onSubmit()">
+            <div>
                 <div>
                     <label>Имя:</label>
                     <div>
-                        <input value={{person.firstname}}>
+                        <input [(ngModel)]="person.firstname" name="firstname">
                     </div>
                 </div>
                 <div>
                     <label>Фамилия:</label>
                     <div>
-                        <input value={{person.surname}}>
+                        <input [(ngModel)]="person.surname" name="surname">
                     </div>
                 </div>
                 <div>
                     <label>Отчество:</label>
                     <div>
-                        <input value={{person.patronymic}}>
+                        <input [(ngModel)]="person.patronymic" name="patronymic">
                     </div>
                 </div>
                 <div>
                     <label>Должность:</label>
                     <div>
-                        <input type="text" value={{person.post}}>
+                        <input [(ngModel)]="person.post" name="post" type="text">
                     </div>
                 </div>
                 <div>
                     <label>ID Департамента:</label>
                     <div>
-                        <input value={{person.departmentId}}>
+                        <input [(ngModel)]="person.departmentId" name="departmentId">
                     </div>
                 </div>
+
                 <div>
                     <label></label>
                     <div>
-                        <input type="button" class="btn btn-primary" value="Сохранить">
-                        <input type="reset" class="btn btn-default" value="Очистить">
+                        <input type="submit" class="btn btn-primary" value="Сохранить">
+                        <input type="button" (click)=delete() class="btn btn-default" value="Удалить">
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>

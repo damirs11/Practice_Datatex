@@ -1,6 +1,8 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonService} from '../shared/person.service';
-import {HeaderMenuService} from '../header-menu/header-menu.service';
+import {HeaderMenuService} from '../shared/header-menu.service';
+import {Person} from '../models/staff/person.model';
+import {MenuItem} from '../models/menuItem.model';
 
 @Component({
     selector: 'app-person-grid',
@@ -9,7 +11,10 @@ import {HeaderMenuService} from '../header-menu/header-menu.service';
 })
 export class PersonGridComponent implements OnInit {
 
-    @Output() title: string = "Работники";
+    title: string = "Работники";
+    menuItems: MenuItem[] = [
+        {path: 'person', title: 'Создать работника'}
+    ];
 
     personList: any = [];
 
@@ -22,10 +27,11 @@ export class PersonGridComponent implements OnInit {
     ngOnInit() {
         this.loadPersons();
         this.headerMenuService.setTitle(this.title);
+        this.headerMenuService.setMenuItems(this.menuItems);
     }
 
     loadPersons() {
-        return this.personService.getAll().subscribe((data: {}) => {
+        return this.personService.getAll().subscribe((data: Person[]) => {
             this.personList = data;
         })
     }

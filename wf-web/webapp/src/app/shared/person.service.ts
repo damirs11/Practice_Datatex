@@ -1,16 +1,16 @@
 import {Injectable} from "@angular/core";
-import {Person} from './../models/staff/person.model';
+import {Person} from '../models/staff/person.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PersonService {
 
-    //baseUrl: String = location.href.replace(location.hash, "") + 'rest/';
-    baseUrl: String = "http://localhost:3000/rest/";
+    baseUrl: String = 'http://windows-ueebum4:8080/rest/ecm/';
+    //baseUrl: String = "http://localhost:3000/rest/"; //only for json-server tests
 
     // Http Headers
     httpOptions = {
@@ -22,18 +22,53 @@ export class PersonService {
     constructor(private http: HttpClient) {
     }
 
-    getAll(): Observable<Person> {
-        return this.http.get<Person>(this.baseUrl + 'ecm/employees')
+    getAll(): Observable<Person[]> {
+        console.log('Getting Persons');
+        return this.http.get<Person[]>(this.baseUrl + 'employees')
             .pipe(
-                retry(1),
+                map((data: Person[]) => {
+                    return data
+                }),
                 catchError(this.errorHandle)
             )
     }
 
     getById(id: number): Observable<Person> {
-        return this.http.get<Person>(this.baseUrl + 'ecm/employees/' + id)
+        console.log('Getting Person id = ' + id);
+        return this.http.get<Person>(this.baseUrl + 'employees/' + id)
             .pipe(
-                retry(1),
+                map((data: Person) => {
+                    return data
+                }),
+                catchError(this.errorHandle)
+            )
+    }
+
+    update(id: number, person: Person): Observable<Person> {
+        console.log('Updating Person id = ' + id);
+        return this.http.put<Person>(this.baseUrl + 'employees/' + id, person, this.httpOptions)
+            .pipe(
+                map(data => data),
+                catchError(this.errorHandle)
+            )
+    }
+
+    create(person: Person): Observable<Person> {
+        console.log('Creating Person');
+        return this.http.post<Person>(this.baseUrl + 'employees', person, this.httpOptions)
+            .pipe(
+                map(data => data),
+                catchError(this.errorHandle)
+            )
+    }
+
+    deleteById(id: number): Observable<Person> {
+        console.log('Deleteing Person id = ' + id);
+        return this.http.delete<Person>(this.baseUrl + 'employees/' + id)
+            .pipe(
+                map((data: Person) => {
+                    return data
+                }),
                 catchError(this.errorHandle)
             )
     }

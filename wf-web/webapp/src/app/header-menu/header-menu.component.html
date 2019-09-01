@@ -4,6 +4,6 @@
     </div>
 
     <div class="actionMenu">
-        <a routerLink="person">Создать</a>
+        <a *ngFor="let item of menuItems" routerLink="{{item.path}}">{{item.title}}</a>
     </div>
 </div>

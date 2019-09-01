@@ -37,6 +37,7 @@ public class DataBaseService {
 
     private static final String CREATE_TABLE_QUERY_TEMPLATE = "CREATE TABLE %s (%s)";
     private static final String READ_TABLE_QUERY_TEMPLATE = "SELECT %s FROM %s";
+    private static final String GET_ENTITY_BY_QUERY_TEMPLATE = "SELECT %s FROM %s WHERE %s";
     private static final String DROP_TABLE_QUERY_TEMPLATE = "DROP TABLE %s";
     private static final String INSERT_INTO_QUERY_TEMPLATE = "INSERT INTO %s (%s) VALUES (%s)";
     private static final String DELETE_QUERY_TEMPLATE = "DELETE FROM %s WHERE %s";
@@ -125,29 +126,13 @@ public class DataBaseService {
                 AnnotationUtils.getAnnotatedColumnFields(clazz, false),
                 AnnotationUtils.getTableName(clazz));
         logger.info(query);
-        Collection<T> collection = new ArrayList<>();
 
         try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
-            while (resultSet.next()) {
-                int parameterNumber = 1;
-                T obj = clazz.getDeclaredConstructor().newInstance();
-
-                for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
-                    String simpleName = resultSet.getObject(parameterNumber).getClass().getSimpleName();
-                    if (Integer.class.getSimpleName().equals(simpleName)) {
-                        PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getInt(parameterNumber++));
-                    } else if (String.class.getSimpleName().equals(simpleName)) {
-                        PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getString(parameterNumber++));
-                    } else {
-                        throw new IllegalStateException("Unexpected value: " + resultSet.getObject(parameterNumber).getClass().getSimpleName());
-                    }
-                }
-                collection.add(obj);
-            }
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | SQLException | NoSuchMethodException | IllegalStateException e) {
-            logger.error("Error while try read table {}", e.getMessage());
+            return setAllProperties(resultSet, clazz);
+        } catch (SQLException e) {
+            logger.error("Error while try read data from table {}", e.getMessage());
         }
-        return collection;
+        return new ArrayList<>();
     }
 
     /**
@@ -198,14 +183,51 @@ public class DataBaseService {
         String query = String.format(UPDATE_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
                 AnnotationUtils.getAnnotatedColumnFieldsWithDataForUpdateQ(entity),
-                "id = " + id);
+                "id=" + id);
         logger.info(query);
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            return preparedStatement.execute();
+            preparedStatement.execute();
+            return true;
         } catch (SQLException e) {
             logger.error("Error while try update data in table {} with id = {} {}", AnnotationUtils.getTableName(clazz), id, e.getMessage());
         }
         return false;
+    }
+
+
+    /**
+     * Getting {@param <T>} By Id
+     *
+     * @param clazz
+     * @param id
+     * @param <T>
+     * @return {@param <T>}
+     */
+    public static <T> T getById(Class<T> clazz, Integer id) {
+        String query = String.format(GET_ENTITY_BY_QUERY_TEMPLATE,
+                AnnotationUtils.getAnnotatedColumnFields(clazz, false),
+                AnnotationUtils.getTableName(clazz),
+                "id = " + id);
+        logger.info(query);
+        try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
+            return setAllProperties(resultSet, clazz).iterator().next();
+        } catch (SQLException e) {
+            logger.error("Error while try get {} with id = {} {}", clazz, id, e.getMessage());
+        }
+        return null;
+    }
+
+    public static <T> Integer getLastId(Class<T> clazz) {
+        String query = String.format(READ_TABLE_QUERY_TEMPLATE,
+                "MAX(id)", AnnotationUtils.getTableName(clazz));
+        logger.info(query);
+        try (Connection connection = getConnection(); ResultSet resultSet = connection.createStatement().executeQuery(query)) {
+            resultSet.next();
+            return resultSet.getInt(1);
+        } catch (SQLException e) {
+            logger.error("Error while try MAX(id) from table {}", e.getMessage());
+        }
+        return null;
     }
 
     /**
@@ -214,7 +236,7 @@ public class DataBaseService {
      * @param clazz      target
      * @param collection for input
      */
-    private static <T> void insertData(Class<T> clazz, Collection<T> collection) {
+    public static <T> boolean insertData(Class<T> clazz, Collection<T> collection) {
         String query = String.format(INSERT_INTO_QUERY_TEMPLATE,
                 AnnotationUtils.getTableName(clazz),
                 AnnotationUtils.getAnnotatedColumnFields(clazz, false),
@@ -225,8 +247,10 @@ public class DataBaseService {
                 inputDataInPreparedStatement(connection, query, obj);
             } catch (SQLException e) {
                 logger.error("Error while try input data in prepared statement {}", e.getMessage());
+                return false;
             }
         }
+        return true;
     }
 
     /**
@@ -253,6 +277,38 @@ public class DataBaseService {
         } catch (IllegalAccessException | InvocationTargetException | SQLException | NoSuchMethodException e) {
             logger.error(e.getMessage());
         }
+    }
+
+    /**
+     * Iterate {@param resultSet} to create Collection of entities with {@param clazz}
+     *
+     * @param resultSet
+     * @param clazz
+     * @return
+     */
+    private static <T> Collection<T> setAllProperties(ResultSet resultSet, Class<T> clazz) {
+        Collection<T> collection = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                int parameterNumber = 1;
+                T obj = clazz.getDeclaredConstructor().newInstance();
+
+                for (Field field : ReflectionUtils.getDeclaredFieldsIncludingInherited(obj.getClass())) {
+                    String simpleName = resultSet.getObject(parameterNumber).getClass().getSimpleName();
+                    if (Integer.class.getSimpleName().equals(simpleName)) {
+                        PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getInt(parameterNumber++));
+                    } else if (String.class.getSimpleName().equals(simpleName)) {
+                        PropertyUtils.setSimpleProperty(obj, field.getName(), resultSet.getString(parameterNumber++));
+                    } else {
+                        throw new IllegalStateException("Unexpected value: " + resultSet.getObject(parameterNumber).getClass().getSimpleName());
+                    }
+                }
+                collection.add(obj);
+            }
+        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | SQLException | IllegalAccessException e) {
+            logger.error("Error while try setAllProperties from ResultSet {}", e.getMessage());
+        }
+        return collection;
     }
 
     /**
