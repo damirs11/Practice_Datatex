@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elements>
+    <organization>
+        <id>1</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>1</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>2</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>2</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>3</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>3</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>4</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>4</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>5</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>5</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>6</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>6</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>7</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>7</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>8</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>8</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+    <organization>
+        <id>9</id>
+        <fullName>Полное название</fullName>
+        <organizationHead>9</organizationHead>
+        <phoneNumber>+79257812444</phoneNumber>
+        <shortName>Короткое название</shortName>
+    </organization>
+</elements>
